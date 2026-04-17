@@ -1,0 +1,117 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # MVP SERVICES
+  # ==========================================
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    image: proflow-app
+    container_name: proflow_app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - proflow_network
+    depends_on:
+      - mysql
+
+  nginx:
+    image: nginx:1.30-alpine
+    container_name: proflow_nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - proflow_network
+    depends_on:
+      - app
+
+  mysql:
+    image: mysql:8.4
+    container_name: proflow_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    volumes:
+      - proflow_mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - proflow_network
+
+  # ==========================================
+  # 🔮 ENHANCED PHASE SERVICES (Commented out)
+  # ==========================================
+
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: proflow_redis
+  #   restart: unless-stopped
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - proflow_redis_data:/data
+  #   networks:
+  #     - proflow_network
+
+  # reverb:
+  #   image: proflow-app
+  #   container_name: proflow_reverb
+  #   restart: unless-stopped
+  #   command: php artisan reverb:start --host=0.0.0.0 --port=8080 --debug
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - ./:/var/www
+  #   networks:
+  #     - proflow_network
+  #   depends_on:
+  #     - app
+  #     - redis
+
+  # queue:
+  #   image: proflow-app
+  #   container_name: proflow_queue
+  #   restart: unless-stopped
+  #   command: php artisan queue:work --tries=3
+  #   volumes:
+  #     - ./:/var/www
+  #   networks:
+  #     - proflow_network
+  #   depends_on:
+  #     - app
+  #     - redis
+  #     - mysql
+
+  # scheduler:
+  #   image: proflow-app
+  #   container_name: proflow_scheduler
+  #   restart: unless-stopped
+  #   command: php artisan schedule:work
+  #   volumes:
+  #     - ./:/var/www
+  #   networks:
+  #     - proflow_network
+  #   depends_on:
+  #     - app
+  #     - redis
+  #     - mysql
+
+networks:
+  proflow_network:
+    driver: bridge
+
+volumes:
+  proflow_mysql_data:
+  # proflow_redis_data:

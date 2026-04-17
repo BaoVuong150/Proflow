@@ -1,0 +1,14 @@
+/node_modules
+/vendor
+/.git
+/tests
+.env
+.env.*
+!.env.example
+docker-compose.yml
+.github
+.phpunit.cache
+/storage/framework/cache
+/storage/framework/sessions
+/storage/framework/views
+/storage/logs
