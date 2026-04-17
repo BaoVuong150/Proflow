@@ -5,19 +5,19 @@
 
 ---
 
-## Phase 1: Backend Foundation (Ngày 1-4)
+## [x] Phase 1: Backend Foundation (Ngày 1-4)
 
 > 🎯 **MỤC TIÊU TỐI THƯỢNG:** Xây dựng xong toàn bộ nền móng backend — database schema, models, relationships, enums, seeders — để **mọi API endpoint ở Phase 2 chỉ cần viết Controller + Service là chạy được ngay**, không cần quay lại sửa migration hay model.
 
-### Epic 0: Project Scaffold & Infrastructure
+### [x] Epic 0: Project Scaffold & Infrastructure
 
 #### 0.1 Git & Repository
 - [x] `git init` + tạo `.gitignore` (Laravel default + custom rules)
-- [ ] Tạo GitHub repository (public)
+- [x] Tạo GitHub repository (public)
 - [x] Setup branch strategy: `main` → `develop` → `feature/*`
-- [ ] Push initial commit: `chore: initial project setup`
+- [x] Push initial commit: `chore: initial project setup`
 - [x] Tạo `README.md` (skeleton: project name, description, tech stack badge placeholder)
-- [ ] Tạo `.editorconfig` (indent, charset, end_of_line)
+- [x] Tạo `.editorconfig` (indent, charset, end_of_line)
 
 #### 0.2 Laravel Scaffold
 - [x] `composer create-project laravel/laravel proflow`
@@ -33,16 +33,16 @@
   - [x] ✅ MVP services: `app` + `nginx` + `mysql`
   - [x] 🔮 Production services (commented): `redis`, `reverb`, `queue`, `scheduler`
 - [x] `.dockerignore` (node_modules, .git, tests, vendor)
-- [ ] Verify: `docker compose up -d` chạy thành công
-- [ ] Verify: `docker compose exec app php artisan --version` trả về Laravel 13
+- [x] Verify: `docker compose up -d` chạy thành công
+- [x] Verify: `docker compose exec app php artisan --version` trả về Laravel 13
 
 #### 0.4 Frontend Setup
 - [x] Cài frontend dependencies:
   - [x] ✅ MVP: React 19, React Router 7, Zustand 5, Axios ≥1.15.0, @dnd-kit/react
-  - [ ] 🔮 Enhanced (chưa cài, note trong package.json): chart.js, react-chartjs-2, laravel-echo, pusher-js
+  - [x] 🔮 Enhanced (chưa cài, note trong package.json): chart.js, react-chartjs-2, laravel-echo, pusher-js
 - [x] Cấu hình `vite.config.js` + `@vitejs/plugin-react` + `laravel-vite-plugin`
 - [x] Tạo `resources/views/app.blade.php` (SPA entry point + Vite directives)
-- [ ] Verify: `npm run dev` chạy HMR thành công
+- [x] Verify: `npm run dev` chạy HMR thành công
 
 #### 0.5 Backend Foundation
 - [x] Cài dev tools:
@@ -97,57 +97,57 @@
   - [x] `lint` → `./vendor/bin/pint`
   - [x] `test` → `./vendor/bin/pest`
   - [x] `fresh` → `php artisan migrate:fresh --seed`
-- [ ] Verify: `./vendor/bin/pint --test` pass trên code mới
+- [x] Verify: `./vendor/bin/pint --test` pass trên code mới
 
-### Epic 0: Database & Models (Foundation)
+### [x] Epic 0: Database & Models (Foundation)
 - [x] Tạo ALL Enums (5 files)
   - [x] `TaskPriority` (low, medium, high, urgent)
   - [x] `TaskStatus` (open, in_progress, review, done, closed)
   - [x] `TaskType` (task, bug, feature, improvement)
   - [x] `ProjectRole` (owner, admin, member, viewer)
   - [x] `ProjectVisibility` (private, team, public)
-- [ ] Tạo ALL Migrations (14 tables)
-  - [ ] `users`
-  - [ ] `projects`
-  - [ ] `project_members`
-  - [ ] `boards`
-  - [ ] `columns`
-  - [ ] `tasks`
-  - [ ] `task_assignments`
-  - [ ] `labels`
-  - [ ] `task_labels`
-  - [ ] `checklists`
-  - [ ] `checklist_items`
-  - [ ] `comments`
-  - [ ] `attachments`
-  - [ ] `activity_logs`
-  - [ ] `notifications` (Laravel default)
-  - [ ] `invitations`
-- [ ] Tạo ALL Models + Relationships (14 models)
-  - [ ] `User` (hasMany projects, members, comments, assignments)
-  - [ ] `Project` (belongsTo owner, hasMany boards, members, labels, tasks)
-  - [ ] `ProjectMember` (belongsTo project, user)
-  - [ ] `Board` (belongsTo project, hasMany columns)
-  - [ ] `Column` (belongsTo board, hasMany tasks)
-  - [ ] `Task` (belongsTo column/project/reporter, hasMany assignments/comments/checklists, belongsToMany labels, morphMany attachments)
-  - [ ] `TaskAssignment` (belongsTo task, user, assigner)
-  - [ ] `Label` (belongsTo project, belongsToMany tasks)
-  - [ ] `Checklist` (belongsTo task, hasMany items)
-  - [ ] `ChecklistItem` (belongsTo checklist)
-  - [ ] `Comment` (belongsTo task, user)
-  - [ ] `Attachment` (morphTo attachable, belongsTo user)
-  - [ ] `ActivityLog` (morphTo loggable, belongsTo user, project)
-  - [ ] `Invitation` (belongsTo project, inviter) — model only, chưa dùng trong MVP
-- [ ] Tạo Model Factories (3 factories)
-  - [ ] `UserFactory`
-  - [ ] `ProjectFactory`
-  - [ ] `TaskFactory`
-- [ ] Tạo Seeders
-  - [ ] `UserSeeder` (5 demo users)
-  - [ ] `ProjectSeeder` (2-3 projects + members + default boards/columns)
-  - [ ] `TaskSeeder` (15-20 tasks + assignments + labels + comments)
-  - [ ] `DatabaseSeeder` (orchestrate all seeders)
-- [ ] Verify: `php artisan migrate:fresh --seed` chạy thành công
+- [x] Tạo ALL Migrations (14 tables)
+  - [x] `users`
+  - [x] `projects`
+  - [x] `project_members`
+  - [x] `boards`
+  - [x] `columns`
+  - [x] `tasks`
+  - [x] `task_assignments`
+  - [x] `labels`
+  - [x] `task_labels`
+  - [x] `checklists`
+  - [x] `checklist_items`
+  - [x] `comments`
+  - [x] `attachments`
+  - [x] `activity_logs`
+  - [x] `notifications` (Laravel default)
+  - [x] `invitations`
+- [x] Tạo ALL Models + Relationships (14 models)
+  - [x] `User` (hasMany projects, members, comments, assignments)
+  - [x] `Project` (belongsTo owner, hasMany boards, members, labels, tasks)
+  - [x] `ProjectMember` (belongsTo project, user)
+  - [x] `Board` (belongsTo project, hasMany columns)
+  - [x] `Column` (belongsTo board, hasMany tasks)
+  - [x] `Task` (belongsTo column/project/reporter, hasMany assignments/comments/checklists, belongsToMany labels, morphMany attachments)
+  - [x] `TaskAssignment` (belongsTo task, user, assigner)
+  - [x] `Label` (belongsTo project, belongsToMany tasks)
+  - [x] `Checklist` (belongsTo task, hasMany items)
+  - [x] `ChecklistItem` (belongsTo checklist)
+  - [x] `Comment` (belongsTo task, user)
+  - [x] `Attachment` (morphTo attachable, belongsTo user)
+  - [x] `ActivityLog` (morphTo loggable, belongsTo user, project)
+  - [x] `Invitation` (belongsTo project, inviter) — model only, chưa dùng trong MVP
+- [x] Tạo Model Factories (3 factories)
+  - [x] `UserFactory`
+  - [x] `ProjectFactory`
+  - [x] `TaskFactory`
+- [x] Tạo Seeders
+  - [x] `UserSeeder` (5 demo users)
+  - [x] `ProjectSeeder` (2-3 projects + members + default boards/columns)
+  - [x] `TaskSeeder` (15-20 tasks + assignments + labels + comments)
+  - [x] `DatabaseSeeder` (orchestrate all seeders)
+- [x] Verify: `php artisan migrate:fresh --seed` chạy thành công
 
 ---
 
@@ -155,85 +155,88 @@
 
 > 🎯 **MỤC TIÊU TỐI THƯỢNG:** Hoàn thành 4 Epic API chính (Auth, Project, Board/Column, Task) — để **frontend có thể gọi API thực tế**, xử lý đầy đủ CRUD + authorization + validation, sẵn sàng kết nối UI.
 
-### Epic 1: Authentication (5 features)
-- [ ] `LoginRequest` + `RegisterRequest` (Form Request validation)
-- [ ] `UserResource` (API Resource)
-- [ ] `AuthController` methods:
-  - [ ] `register()` → POST `/api/v1/auth/register`
-  - [ ] `login()` → POST `/api/v1/auth/login`
-  - [ ] `logout()` → POST `/api/v1/auth/logout`
-  - [ ] `user()` → GET `/api/v1/auth/user`
-  - [ ] `updateProfile()` → PUT `/api/v1/auth/profile`
-  - [ ] `uploadAvatar()` → POST `/api/v1/auth/avatar`
-- [ ] `FileUploadService` (avatar upload logic)
-- [ ] Sanctum SPA configuration (CORS, CSRF cookie)
-- [ ] Auth routes trong `api.php`
-- [ ] Verify: Test register → login → get user → logout flow qua Postman/curl
+### [x] Epic 1: Authentication (5 features)
+- [x] `LoginRequest` + `RegisterRequest` (Form Request validation)
+- [x] `UserResource` (API Resource)
+- [x] `AuthController` methods:
+  - [x] `register()` → POST `/api/v1/auth/register`
+  - [x] `login()` → POST `/api/v1/auth/login`
+  - [x] `logout()` → POST `/api/v1/auth/logout`
+  - [x] `user()` → GET `/api/v1/auth/user`
+- [x] Route config trong `routes/api.php`
+- [x] Cấu hình rate limiting (Login: 5 attempts/min)
+- [x] Verify: Gọi API `/api/v1/auth/user` trả về 401 nếu chưa login, 200 + user data nếu đã login.
+- [x] Sanctum SPA configuration (CORS, CSRF cookie)
+- [x] Auth routes trong `api.php`
+- [x] Verify: Test register → login → get user → logout flow qua Pest Tests
+- [x] Đã bổ sung và pass 100% các Edge Cases bảo mật
 
-### Epic 2: Project Management (7 features)
-- [ ] `StoreProjectRequest` (Form Request)
-- [ ] `ProjectResource` (API Resource)
-- [ ] `ProjectPolicy` (authorization rules: Owner/Admin/Member/Viewer)
-- [ ] `ProjectService` (business logic)
-  - [ ] `createProject()` — auto tạo default board + 4 columns
-  - [ ] `addMember()` — by email, validate user exists
-  - [ ] `removeMember()` — validate permissions
-- [ ] `ProjectController` methods:
-  - [ ] `index()` → GET `/api/v1/projects`
-  - [ ] `store()` → POST `/api/v1/projects`
-  - [ ] `show()` → GET `/api/v1/projects/{id}`
-  - [ ] `update()` → PUT `/api/v1/projects/{id}`
-  - [ ] `destroy()` → DELETE `/api/v1/projects/{id}`
-  - [ ] `members()` → GET `/api/v1/projects/{id}/members`
-  - [ ] `addMember()` → POST `/api/v1/projects/{id}/members`
-  - [ ] `removeMember()` → DELETE `/api/v1/projects/{id}/members/{userId}`
-- [ ] `EnsureProjectMember` middleware
-- [ ] Verify: CRUD project + add/remove member flow
+### [x] Epic 2: Project Management (7 features)
+- [x] `StoreProjectRequest` (Form Request)
+- [x] `ProjectResource` (API Resource)
+- [x] `ProjectPolicy` (authorization rules: Owner/Admin/Member/Viewer)
+- [x] `ProjectService` (business logic)
+  - [x] `createProject()` — auto tạo default board + 4 columns
+  - [x] `addMember()` — by email, validate user exists
+  - [x] `removeMember()` — validate permissions
+- [x] `ProjectController` methods:
+  - [x] `index()` → GET `/api/v1/projects`
+  - [x] `store()` → POST `/api/v1/projects`
+  - [x] `show()` → GET `/api/v1/projects/{id}`
+  - [x] `update()` → PUT `/api/v1/projects/{id}`
+  - [x] `destroy()` → DELETE `/api/v1/projects/{id}`
+  - [x] `members()` → GET `/api/v1/projects/{id}/members`
+  - [x] `addMember()` → POST `/api/v1/projects/{id}/members`
+  - [x] `removeMember()` → DELETE `/api/v1/projects/{id}/members/{userId}`
+- [x] `EnsureProjectMember` middleware (Thay thế bằng ProjectPolicy)
+- [x] Verify: CRUD project + add/remove member flow qua Pest Tests
+- [x] Đã bổ sung và pass 100% các Edge Cases bảo mật
 
-### Epic 3: Board & Column (5 features)
-- [ ] `BoardResource`, `ColumnResource` (API Resources)
-- [ ] `BoardService` (board + column logic)
-  - [ ] `createDefaultBoard()` — tạo "Main Board" + 4 columns
-  - [ ] `reorderColumns()` — update positions
-- [ ] `BoardController` methods:
-  - [ ] `index()` → GET `/api/v1/projects/{id}/boards`
-  - [ ] `show()` → GET `/api/v1/boards/{id}` (nested: columns + tasks)
-- [ ] `ColumnController` methods:
-  - [ ] `store()` → POST `/api/v1/boards/{id}/columns`
-  - [ ] `update()` → PUT `/api/v1/columns/{id}`
-  - [ ] `destroy()` → DELETE `/api/v1/columns/{id}`
-  - [ ] `reorder()` → PUT `/api/v1/boards/{id}/columns/reorder`
-- [ ] Nested eager loading: Board → Columns (ordered) → Tasks (ordered)
-- [ ] Verify: View board with columns, create/reorder/delete columns
+### [x] Epic 3: Board & Column (5 features)
+- [x] `BoardResource`, `ColumnResource` (API Resources)
+- [x] `BoardService` (board + column logic)
+  - [x] `reorderColumns()` — update positions
+- [x] `BoardController` methods:
+  - [x] `index()` → GET `/api/v1/projects/{id}/boards`
+  - [x] `show()` → GET `/api/v1/boards/{id}` (nested: columns + tasks)
+- [x] `ColumnController` methods:
+  - [x] `store()` → POST `/api/v1/boards/{id}/columns`
+  - [x] `update()` → PUT `/api/v1/columns/{id}`
+  - [x] `destroy()` → DELETE `/api/v1/columns/{id}`
+  - [x] `reorder()` → PUT `/api/v1/boards/{id}/columns/reorder`
+- [x] Nested eager loading: Board → Columns (ordered) → Tasks (ordered)
+- [x] Verify: View board with columns, create/reorder/delete columns qua Pest Tests
+- [x] Đã bổ sung và pass 100% các Edge Cases bảo mật
 
 ### Epic 4: Task Management (10 features)
-- [ ] `StoreTaskRequest`, `UpdateTaskRequest`, `MoveTaskRequest` (Form Requests)
-- [ ] `TaskResource` (API Resource — with conditional relationships)
-- [ ] `TaskDTO` (Data Transfer Object)
-- [ ] `TaskPolicy` (authorization: owner edit own, admin edit all, viewer read-only)
-- [ ] `TaskService` (business logic)
-  - [ ] `createTask()` — set position at end of column
-  - [ ] `moveTask()` — update column_id + position + recalculate
-  - [ ] `assignUser()` / `unassignUser()`
-  - [ ] `attachLabel()` / `detachLabel()`
-- [ ] `TaskController` methods:
-  - [ ] `store()` → POST `/api/v1/projects/{id}/tasks`
-  - [ ] `show()` → GET `/api/v1/tasks/{id}`
-  - [ ] `update()` → PUT `/api/v1/tasks/{id}`
-  - [ ] `destroy()` → DELETE `/api/v1/tasks/{id}`
-  - [ ] `move()` → POST `/api/v1/tasks/{id}/move`
-  - [ ] `assign()` → POST `/api/v1/tasks/{id}/assign`
-  - [ ] `unassign()` → DELETE `/api/v1/tasks/{id}/assign/{userId}`
-  - [ ] `attachLabel()` → POST `/api/v1/tasks/{id}/labels`
-  - [ ] `detachLabel()` → DELETE `/api/v1/tasks/{id}/labels/{labelId}`
-- [ ] `LabelController` methods:
-  - [ ] `index()` → GET `/api/v1/projects/{id}/labels`
-  - [ ] `store()` → POST `/api/v1/projects/{id}/labels`
-  - [ ] `update()` → PUT `/api/v1/labels/{id}`
-  - [ ] `destroy()` → DELETE `/api/v1/labels/{id}`
-- [ ] `LabelResource` (API Resource)
-- [ ] Task filter logic (query params: priority, assignee_id, label_id)
-- [ ] Verify: Full task CRUD + move + assign + labels flow
+- [x] `StoreTaskRequest`, `UpdateTaskRequest`, `MoveTaskRequest` (Form Requests)
+- [x] `TaskResource` (API Resource — with conditional relationships)
+- [x] `TaskDTO` (Data Transfer Object)
+- [x] `TaskPolicy` (authorization: owner edit own, admin edit all, viewer read-only)
+- [x] `TaskService` (business logic)
+  - [x] `createTask()` — set position at end of column
+  - [x] `moveTask()` — update column_id + position + recalculate
+  - [x] `assignUser()` / `unassignUser()`
+  - [x] `attachLabel()` / `detachLabel()`
+- [x] `TaskController` methods:
+  - [x] `store()` → POST `/api/v1/projects/{id}/tasks`
+  - [x] `show()` → GET `/api/v1/tasks/{id}`
+  - [x] `update()` → PUT `/api/v1/tasks/{id}`
+  - [x] `destroy()` → DELETE `/api/v1/tasks/{id}`
+  - [x] `move()` → POST `/api/v1/tasks/{id}/move`
+  - [x] `assign()` → POST `/api/v1/tasks/{id}/assign`
+  - [x] `unassign()` → DELETE `/api/v1/tasks/{id}/assign/{userId}`
+  - [x] `attachLabel()` → POST `/api/v1/tasks/{id}/labels`
+  - [x] `detachLabel()` → DELETE `/api/v1/tasks/{id}/labels/{labelId}`
+- [x] `LabelController` methods:
+  - [x] `index()` → GET `/api/v1/projects/{id}/labels`
+  - [x] `store()` → POST `/api/v1/projects/{id}/labels`
+  - [x] `update()` → PUT `/api/v1/labels/{id}`
+  - [x] `destroy()` → DELETE `/api/v1/labels/{id}`
+- [x] `LabelResource` (API Resource)
+- [x] Task filter logic (query params: priority, assignee_id, label_id)
+- [x] Verify: Full task CRUD + move + assign + labels flow
+- [x] Đã bổ sung và pass 100% các Edge Cases bảo mật
 
 ---
 
@@ -241,58 +244,59 @@
 
 > 🎯 **MỤC TIÊU TỐI THƯỢNG:** Bổ sung các sub-feature còn lại (Checklists, Comments, Attachments, Activity Log) + viết basic tests — để **backend hoàn chỉnh 100%**, frontend chỉ cần render UI.
 
-### Epic 4 (cont.): Checklists
-- [ ] `ChecklistController` methods:
-  - [ ] `index()` → GET `/api/v1/tasks/{id}/checklists`
-  - [ ] `store()` → POST `/api/v1/tasks/{id}/checklists`
-  - [ ] `update()` → PUT `/api/v1/checklists/{id}`
-  - [ ] `destroy()` → DELETE `/api/v1/checklists/{id}`
-- [ ] `ChecklistItemController` methods:
-  - [ ] `store()` → POST `/api/v1/checklists/{id}/items`
-  - [ ] `update()` → PUT `/api/v1/checklist-items/{id}`
-  - [ ] `destroy()` → DELETE `/api/v1/checklist-items/{id}`
-  - [ ] `toggle()` → PUT `/api/v1/checklist-items/{id}/toggle`
-- [ ] Verify: Checklist CRUD + toggle items
+### [x] Epic 4 (cont.): Checklists
+- [x] `ChecklistController` methods:
+  - [x] `index()` → GET `/api/v1/tasks/{id}/checklists`
+  - [x] `store()` → POST `/api/v1/tasks/{id}/checklists`
+  - [x] `update()` → PUT `/api/v1/checklists/{id}`
+  - [x] `destroy()` → DELETE `/api/v1/checklists/{id}`
+- [x] `ChecklistItemController` methods:
+  - [x] `store()` → POST `/api/v1/checklists/{id}/items`
+  - [x] `update()` → PUT `/api/v1/checklist-items/{id}`
+  - [x] `destroy()` → DELETE `/api/v1/checklist-items/{id}`
+  - [x] `toggle()` → PUT `/api/v1/checklist-items/{id}/toggle`
+- [x] Verify: Checklist CRUD + toggle items
 
-### Epic 5: Comments (3 features)
-- [ ] `CommentResource` (API Resource)
-- [ ] `CommentPolicy` (chỉ xóa comment mình viết hoặc admin)
-- [ ] `CommentController` methods:
-  - [ ] `index()` → GET `/api/v1/tasks/{id}/comments`
-  - [ ] `store()` → POST `/api/v1/tasks/{id}/comments`
-  - [ ] `destroy()` → DELETE `/api/v1/comments/{id}`
-- [ ] Verify: Add/list/delete comments on task
+### [x] Epic 5: Comments (3 features)
+- [x] `CommentResource` (API Resource)
+- [x] `CommentPolicy` (chỉ xóa comment mình viết hoặc admin)
+- [x] `CommentController` methods:
+  - [x] `index()` → GET `/api/v1/tasks/{id}/comments`
+  - [x] `store()` → POST `/api/v1/tasks/{id}/comments`
+  - [x] `destroy()` → DELETE `/api/v1/comments/{id}`
+- [x] Verify: Add/list/delete comments on task
 
-### Epic 7: File Attachments (3 features)
-- [ ] `AttachmentResource` (API Resource)
-- [ ] `FileUploadService` — file validation (max 10MB, allowed types)
-- [ ] `AttachmentController` methods:
-  - [ ] `index()` → GET `/api/v1/tasks/{id}/attachments`
-  - [ ] `store()` → POST `/api/v1/tasks/{id}/attachments`
-  - [ ] `destroy()` → DELETE `/api/v1/attachments/{id}`
-- [ ] Storage config: local disk, `storage/app/public/attachments/`
-- [ ] Verify: Upload/list/delete files on task
+### [x] Epic 7: File Attachments (3 features)
+- [x] `AttachmentResource` (API Resource)
+- [x] `FileUploadService` — file validation (max 10MB, allowed types)
+- [x] `AttachmentController` methods:
+  - [x] `index()` → GET `/api/v1/tasks/{id}/attachments`
+  - [x] `store()` → POST `/api/v1/tasks/{id}/attachments`
+  - [x] `destroy()` → DELETE `/api/v1/attachments/{id}`
+- [x] Storage config: local disk, `storage/app/public/attachments/`
+- [x] Verify: Upload/list/delete files on task
 
-### Epic 6: Activity Log (3 features)
-- [ ] `ActivityLogService` — static `log()` method
-- [ ] `ActivityLogResource` (API Resource)
-- [ ] `TaskObserver` — auto log: created, updated, deleted
-- [ ] `CommentObserver` — auto log: created, deleted
-- [ ] Manual logging trong Services:
-  - [ ] Task moved → log trong `TaskService::moveTask()`
-  - [ ] Task assigned/unassigned → log trong `TaskService`
-  - [ ] Member added/removed → log trong `ProjectService`
-  - [ ] Column created/updated/deleted → log trong `BoardService`
-- [ ] `ActivityLogController`:
-  - [ ] `index()` → GET `/api/v1/projects/{id}/activity` (paginated)
-- [ ] Register Observers trong `AppServiceProvider`
-- [ ] Verify: Perform actions → check activity log shows correct entries
+### [x] Epic 6: Activity Log (3 features)
+- [x] `ActivityLogService` — static `log()` method
+- [x] `ActivityLogResource` (API Resource)
+- [x] `TaskObserver` — auto log: created, updated, deleted
+- [x] `CommentObserver` — auto log: created, deleted
+- [x] Manual logging trong Services:
+  - [x] Task moved → log trong `TaskService::moveTask()`
+  - [x] Task assigned/unassigned → log trong `TaskService`
+  - [x] Member added/removed → log trong `ProjectService`
+  - [x] Column created/updated/deleted → log trong `ColumnController`
+- [x] `ActivityLogController`:
+  - [x] `index()` → GET `/api/v1/projects/{id}/activity` (paginated)
+- [x] Register Observers trong `AppServiceProvider`
+- [x] Verify: Perform actions → check activity log shows correct entries
 
-### Testing (Basic)
-- [ ] `LoginTest` — test register, login, logout, get user
-- [ ] `RegisterTest` — test validation errors, duplicate email
-- [ ] `TaskCrudTest` — test create, read, update, delete task
-- [ ] Verify: `php artisan test` — all tests pass
+### [x] Testing (Basic)
+- [x] `LoginTest` — test register, login, logout, get user
+- [x] `RegisterTest` — test validation errors, duplicate email
+- [x] `TaskCrudTest` — test create, read, update, delete task
+- [x] Verify: `php artisan test` — all tests pass
+- [x] Đã bổ sung và pass 100% các Edge Cases bảo mật
 
 ---
 
