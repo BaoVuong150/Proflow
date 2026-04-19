@@ -61,7 +61,7 @@ class ProjectController extends Controller
         $this->authorize('view', $project);
 
         return $this->success(
-            new ProjectResource($project->load(['owner', 'members.user']))
+            new ProjectResource($project->load(['owner', 'members.user', 'boards']))
         );
     }
 

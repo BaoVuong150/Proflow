@@ -75,6 +75,7 @@
 |---|---|---|---|
 | **Node.js** | `22.x LTS` | JavaScript runtime | Cài trên host machine hoặc Docker |
 | **npm** | `10.x` | Package manager (đi kèm Node.js) | Đi kèm Node.js |
+| **TypeScript** | `^5.0` | Type-safe JavaScript | `npm install typescript @types/react @types/react-dom` |
 
 > **Tại sao Node.js 22 thay vì 24?**
 > Node.js 22 đang ở Maintenance LTS — ổn định nhất. Node.js 24 là Active LTS nhưng tương đối mới. Vite 8 + React 19 đã tested kỹ trên Node 22.
@@ -83,8 +84,7 @@
 
 | Công nghệ | Phiên bản | Vai trò | Ghi chú |
 |---|---|---|---|
-| **Vite** | `^8.0` | Build tool + HMR dev server | Sử dụng Rolldown bundler (Rust-based, cực nhanh). Đi kèm via `laravel-vite-plugin` |
-| **laravel-vite-plugin** | `^1.0` | Tích hợp Vite với Laravel | `npm install laravel-vite-plugin` |
+| **Vite** | `^8.0` | Build tool + HMR dev server | Sử dụng Rolldown bundler (Rust-based, cực nhanh) |
 | **@vitejs/plugin-react** | `^6.0` | Vite React plugin (dùng Oxc, không cần Babel) | `npm install @vitejs/plugin-react` |
 
 ### UI Framework
@@ -94,6 +94,7 @@
 | **React** | `^19.0` | Reactive UI library | `npm install react@^19 react-dom@^19` |
 | **React Router** | `^7.0` | SPA routing | `npm install react-router@^7` |
 | **Zustand** | `^5.0` | State management (lightweight) | `npm install zustand@^5` |
+| **Tailwind CSS** | `^4.0` | Utility-first CSS framework | `npm install tailwindcss @tailwindcss/vite` |
 
 ### UI Libraries
 
@@ -242,8 +243,9 @@
     },
     "devDependencies": {
         "vite": "^8.0",
-        "laravel-vite-plugin": "^1.0",
-        "@vitejs/plugin-react": "^6.0"
+        "@vitejs/plugin-react": "^6.0",
+        "tailwindcss": "^4.0",
+        "@tailwindcss/vite": "^4.0"
     }
 }
 ```

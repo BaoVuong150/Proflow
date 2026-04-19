@@ -31,6 +31,10 @@ class AuthController extends Controller
 
         Auth::login($user);
 
+        if ($request->hasSession()) {
+            $request->session()->regenerate();
+        }
+
         return $this->success(
             new UserResource($user),
             'User registered successfully',

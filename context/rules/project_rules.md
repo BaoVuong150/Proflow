@@ -198,14 +198,37 @@ public function getTitle(): string  // tên method đã rõ
 
 ## 5. Coding Standards (React / Frontend)
 
-### 5.1 Functional Components + Hooks ONLY (BẮT BUỘC)
+### 5.0 CSS: Tailwind CSS v4 (BẮT BUỘC)
 
-```jsx
-// ✅ ĐÚNG — Functional Component + Hooks
+```tsx
+// ✅ ĐÚNG — Dùng Tailwind utility classes
+<div className="flex items-center gap-2 rounded-lg bg-gray-900 p-4">
+  <h3 className="text-sm font-semibold text-white">{title}</h3>
+</div>
+
+// ❌ SAI — Viết CSS thủ công trong .module.css
+import styles from './Card.module.css'
+<div className={styles.card}>{title}</div>
+```
+
+> **Quy tắc:**
+> - Dùng Tailwind utility classes cho mọi styling
+> - Custom design tokens đặt trong `app.css` qua `@theme`
+> - Chỉ viết custom CSS khi Tailwind không hỗ trợ (animation phức tạp)
+> - KHÔNG dùng CSS Modules
+
+### 5.1 TypeScript + Functional Components + Hooks ONLY (BẮT BUỘC)
+
+```tsx
+// ✅ ĐÚNG — TypeScript Functional Component + Hooks
 import { useState, useEffect, useMemo } from 'react'
 
-function TaskList({ columnId }) {
-  const [tasks, setTasks] = useState([])
+interface TaskListProps {
+  columnId: number
+}
+
+function TaskList({ columnId }: TaskListProps) {
+  const [tasks, setTasks] = useState<Task[]>([])
   const completedCount = useMemo(() => tasks.filter(t => t.status === 'done').length, [tasks])
 
   useEffect(() => {
@@ -223,21 +246,25 @@ class TaskList extends React.Component {
   componentDidMount() { ... }
   render() { return <div /> }
 }
+
+// ❌ SAI — Dùng `any` type
+const data: any = response.data // ❌
+const data: ApiResponse<Task> = response.data // ✅
 ```
 
 ### 5.2 Naming Conventions
 
 | Loại | Convention | Ví dụ |
 |---|---|---|
-| **Components** | PascalCase `.jsx` | `TaskCard.jsx`, `KanbanBoard.jsx` |
-| **Pages** | PascalCase + Page suffix | `LoginPage.jsx`, `BoardPage.jsx` |
-| **Hooks** | camelCase + use prefix | `useAuth.js`, `useDragDrop.js` |
-| **Stores** | camelCase + Store suffix | `authStore.js`, `boardStore.js` |
-| **Services** | camelCase + Service suffix | `authService.js`, `taskService.js` |
-| **CSS Modules** | PascalCase `.module.css` | `TaskCard.module.css` |
-| **CSS classes** | camelCase (CSS Modules) | `styles.taskCard`, `styles.kanbanBoard` |
+| **Components** | PascalCase `.tsx` | `TaskCard.tsx`, `KanbanBoard.tsx` |
+| **Pages** | PascalCase + Page suffix `.tsx` | `LoginPage.tsx`, `BoardPage.tsx` |
+| **Hooks** | camelCase + use prefix `.ts` | `useAuth.ts`, `useDragDrop.ts` |
+| **Stores** | camelCase + Store suffix `.ts` | `authStore.ts`, `boardStore.ts` |
+| **Services** | camelCase + Service suffix `.ts` | `authService.ts`, `taskService.ts` |
+| **Types** | PascalCase, trong `types/` folder `.ts` | `types/task.ts`, `types/project.ts` |
+| **CSS** | Tailwind CSS v4 utility classes | `className="flex items-center gap-2"` |
 | **Callbacks** | on/handle prefix | `onClick`, `handleDragEnd` |
-| **Props** | camelCase | `taskId`, `isCompleted` |
+| **Props** | PascalCase + Props suffix (interface) | `TaskCardProps`, `BoardPageProps` |
 
 ### 5.3 Component Structure
 

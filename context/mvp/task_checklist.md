@@ -2,6 +2,7 @@
 
 > **Tracking tiến độ MVP.** Cập nhật trạng thái khi hoàn thành từng task.
 > `[ ]` chưa làm · `[/]` đang làm · `[x]` hoàn thành
+> **[LUẬT BẮT BUỘC]: Làm xong chức năng nào, AI phải tự động mở file này lên và đổi `[ ]` thành `[x]` ngay lập tức.**
 
 ---
 
@@ -300,98 +301,98 @@
 
 ---
 
-## Phase 4: Frontend Foundation (Ngày 12-14)
+## [x] Phase 4: Frontend Foundation (Ngày 12-14)
 
 > 🎯 **MỤC TIÊU TỐI THƯỢNG:** Dựng xong React skeleton — Router, Stores, Services, Design System, Common Components, Auth Pages — để **user có thể Register → Login → thấy trang Projects trống**, chứng minh frontend kết nối backend thành công.
 
 ### Setup & Configuration
-- [ ] React 19 app initialization (`main.jsx`)
-- [ ] React Router setup (`router/index.jsx`)
-  - [ ] Route definitions: `/login`, `/register`, `/projects`, `/projects/:id/board`
-  - [ ] Protected route wrapper (auth check)
-- [ ] Zustand stores setup
-  - [ ] `authStore.js` (user state, login/logout actions)
-  - [ ] `projectStore.js` (projects list, current project)
-  - [ ] `boardStore.js` (current board, columns, tasks)
-- [ ] Axios instance (`services/api.js`)
-  - [ ] Base URL config
-  - [ ] Request interceptor (CSRF token)
-  - [ ] Response interceptor (error handling, 401 redirect)
-- [ ] API service layer
-  - [ ] `authService.js` (login, register, logout, getUser, updateProfile)
-  - [ ] `projectService.js` (CRUD projects, members)
-  - [ ] `taskService.js` (CRUD tasks, move, assign, labels, checklists, comments, attachments)
+- [x] React 19 app initialization (`main.tsx`)
+- [x] React Router setup (`router/index.tsx`)
+  - [x] Route definitions: `/login`, `/register`, `/projects`, `/projects/:id/board`
+  - [x] Protected route wrapper (auth check)
+- [x] Zustand stores setup
+  - [x] `authStore.ts` (user state, login/logout actions)
+  - [x] `projectStore.ts` (projects list, current project)
+  - [x] `boardStore.ts` (current board, columns, tasks)
+- [x] Axios instance (`services/api.ts`)
+  - [x] Base URL config
+  - [x] Request interceptor (CSRF token)
+  - [x] Response interceptor (error handling, 401 redirect)
+- [x] API service layer
+  - [x] `authService.ts` (login, register, logout, getUser, updateProfile)
+  - [x] `projectService.ts` (CRUD projects, members)
+  - [x] `taskService.ts` (CRUD tasks, move, assign, labels, checklists, comments, attachments)
 
 ### Design System
-- [ ] CSS Variables (dark theme tokens: colors, spacing, fonts, radius)
-- [ ] Import Google Font: Inter
-- [ ] Global reset + base styles (`app.css`)
+- [x] CSS Variables (dark theme tokens: colors, spacing, fonts, radius)
+- [x] Import Google Font: Inter
+- [x] Global reset + base styles (`app.css` using Tailwind v4 @theme)
 
 ### Common Components
-- [ ] `AppHeader.jsx` (logo, user avatar, logout)
-- [ ] `AppSidebar.jsx` (projects list, create project button)
-- [ ] `AppModal.jsx` (reusable modal wrapper)
-- [ ] `AppAvatar.jsx` (user avatar with initials fallback)
-- [ ] `AppBadge.jsx` (priority/status badges)
-- [ ] `AppToast.jsx` (success/error notifications)
-- [ ] `AppLoading.jsx` (spinner/skeleton)
+- [x] `AppHeader.tsx` (logo, user avatar, logout)
+- [x] `AppSidebar.tsx` (projects list, create project button)
+- [x] `AppModal.tsx` (reusable modal wrapper)
+- [x] `AppAvatar.tsx` (user avatar with initials fallback)
+- [x] `AppBadge.tsx` (priority/status badges)
+- [x] `AppToast.tsx` (success/error notifications)
+- [x] `AppLoading.tsx` (spinner/skeleton)
 
 ### Auth Pages
-- [ ] `LoginPage.jsx` (form + validation + redirect)
-- [ ] `RegisterPage.jsx` (form + validation + redirect)
-- [ ] `useAuth.js` hook (auth state + protected route)
-- [ ] Verify: Register → Login → Redirect to projects page
+- [x] `LoginPage.tsx` (form + validation + redirect)
+- [x] `RegisterPage.tsx` (form + validation + redirect)
+- [x] `useAuth.ts` hook (auth state + protected route)
+- [x] Verify: Register → Login → Redirect to projects page
 
 ---
 
-## Phase 5: Frontend Core Pages (Ngày 15-18)
+## [x] Phase 5: Frontend Core Pages (Ngày 15-18)
 
 > 🎯 **MỤC TIÊU TỐI THƯỢNG:** Hoàn thiện Kanban Board + Task Detail Modal — **tính năng WOW chính** của dự án. User có thể tạo project, kéo thả task giữa columns, mở modal xem/sửa chi tiết task.
 
 ### Project List Page
-- [ ] `ProjectListPage.jsx` (layout: sidebar + content area)
-- [ ] `ProjectCard.jsx` (project card: name, color, description, member count)
-- [ ] Create Project Modal (form inside `AppModal`)
-- [ ] Project list fetching + display
-- [ ] Click project → navigate to board page
-- [ ] Verify: View projects, create new project
+- [x] `ProjectListPage.tsx` (layout: sidebar + content area)
+- [x] `ProjectCard.tsx` (project card: name, color, description, member count)
+- [x] Create Project Modal (form inside `AppModal`)
+- [x] Project list fetching + display
+- [x] Click project → navigate to board page
+- [x] Verify: View projects, create new project
 
 ### Board Page (Kanban) ⭐
-- [ ] `BoardPage.jsx` (layout: header + kanban area)
-- [ ] Board header (project name, member avatars, add column button)
-- [ ] `KanbanBoard.jsx` (horizontal scrollable container)
-- [ ] `KanbanColumn.jsx` (column header + task list + quick add)
-  - [ ] Column header: name, color bar, task count, menu (edit/delete)
-  - [ ] Quick add task input at bottom
-  - [ ] Drop zone for dragged tasks
-- [ ] `TaskCard.jsx` (compact card in column)
-  - [ ] Title, priority badge, type icon
-  - [ ] Label chips
-  - [ ] Due date (with overdue indicator)
-  - [ ] Assignee avatars
-  - [ ] Checklist progress bar (if has checklists)
-  - [ ] Click → open Task Detail Modal
-- [ ] Drag & Drop implementation
-  - [ ] Install `@dnd-kit/react` + `@dnd-kit/dom`
-  - [ ] Task drag between columns
-  - [ ] Task reorder within column
-  - [ ] API sync on drop (`POST /tasks/{id}/move`)
-  - [ ] Optimistic UI update
-- [ ] `useDragDrop.js` hook
-- [ ] Verify: Drag tasks between columns, quick add task, reorder
+- [x] `BoardPage.tsx` (layout: header + kanban area)
+- [x] Board header (project name, member avatars, add column button)
+- [x] `KanbanBoard.tsx` (horizontal scrollable container)
+- [x] `KanbanColumn.tsx` (column header + task list + quick add)
+  - [x] Column header: name, color bar, task count, menu (edit/delete)
+  - [x] Quick add task input at bottom
+  - [x] Drop zone for dragged tasks
+- [x] `TaskCard.tsx` (compact card in column)
+  - [x] Title, priority badge, type icon
+  - [x] Label chips
+  - [x] Due date (with overdue indicator)
+  - [x] Assignee avatars
+  - [x] Checklist progress bar (if has checklists)
+  - [x] Click → open Task Detail Modal
+- [x] Drag & Drop implementation
+  - [x] Install `@dnd-kit/react` + `@dnd-kit/dom`
+  - [x] Task drag between columns
+  - [x] Task reorder within column
+  - [x] API sync on drop (`POST /tasks/{id}/move`)
+  - [x] Optimistic UI update
+- [x] `useDragDrop.js` hook
+- [x] Verify: Drag tasks between columns, quick add task, reorder
 
 ### Task Detail Modal ⭐
-- [ ] `TaskDetailModal.jsx` (2-column layout)
-  - [ ] Left column: title, description, checklists, attachments, comments, activity
-  - [ ] Right column: assignees, labels, priority, type, due date, column
-- [ ] Inline edit: title (click to edit)
-- [ ] Textarea: description
-- [ ] `TaskAssignees.jsx` (assignee list + add member dropdown)
-- [ ] `TaskLabels.jsx` (label chips + add label dropdown)
-- [ ] Priority selector (dropdown with color indicators)
-- [ ] Type selector (dropdown with icons)
-- [ ] Due date picker
-- [ ] Verify: Open modal, edit all fields, changes persist
+- [x] `TaskDetailModal.jsx` (2-column layout)
+  - [x] Left column: title, description, checklists, attachments, comments, activity
+  - [x] Right column: assignees, labels, priority, type, due date, column
+- [x] Inline edit: title (click to edit)
+- [x] Textarea: description
+- [x] `TaskAssignees.jsx` (assignee list + add member dropdown)
+- [x] `TaskLabels.jsx` (label chips + add label dropdown)
+- [x] Priority selector (dropdown with color indicators)
+- [x] Type selector (dropdown with icons)
+- [x] Due date picker
+- [x] Verify: Open modal, edit all fields, changes persist
 
 ---
 
@@ -522,3 +523,7 @@
 - [ ] `CONTRIBUTING.md` (conventional commits, branch strategy)
 - [ ] GitHub repo: pinned, topics, description
 
+### Security & Production Readiness (New Epic)
+- [ ] Setup SSL/HTTPS certificates for Nginx in production (`SESSION_SECURE_COOKIE=true`).
+- [ ] Add strict `Content-Security-Policy` (CSP) header in Nginx to prevent XSS executing malicious scripts.
+- [ ] Implement Business Quotas / Resource Limits (e.g. Free Tier = Max 5 Projects) for rate limiting and DoS prevention.

@@ -18,6 +18,9 @@ class ProjectService
      */
     public function createProject(User $owner, array $data): Project
     {
+        if ($owner->ownedProjects()->count() >= 9) {
+            throw new \Symfony\Component\HttpKernel\Exception\BadRequestHttpException('You can only create 9 projects.');
+        }
         return DB::transaction(function () use ($owner, $data) {
             // 1. Create the project
             $project = Project::create([
