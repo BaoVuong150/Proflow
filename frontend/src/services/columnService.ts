@@ -2,10 +2,10 @@ import api from './api'
 import type { ApiResponse, Column } from '../types'
 
 export const columnService = {
-  create: (boardId: number, data: { name: string; position?: number; color?: string }) => 
+  create: (boardId: number, data: { name: string; position?: number; color?: string | null }) => 
     api.post<ApiResponse<Column>>(`/boards/${boardId}/columns`, data),
     
-  update: (columnId: number, data: { name?: string; position?: number; color?: string }) => 
+  update: (columnId: number, data: { name?: string; position?: number; color?: string | null }) => 
     api.put<ApiResponse<Column>>(`/columns/${columnId}`, data),
     
   delete: (columnId: number) => 

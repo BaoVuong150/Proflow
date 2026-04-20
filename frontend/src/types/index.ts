@@ -20,6 +20,7 @@ export interface Project {
   icon: string | null
   is_archived: boolean
   boards?: Board[]
+  members?: (User & { pivot?: { role: string } })[]
   created_at: string
   updated_at: string
 }

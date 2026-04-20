@@ -21,9 +21,17 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
   const [type, setType] = useState(task.type || '')
   const [dueDate, setDueDate] = useState(task.due_date?.split('T')[0] || '')
   const [isSaving, setIsSaving] = useState(false)
-  const [saveStatus, setSaveStatus] = useState<'idle' | 'saved' | 'error'>('idle')
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
+  const [isDeleting, setIsDeleting] = useState(false)
 
   const { columns, setSelectedTask } = useBoardStore()
+
+  // Track changes to show "Unsaved changes" warning
+  const hasChanges = title !== task.title || 
+                    description !== (task.description || '') || 
+                    priority !== (task.priority || '') ||
+                    type !== (task.type || '') ||
+                    dueDate !== (task.due_date?.split('T')[0] || '')
 
   // Sync state when task prop changes
   useEffect(() => {
@@ -33,6 +41,7 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
     setType(task.type || '')
     setDueDate(task.due_date?.split('T')[0] || '')
     setSaveStatus('idle')
+    setIsDeleting(false)
   }, [task])
 
   const handleSave = async () => {
@@ -59,9 +68,8 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
       }))
 
       setSaveStatus('saved')
-      setTimeout(() => setSaveStatus('idle'), 2000)
     } catch (err) {
-      console.error('Failed to save task:', err)
+      console.error('Failed to update task', err)
       setSaveStatus('error')
     } finally {
       setIsSaving(false)
@@ -70,6 +78,7 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
 
   const handleDelete = async () => {
     if (!confirm('Are you sure you want to delete this task?')) return
+    setIsDeleting(true)
     try {
       await taskService.destroy(task.id)
       // Remove task from board store
@@ -101,9 +110,20 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
         </span>
         <button 
           onClick={handleDelete}
-          className="text-xs font-semibold text-red-400 hover:text-red-300 hover:bg-red-400/10 px-2 py-1 rounded transition-colors cursor-pointer"
+          disabled={isDeleting}
+          className="text-xs font-semibold text-red-400 hover:text-red-300 hover:bg-red-400/10 px-2 py-1 rounded transition-colors cursor-pointer disabled:opacity-50 flex items-center gap-1"
         >
-          🗑 Delete
+          {isDeleting ? (
+            <>
+              <svg className="animate-spin h-3 w-3 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Deleting...
+            </>
+          ) : (
+            '🗑 Delete'
+          )}
         </button>
       </div>
 
