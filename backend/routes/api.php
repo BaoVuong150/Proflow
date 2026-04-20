@@ -97,7 +97,7 @@ Route::prefix('v1')->group(function () {
 
         // Comments
         Route::get('tasks/{task}/comments', [CommentController::class, 'index']);
-        Route::post('tasks/{task}/comments', [CommentController::class, 'store']);
+        Route::post('tasks/{task}/comments', [CommentController::class, 'store'])->middleware('throttle:10,1');
         Route::delete('comments/{comment}', [CommentController::class, 'destroy']);
 
         // Attachments
