@@ -20,6 +20,7 @@ function AppRouter() {
         <Route path="/projects/:projectId/boards/:boardId" element={<BoardPage />} />
       </Route>
 
+      <Route path="/" element={<Navigate to="/projects" replace />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
