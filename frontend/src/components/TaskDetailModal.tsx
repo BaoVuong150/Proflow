@@ -183,8 +183,8 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
             </div>
           )}
 
-          {/* Checklists Section */}
-          <TaskChecklists task={task} />
+          {/* Checklists Section - Hidden for now, kept for future MVP scope */}
+          {/* <TaskChecklists task={task} /> */}
 
           {/* Attachments Section */}
           <TaskAttachments taskId={task.id} />
