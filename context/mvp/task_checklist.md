@@ -552,14 +552,13 @@
 - [ ] Cài `laravel/horizon` để monitor Queue trên dashboard
 - [ ] Verify: Kéo thả Task → API trả về < 200ms, Activity Log vẫn được ghi đúng
 
-### Epic 3: Cloud Storage (Lưu trữ đám mây)
-> 💡 **Tại sao:** File đính kèm (Attachments) đang lưu trên ổ cứng Server. Khi dung lượng đầy, Server sẽ sập. Chuyển sang S3/R2 để lưu trữ không giới hạn với chi phí cực thấp.
-- [ ] Cài `league/flysystem-aws-s3-v3`
-- [ ] Cấu hình S3 credentials trong `.env` (hoặc Cloudflare R2 tương thích S3)
-- [ ] Đổi `FILESYSTEM_DISK=s3` trong `.env`
-- [ ] Tạo CDN distribution (CloudFront hoặc Cloudflare) trỏ vào S3 bucket
-- [ ] Cập nhật `AttachmentResource` trả về CDN URL thay vì local URL
-- [ ] Verify: Upload file → file xuất hiện trên S3, tải về qua CDN URL thành công
+### Epic 3: 100% Free Cloud Storage & Resource Quotas
+> 💡 **Tại sao:** AWS S3 bắt buộc nhập thẻ Visa và có thể trừ tiền nếu lố băng thông. Để an toàn 100% miễn phí, ta sẽ dùng Supabase/Cloudinary (không đòi thẻ) hoặc dùng Local Storage kết hợp với giới hạn Quota để chống đầy ổ cứng.
+- [ ] Lựa chọn 1: Giữ Local Storage nhưng tạo bảng `user_quotas` (Giới hạn tối đa 100MB file / User).
+- [ ] Lựa chọn 2: Cài thư viện `cloudinary-labs/cloudinary-laravel`.
+- [ ] Đăng ký Cloudinary (Free vĩnh viễn 25GB, không cần thẻ tín dụng).
+- [ ] Đổi logic `FileUploadService` đẩy file lên Cloudinary thay vì lưu vào ổ cứng.
+- [ ] Verify: Tải file lên → File xuất hiện trên Cloudinary, dung lượng ổ cứng Server không đổi.
 
 ### Epic 4: Rate Limiting toàn diện (Chống spam & DDoS ứng dụng)
 > 💡 **Tại sao:** Hiện tại chỉ có 2 endpoint được rate limit (Move Task, Reorder Column). Các endpoint tạo Task, Comment, Upload File vẫn còn lỗ hổng bị spam.
