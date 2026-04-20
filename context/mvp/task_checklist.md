@@ -527,3 +527,80 @@
 - [ ] Setup SSL/HTTPS certificates for Nginx in production (`SESSION_SECURE_COOKIE=true`).
 - [ ] Add strict `Content-Security-Policy` (CSP) header in Nginx to prevent XSS executing malicious scripts.
 - [ ] Implement Business Quotas / Resource Limits (e.g. Free Tier = Max 5 Projects) for rate limiting and DoS prevention.
+
+---
+
+## 🚀 Phase 7: Performance & Scalability Optimization (Tuần 6+)
+
+> 🎯 **MỤC TIÊU TỐI THƯỢNG:** Tối ưu hiệu năng toàn diện — caching, queue, cloud storage, real-time sync, engine upgrade — để dự án **sẵn sàng gánh hàng ngàn người dùng đồng thời** trên 1 con Server duy nhất, đạt đẳng cấp SaaS thương mại.
+
+### Epic 1: Redis Caching (Bộ nhớ đệm RAM)
+> 💡 **Tại sao:** Mỗi lần mở Board, Backend phải JOIN nhiều bảng (Columns, Tasks, Assignees, Labels). Với Redis, dữ liệu được lưu sẵn trong RAM, trả về nhanh gấp 10 lần MySQL.
+- [ ] Cài `predis/predis` + cấu hình Redis trong `docker-compose.yml`
+- [ ] Đổi `CACHE_DRIVER=redis` trong `.env`
+- [ ] Cache Board data (`BoardController@show`) — invalidate khi Task/Column thay đổi
+- [ ] Cache Project list (`ProjectController@index`) — invalidate khi tạo/xóa Project
+- [ ] Cache Member list cho từng Project — invalidate khi add/remove member
+- [ ] Verify: So sánh response time trước/sau khi bật Redis (target: giảm ≥ 50%)
+
+### Epic 2: Queue & Background Jobs (Hàng đợi xử lý ngầm)
+> 💡 **Tại sao:** Ghi Activity Log và gửi Email thông báo đang chạy đồng bộ (synchronous), làm chậm tốc độ phản hồi API khi kéo thả Task.
+- [ ] Đổi `QUEUE_CONNECTION=redis` trong `.env`
+- [ ] Thêm `queue` worker service vào `docker-compose.yml`
+- [ ] Chuyển Activity Log sang Job: `LogActivityJob` (dispatch từ Observer/Service)
+- [ ] Chuyển Email thông báo sang Job: `SendNotificationJob`
+- [ ] Cài `laravel/horizon` để monitor Queue trên dashboard
+- [ ] Verify: Kéo thả Task → API trả về < 200ms, Activity Log vẫn được ghi đúng
+
+### Epic 3: Cloud Storage (Lưu trữ đám mây)
+> 💡 **Tại sao:** File đính kèm (Attachments) đang lưu trên ổ cứng Server. Khi dung lượng đầy, Server sẽ sập. Chuyển sang S3/R2 để lưu trữ không giới hạn với chi phí cực thấp.
+- [ ] Cài `league/flysystem-aws-s3-v3`
+- [ ] Cấu hình S3 credentials trong `.env` (hoặc Cloudflare R2 tương thích S3)
+- [ ] Đổi `FILESYSTEM_DISK=s3` trong `.env`
+- [ ] Tạo CDN distribution (CloudFront hoặc Cloudflare) trỏ vào S3 bucket
+- [ ] Cập nhật `AttachmentResource` trả về CDN URL thay vì local URL
+- [ ] Verify: Upload file → file xuất hiện trên S3, tải về qua CDN URL thành công
+
+### Epic 4: Rate Limiting toàn diện (Chống spam & DDoS ứng dụng)
+> 💡 **Tại sao:** Hiện tại chỉ có 2 endpoint được rate limit (Move Task, Reorder Column). Các endpoint tạo Task, Comment, Upload File vẫn còn lỗ hổng bị spam.
+- [x] Rate limit: `POST /tasks/{task}/move` → `throttle:5,1`
+- [x] Rate limit: `PUT /boards/{board}/columns/reorder` → `throttle:5,1`
+- [x] Rate limit: `POST /tasks/{task}/comments` → `throttle:10,1`
+- [ ] Rate limit: `POST /projects/{project}/tasks` → `throttle:30,1`
+- [ ] Rate limit: `POST /tasks/{task}/attachments` → `throttle:5,1`
+- [ ] Rate limit: `POST /projects` → `throttle:10,1`
+- [ ] Rate limit: `POST /auth/register` → `throttle:3,1`
+- [ ] Verify: Spam API bằng tool → nhận đúng lỗi 429 Too Many Requests
+
+### Epic 5: Pagination toàn diện (Phân trang dữ liệu lớn)
+> 💡 **Tại sao:** Khi có 1.000+ Comments/Attachments/Activities, việc tải toàn bộ 1 lần sẽ làm treo trình duyệt và nghẽn Server.
+- [x] Pagination: Activity Logs (10/page + Load More UI)
+- [x] Pagination: Task Comments (10/page + Load More UI)
+- [ ] Pagination: Task Attachments (10/page + Load More UI)
+- [ ] Pagination: Project list (nếu user có > 20 projects)
+- [ ] Verify: Tạo 100+ comments trên 1 task → Load More hoạt động mượt mà
+
+### Epic 6: Laravel Octane (Tăng tốc Engine PHP)
+> 💡 **Tại sao:** PHP mặc định khởi động lại toàn bộ framework mỗi request. Octane giữ application trong RAM, tăng throughput lên gấp 5-10 lần.
+- [ ] Cài `laravel/octane` với FrankenPHP hoặc Swoole
+- [ ] Cập nhật `Dockerfile` để dùng Octane server thay vì PHP-FPM
+- [ ] Kiểm tra và sửa các Singleton/Static state conflicts
+- [ ] Benchmark: So sánh RPS (Requests Per Second) trước/sau Octane
+- [ ] Verify: Toàn bộ tính năng hoạt động bình thường dưới Octane
+
+### Epic 7: Frontend Performance (Tối ưu giao diện)
+> 💡 **Tại sao:** Với hàng trăm Task trên Board, trình duyệt phải render rất nhiều DOM elements. Cần tối ưu để giữ 60fps khi kéo thả.
+- [x] Frontend Debouncing: Kéo thả Task/Column (500ms delay)
+- [x] Syncing Indicator: Loading spinner + disable drag khi đang sync
+- [ ] Lazy loading: Chỉ render Task cards trong viewport (React Virtualization)
+- [ ] Code splitting: Lazy load TaskDetailModal, ActivityTimeline
+- [ ] Image optimization: Lazy load avatar images, attachment thumbnails
+- [ ] Verify: Board với 200+ tasks vẫn mượt mà 60fps khi cuộn và kéo thả
+
+### Epic 8: Real-time Sync (Đồng bộ thời gian thực) — Optional
+> 💡 **Tại sao:** Khi nhiều người cùng mở 1 Board, người A kéo Task nhưng màn hình người B không cập nhật (phải F5).
+- [ ] Cài `laravel/reverb` + thêm `reverb` service vào Docker
+- [ ] Cài `laravel-echo` + `pusher-js` ở Frontend
+- [ ] Broadcast events: `TaskMoved`, `TaskCreated`, `TaskUpdated`, `TaskDeleted`
+- [ ] Frontend: Listen events → update Zustand store → Board tự cập nhật
+- [ ] Verify: 2 browser tabs → kéo Task ở tab 1 → tab 2 cập nhật real-time
