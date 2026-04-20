@@ -93,19 +93,19 @@ services:
   #     - app
   #     - redis
 
-  # queue:
-  #   image: proflow-app
-  #   container_name: proflow_queue
-  #   restart: unless-stopped
-  #   command: php artisan queue:work --tries=3
-  #   volumes:
-  #     - ./backend:/var/www
-  #   networks:
-  #     - proflow_network
-  #   depends_on:
-  #     - app
-  #     - redis
-  #     - mysql
+  queue:
+    image: proflow-app
+    container_name: proflow_queue
+    restart: unless-stopped
+    command: php artisan horizon
+    volumes:
+      - ./backend:/var/www
+    networks:
+      - proflow_network
+    depends_on:
+      - app
+      - redis
+      - mysql
 
   # scheduler:
   #   image: proflow-app

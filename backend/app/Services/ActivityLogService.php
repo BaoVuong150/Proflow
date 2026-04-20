@@ -19,8 +19,8 @@ class ActivityLogService
         string $action,
         ?string $description = null,
         ?array $changes = null,
-    ): ActivityLog {
-        return ActivityLog::create([
+    ): void {
+        $logData = [
             'user_id' => $user?->id,
             'project_id' => $project->id,
             'loggable_type' => get_class($loggable),
@@ -30,6 +30,8 @@ class ActivityLogService
             'changes' => $changes,
             'ip_address' => request()?->ip(),
             'user_agent' => request()?->userAgent(),
-        ]);
+        ];
+
+        \App\Jobs\LogActivityJob::dispatch($logData);
     }
 }

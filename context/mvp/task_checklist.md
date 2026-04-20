@@ -545,12 +545,12 @@
 
 ### Epic 2: Queue & Background Jobs (Hàng đợi xử lý ngầm)
 > 💡 **Tại sao:** Ghi Activity Log và gửi Email thông báo đang chạy đồng bộ (synchronous), làm chậm tốc độ phản hồi API khi kéo thả Task.
-- [ ] Đổi `QUEUE_CONNECTION=redis` trong `.env`
-- [ ] Thêm `queue` worker service vào `docker-compose.yml`
-- [ ] Chuyển Activity Log sang Job: `LogActivityJob` (dispatch từ Observer/Service)
-- [ ] Chuyển Email thông báo sang Job: `SendNotificationJob`
-- [ ] Cài `laravel/horizon` để monitor Queue trên dashboard
-- [ ] Verify: Kéo thả Task → API trả về < 200ms, Activity Log vẫn được ghi đúng
+- [x] Đổi `QUEUE_CONNECTION=redis` trong `.env`
+- [x] Thêm `queue` worker service vào `docker-compose.yml`
+- [x] Chuyển Activity Log sang Job: `LogActivityJob` (dispatch từ Observer/Service)
+- [x] Chuyển Email thông báo sang Job: `SendNotificationJob`
+- [x] Cài `laravel/horizon` để monitor Queue trên dashboard
+- [x] Verify: Kéo thả Task → API trả về < 200ms, Activity Log vẫn được ghi đúng
 
 ### Epic 3: 100% Free Cloud Storage & Resource Quotas
 > 💡 **Tại sao:** AWS S3 bắt buộc nhập thẻ Visa và có thể trừ tiền nếu lố băng thông. Để an toàn 100% miễn phí, ta sẽ dùng Supabase/Cloudinary (không đòi thẻ) hoặc dùng Local Storage kết hợp với giới hạn Quota để chống đầy ổ cứng.
