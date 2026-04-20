@@ -11,25 +11,45 @@ interface ProjectActivitySidebarProps {
 export default function ProjectActivitySidebar({ projectId, isOpen, onClose }: ProjectActivitySidebarProps) {
   const [activities, setActivities] = useState<ActivityLog[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const [page, setPage] = useState(1)
+  const [hasMore, setHasMore] = useState(true)
+  const [isLoadingMore, setIsLoadingMore] = useState(false)
+
+  const fetchActivities = async (currentPage: number, isLoadMore = false) => {
+    if (isLoadMore) setIsLoadingMore(true)
+    else setIsLoading(true)
+    
+    try {
+      const { data } = await projectService.getProjectActivities(projectId, currentPage)
+      const payload = data.data
+      const activityList = Array.isArray(payload) ? payload : (payload?.data || [])
+      
+      if (payload && payload.meta) {
+        setHasMore(payload.meta.current_page < payload.meta.last_page)
+      } else {
+        setHasMore(activityList.length === 20)
+      }
+
+      setActivities(prev => isLoadMore ? [...prev, ...activityList] : activityList)
+    } catch (err) {
+      console.error('Failed to load project activities:', err)
+    } finally {
+      if (isLoadMore) setIsLoadingMore(false)
+      else setIsLoading(false)
+    }
+  }
 
   useEffect(() => {
     if (!isOpen) return
-
-    const fetchActivities = async () => {
-      setIsLoading(true)
-      try {
-        const { data } = await projectService.getProjectActivities(projectId)
-        const activityList = Array.isArray(data.data) ? data.data : (data.data?.data || [])
-        setActivities(activityList) 
-      } catch (err) {
-        console.error('Failed to load project activities:', err)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchActivities()
+    setPage(1)
+    fetchActivities(1, false)
   }, [projectId, isOpen])
+
+  const handleLoadMore = () => {
+    const nextPage = page + 1
+    setPage(nextPage)
+    fetchActivities(nextPage, true)
+  }
 
   if (!isOpen) return null
 
@@ -64,8 +84,8 @@ export default function ProjectActivitySidebar({ projectId, isOpen, onClose }: P
             </div>
           ) : (
             <div className="flex flex-col gap-6 relative before:absolute before:inset-0 before:ml-[15px] before:-translate-x-px before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-[var(--color-border-default)] before:to-transparent">
-              {activities.map((activity) => (
-                <div key={activity.id} className="relative flex items-start gap-4 z-10 group">
+              {activities.map((activity, index) => (
+                <div key={`${activity.id}-${index}`} className="relative flex items-start gap-4 z-10 group">
                   <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--color-bg-elevated)] border border-[var(--color-border-default)] text-[var(--color-text-secondary)] shadow-sm shrink-0 text-xs font-bold uppercase mt-1">
                     {activity.user?.name?.substring(0, 2) || '??'}
                   </div>
@@ -86,6 +106,28 @@ export default function ProjectActivitySidebar({ projectId, isOpen, onClose }: P
                   </div>
                 </div>
               ))}
+              
+              {hasMore && (
+                <div className="pt-4 pb-2 text-center relative z-10 bg-[var(--color-bg-primary)]">
+                  <button 
+                    onClick={handleLoadMore}
+                    disabled={isLoadingMore}
+                    className="px-4 py-2 text-sm font-semibold bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)] text-[var(--color-text-primary)] rounded-lg hover:bg-[var(--color-bg-hover)] transition-colors disabled:opacity-50 inline-flex items-center gap-2"
+                  >
+                    {isLoadingMore ? (
+                      <>
+                        <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Loading...
+                      </>
+                    ) : (
+                      'Load More'
+                    )}
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </div>
