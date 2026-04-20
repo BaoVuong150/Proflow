@@ -37,7 +37,7 @@ export const useBoardStore = create<BoardState>((set, get) => ({
   },
 
   fetchBoard: async (boardId) => {
-    set({ isLoading: true })
+    set({ isLoading: true, error: null })
     try {
       const { data } = await api.get<ApiResponse<Board>>(`/boards/${boardId}`)
       const board = data.data
@@ -45,9 +45,14 @@ export const useBoardStore = create<BoardState>((set, get) => ({
         board,
         columns: board.columns || [],
         isLoading: false,
+        error: null
       })
-    } catch {
-      set({ isLoading: false })
+    } catch (err: any) {
+      if (err.response?.status === 404) {
+        set({ error: 'NOT_FOUND', isLoading: false })
+      } else {
+        set({ error: 'Failed to load board', isLoading: false })
+      }
     }
   },
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router'
+import { useParams, Link, Navigate } from 'react-router'
 import { useProjectStore } from '../stores/projectStore'
 import { useBoardStore } from '../stores/boardStore'
 import AppHeader from '../components/AppHeader'
@@ -11,16 +11,25 @@ import ProjectMembersModal from '../components/ProjectMembersModal'
 
 function BoardPage() {
   const { projectId, boardId } = useParams()
-  const { currentProject, fetchProject } = useProjectStore()
-  const { columns, isLoading, fetchBoard, selectedTask, setSelectedTask } = useBoardStore()
+  const { currentProject, fetchProject, error: projectError } = useProjectStore()
+  const { columns, isLoading, fetchBoard, selectedTask, setSelectedTask, error: boardError } = useBoardStore()
   const [isActivityOpen, setIsActivityOpen] = useState(false)
   const [isMembersOpen, setIsMembersOpen] = useState(false)
 
+  // Redirect if ID formats are invalid or APIs return 404
+  const isInvalidFormat = isNaN(Number(projectId)) || isNaN(Number(boardId))
+  const isNotFound = projectError === 'NOT_FOUND' || boardError === 'NOT_FOUND' || isInvalidFormat
+
   // Parallel fetching
   useEffect(() => {
+    if (isInvalidFormat) return
     if (projectId) fetchProject(projectId)
     if (boardId) fetchBoard(Number(boardId))
-  }, [projectId, boardId, fetchProject, fetchBoard])
+  }, [projectId, boardId, fetchProject, fetchBoard, isInvalidFormat])
+
+  if (isNotFound) {
+    return <Navigate to="/404" replace />
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--color-bg-primary)] overflow-hidden">

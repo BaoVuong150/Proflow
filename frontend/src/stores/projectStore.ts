@@ -6,6 +6,7 @@ interface ProjectState {
   projects: Project[]
   currentProject: Project | null
   isLoading: boolean
+  error: string | null
   fetchProjects: () => Promise<void>
   fetchProject: (id: number | string) => Promise<void>
   createProject: (data: { name: string; description?: string }) => Promise<Project>
@@ -16,6 +17,7 @@ export const useProjectStore = create<ProjectState>((set) => ({
   projects: [],
   currentProject: null,
   isLoading: false,
+  error: null,
 
   fetchProjects: async () => {
     set({ isLoading: true })
@@ -28,12 +30,16 @@ export const useProjectStore = create<ProjectState>((set) => ({
   },
 
   fetchProject: async (id) => {
-    set({ isLoading: true })
+    set({ isLoading: true, error: null })
     try {
       const { data } = await projectService.getById(id)
-      set({ currentProject: data.data, isLoading: false })
-    } catch {
-      set({ isLoading: false })
+      set({ currentProject: data.data, isLoading: false, error: null })
+    } catch (err: any) {
+      if (err.response?.status === 404) {
+        set({ error: 'NOT_FOUND', isLoading: false })
+      } else {
+        set({ error: 'Failed to fetch project', isLoading: false })
+      }
     }
   },
 
