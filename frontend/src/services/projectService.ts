@@ -9,4 +9,5 @@ export const projectService = {
   destroy: (id: number) => api.delete(`/projects/${id}`),
   addMember: (projectId: number, data: { email: string; role?: string }) => api.post(`/projects/${projectId}/members`, data),
   removeMember: (projectId: number, userId: number) => api.delete(`/projects/${projectId}/members/${userId}`),
+  getProjectActivities: (projectId: number) => api.get(`/projects/${projectId}/activity`),
 }

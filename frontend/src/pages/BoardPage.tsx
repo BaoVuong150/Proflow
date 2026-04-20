@@ -1,15 +1,17 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router'
 import { useProjectStore } from '../stores/projectStore'
 import { useBoardStore } from '../stores/boardStore'
 import AppHeader from '../components/AppHeader'
 import KanbanBoard from '../components/KanbanBoard'
 import TaskDetailModal from '../components/TaskDetailModal'
+import ProjectActivitySidebar from '../components/ProjectActivitySidebar'
 
 function BoardPage() {
   const { projectId, boardId } = useParams()
   const { currentProject, fetchProject } = useProjectStore()
   const { columns, isLoading, fetchBoard, selectedTask, setSelectedTask } = useBoardStore()
+  const [isActivityOpen, setIsActivityOpen] = useState(false)
 
   // Parallel fetching
   useEffect(() => {
@@ -32,7 +34,14 @@ function BoardPage() {
             <span className="font-bold text-base">{currentProject?.name || 'Loading Project...'}</span>
           </div>
         } 
-      />
+      >
+        <button 
+          onClick={() => setIsActivityOpen(true)}
+          className="hidden sm:flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)] rounded transition-colors cursor-pointer border border-[var(--color-border-default)]"
+        >
+          ⏱️ Activity
+        </button>
+      </AppHeader>
 
       <main className="flex-1 overflow-x-auto overflow-y-hidden p-6 relative">
         {isLoading ? (
@@ -49,6 +58,14 @@ function BoardPage() {
           isOpen={true} 
           onClose={() => setSelectedTask(null)} 
           task={selectedTask} 
+        />
+      )}
+
+      {projectId && (
+        <ProjectActivitySidebar 
+          projectId={Number(projectId)} 
+          isOpen={isActivityOpen} 
+          onClose={() => setIsActivityOpen(false)} 
         />
       )}
     </div>
