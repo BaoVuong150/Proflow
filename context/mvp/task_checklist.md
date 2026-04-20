@@ -430,10 +430,10 @@
   - [x] Edit column color
   - [x] Delete column (with confirmation)
   - [ ] Drag & Drop columns to reorder
-- [ ] `MemberList.jsx` (project members panel/dropdown)
-  - [ ] List members with roles
-  - [ ] Add member form (email input)
-  - [ ] Remove member button
+- [x] `MemberList.jsx` (project members panel/dropdown)
+  - [x] List members with roles
+  - [x] Add member form (email input)
+  - [x] Remove member button
 
 ### UX Polish
 - [ ] Loading states (skeleton loaders on board, spinners on actions)

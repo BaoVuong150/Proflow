@@ -7,12 +7,14 @@ import KanbanBoard from '../components/KanbanBoard'
 import TaskDetailModal from '../components/TaskDetailModal'
 import ProjectActivitySidebar from '../components/ProjectActivitySidebar'
 import BoardFilterBar from '../components/BoardFilterBar'
+import ProjectMembersModal from '../components/ProjectMembersModal'
 
 function BoardPage() {
   const { projectId, boardId } = useParams()
   const { currentProject, fetchProject } = useProjectStore()
   const { columns, isLoading, fetchBoard, selectedTask, setSelectedTask } = useBoardStore()
   const [isActivityOpen, setIsActivityOpen] = useState(false)
+  const [isMembersOpen, setIsMembersOpen] = useState(false)
 
   // Parallel fetching
   useEffect(() => {
@@ -36,6 +38,14 @@ function BoardPage() {
           </div>
         } 
       >
+        <button 
+          onClick={() => setIsMembersOpen(true)}
+          className="hidden sm:flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)] rounded transition-colors cursor-pointer border border-[var(--color-border-default)]"
+          title="Manage Project Members"
+        >
+          👥 Members ({currentProject?.members?.length || 0})
+        </button>
+
         <button 
           onClick={() => setIsActivityOpen(true)}
           className="hidden sm:flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)] rounded transition-colors cursor-pointer border border-[var(--color-border-default)]"
@@ -66,11 +76,18 @@ function BoardPage() {
       )}
 
       {projectId && (
-        <ProjectActivitySidebar 
-          projectId={Number(projectId)} 
-          isOpen={isActivityOpen} 
-          onClose={() => setIsActivityOpen(false)} 
-        />
+        <>
+          <ProjectActivitySidebar 
+            projectId={Number(projectId)} 
+            isOpen={isActivityOpen} 
+            onClose={() => setIsActivityOpen(false)} 
+          />
+          <ProjectMembersModal 
+            projectId={Number(projectId)} 
+            isOpen={isMembersOpen} 
+            onClose={() => setIsMembersOpen(false)} 
+          />
+        </>
       )}
     </div>
   )
