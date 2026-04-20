@@ -94,8 +94,8 @@ export default function ProjectMembersModal({ isOpen, onClose, projectId }: Proj
         <div className="flex flex-col gap-3">
           <h4 className="text-sm font-bold text-[var(--color-text-primary)]">Current Members ({currentProject.members?.length || 0})</h4>
           <div className="flex flex-col gap-2 max-h-60 overflow-y-auto pr-2">
-            {currentProject.members?.map(member => (
-              <div key={member.id} className="flex items-center justify-between p-3 bg-[var(--color-bg-secondary)] rounded-lg border border-[var(--color-border-default)] group">
+            {currentProject.members?.map((member, index) => (
+              <div key={`modal-member-${member.id}-${index}`} className="flex items-center justify-between p-3 bg-[var(--color-bg-secondary)] rounded-lg border border-[var(--color-border-default)] group">
                 <div className="flex items-center gap-3">
                   <AppAvatar name={member.name} size="md" />
                   <div className="flex flex-col">

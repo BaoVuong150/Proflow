@@ -23,9 +23,9 @@ export default function BoardFilterBar() {
       <div className="flex items-center gap-2 shrink-0">
         <span className="text-xs text-[var(--color-text-muted)] font-medium">Assignee:</span>
         <div className="flex -space-x-2">
-          {currentProject?.members?.map((member) => (
+          {currentProject?.members?.map((member, index) => (
             <button
-              key={member.id}
+              key={`member-${member.id}-${index}`}
               onClick={() => setFilters({ assigneeId: filters.assigneeId === member.id ? null : member.id })}
               className={`relative rounded-full transition-transform hover:z-10 hover:scale-110 ${
                 filters.assigneeId === member.id 
