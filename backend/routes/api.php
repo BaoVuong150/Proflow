@@ -59,7 +59,7 @@ Route::prefix('v1')->group(function () {
         Route::post('boards/{board}/columns', [ColumnController::class, 'store']);
         Route::put('columns/{column}', [ColumnController::class, 'update']);
         Route::delete('columns/{column}', [ColumnController::class, 'destroy']);
-        Route::put('boards/{board}/columns/reorder', [ColumnController::class, 'reorder']);
+        Route::put('boards/{board}/columns/reorder', [ColumnController::class, 'reorder'])->middleware('throttle:5,1');
 
         // Labels
         Route::get('projects/{project}/labels', [LabelController::class, 'index']);
@@ -72,7 +72,7 @@ Route::prefix('v1')->group(function () {
         Route::get('tasks/{task}', [TaskController::class, 'show']);
         Route::put('tasks/{task}', [TaskController::class, 'update']);
         Route::delete('tasks/{task}', [TaskController::class, 'destroy']);
-        Route::post('tasks/{task}/move', [TaskController::class, 'move']);
+        Route::post('tasks/{task}/move', [TaskController::class, 'move'])->middleware('throttle:5,1');
         Route::post('tasks/{task}/assign', [TaskController::class, 'assign']);
         Route::delete('tasks/{task}/assign/{user}', [TaskController::class, 'unassign']);
         Route::post('tasks/{task}/labels', [TaskController::class, 'attachLabel']);
