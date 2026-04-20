@@ -31,6 +31,6 @@ export const taskFeatureService = {
   deleteAttachment: (attachmentId: number) => api.delete(`/attachments/${attachmentId}`),
 
   // --- Activities ---
-  getTaskActivities: (projectId: number, taskId: number) => 
-    api.get(`/projects/${projectId}/activity?loggable_type=App\\Models\\Task&loggable_id=${taskId}`),
+  getTaskActivities: (projectId: number, taskId: number, page: number = 1) => 
+    api.get(`/projects/${projectId}/activity?loggable_type=App\\Models\\Task&loggable_id=${taskId}&page=${page}`),
 }
