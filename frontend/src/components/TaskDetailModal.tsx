@@ -95,12 +95,6 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
     }
   }
 
-  const hasChanges = title !== task.title 
-    || description !== (task.description || '') 
-    || priority !== (task.priority || '') 
-    || type !== (task.type || '') 
-    || dueDate !== (task.due_date?.split('T')[0] || '')
-
   return (
     <AppModal isOpen={isOpen} onClose={onClose} size="xl">
       {/* Custom Header with Delete */}
