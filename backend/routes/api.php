@@ -34,7 +34,7 @@ RateLimiter::for('auth.login', function (Request $request) {
 Route::prefix('v1')->group(function () {
     // Public routes
     Route::prefix('auth')->group(function () {
-        Route::post('/register', [AuthController::class, 'register']);
+        Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:3,1');
         Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:auth.login');
 
         // Protected routes
@@ -47,7 +47,8 @@ Route::prefix('v1')->group(function () {
     // Protected API Routes
     Route::middleware('auth:sanctum')->group(function () {
         // Projects
-        Route::apiResource('projects', ProjectController::class);
+        Route::post('projects', [ProjectController::class, 'store'])->middleware('throttle:10,1');
+        Route::apiResource('projects', ProjectController::class)->except(['store']);
         Route::post('projects/{project}/members', [ProjectController::class, 'addMember']);
         Route::delete('projects/{project}/members/{user}', [ProjectController::class, 'removeMember']);
         
@@ -68,7 +69,7 @@ Route::prefix('v1')->group(function () {
         Route::delete('labels/{label}', [LabelController::class, 'destroy']);
 
         // Tasks
-        Route::post('projects/{project}/tasks', [TaskController::class, 'store']);
+        Route::post('projects/{project}/tasks', [TaskController::class, 'store'])->middleware('throttle:30,1');
         Route::get('tasks/{task}', [TaskController::class, 'show']);
         Route::put('tasks/{task}', [TaskController::class, 'update']);
         Route::delete('tasks/{task}', [TaskController::class, 'destroy']);
@@ -102,7 +103,7 @@ Route::prefix('v1')->group(function () {
 
         // Attachments
         Route::get('tasks/{task}/attachments', [AttachmentController::class, 'index']);
-        Route::post('tasks/{task}/attachments', [AttachmentController::class, 'store']);
+        Route::post('tasks/{task}/attachments', [AttachmentController::class, 'store'])->middleware('throttle:5,1');
         Route::delete('attachments/{attachment}', [AttachmentController::class, 'destroy']);
 
         // Activity Log

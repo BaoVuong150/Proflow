@@ -567,11 +567,11 @@
 - [x] Rate limit: `POST /tasks/{task}/move` → `throttle:5,1`
 - [x] Rate limit: `PUT /boards/{board}/columns/reorder` → `throttle:5,1`
 - [x] Rate limit: `POST /tasks/{task}/comments` → `throttle:10,1`
-- [ ] Rate limit: `POST /projects/{project}/tasks` → `throttle:30,1`
-- [ ] Rate limit: `POST /tasks/{task}/attachments` → `throttle:5,1`
-- [ ] Rate limit: `POST /projects` → `throttle:10,1`
-- [ ] Rate limit: `POST /auth/register` → `throttle:3,1`
-- [ ] Verify: Spam API bằng tool → nhận đúng lỗi 429 Too Many Requests
+- [x] Rate limit: `POST /projects/{project}/tasks` → `throttle:30,1`
+- [x] Rate limit: `POST /tasks/{task}/attachments` → `throttle:5,1`
+- [x] Rate limit: `POST /projects` → `throttle:10,1`
+- [x] Rate limit: `POST /auth/register` → `throttle:3,1`
+- [x] Verify: 4/4 Tests PASS — Spam API → nhận đúng lỗi 429 Too Many Requests
 
 ### Epic 5: Pagination toàn diện (Phân trang dữ liệu lớn)
 > 💡 **Tại sao:** Khi có 1.000+ Comments/Attachments/Activities, việc tải toàn bộ 1 lần sẽ làm treo trình duyệt và nghẽn Server.
