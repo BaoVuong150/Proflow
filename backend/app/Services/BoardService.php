@@ -19,6 +19,6 @@ class BoardService
                     'position' => $data['position'],
                 ]);
             }
-        });
+        }, 5);
     }
 }

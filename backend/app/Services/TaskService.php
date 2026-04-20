@@ -118,7 +118,7 @@ class TaskService
                 'column_id' => $newColumnId,
                 'position' => $newPosition,
             ]);
-        });
+        }, 5);
 
         // Manual activity log for task.moved
         if (auth()->check()) {
