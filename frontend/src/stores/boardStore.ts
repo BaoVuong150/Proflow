@@ -12,6 +12,7 @@ interface BoardState {
   isLoading: boolean
   error: string | null
   selectedTask: Task | null
+  syncingTasks: number[]
   filters: {
     priority: string | null
     assigneeId: number | null
@@ -34,6 +35,7 @@ export const useBoardStore = create<BoardState>((set, get) => ({
   isLoading: false,
   error: null,
   selectedTask: null,
+  syncingTasks: [],
   filters: {
     priority: null,
     assigneeId: null,
@@ -83,7 +85,10 @@ export const useBoardStore = create<BoardState>((set, get) => ({
         }
       }
 
-      return { columns: newColumns }
+      return { 
+        columns: newColumns,
+        syncingTasks: [...state.syncingTasks.filter(id => id !== taskId), taskId]
+      }
     })
 
     if (moveTaskTimeouts[taskId]) {
@@ -95,6 +100,10 @@ export const useBoardStore = create<BoardState>((set, get) => ({
         await taskService.move(taskId, { column_id: columnId, position })
       } catch {
         set({ columns: prevColumns })
+      } finally {
+        set((state) => ({
+          syncingTasks: state.syncingTasks.filter(id => id !== taskId)
+        }))
       }
       delete moveTaskTimeouts[taskId]
     }, 500)
