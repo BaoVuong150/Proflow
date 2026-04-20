@@ -16,6 +16,8 @@ interface BoardState {
   fetchBoard: (boardId: number) => Promise<void>
   moveTask: (taskId: number, columnId: number, position: number) => Promise<void>
   addTaskToColumn: (columnId: number, task: Task) => void
+  updateColumn: (columnId: number, updates: Partial<Column>) => Promise<void>
+  deleteColumn: (columnId: number) => Promise<void>
   setSelectedTask: (task: Task | null) => void
   setFilters: (filters: Partial<BoardState['filters']>) => void
   clearFilters: () => void
@@ -84,7 +86,7 @@ export const useBoardStore = create<BoardState>((set, get) => ({
 
   addTaskToColumn: (columnId, task) => {
     set((state) => {
-      const newColumns = state.columns.map((col) => {
+      const newColumns = state.columns.map(col => {
         if (col.id === columnId) {
           return { ...col, tasks: [...(col.tasks || []), task] }
         }
@@ -92,6 +94,36 @@ export const useBoardStore = create<BoardState>((set, get) => ({
       })
       return { columns: newColumns }
     })
+  },
+
+  updateColumn: async (columnId, updates) => {
+    // Optimistic update
+    set((state) => ({
+      columns: state.columns.map(col => 
+        col.id === columnId ? { ...col, ...updates } : col
+      )
+    }))
+    // Call API (using a dynamic import to avoid circular dependencies if any, but regular import is fine)
+    try {
+      const { columnService } = await import('../services/columnService')
+      await columnService.update(columnId, updates)
+    } catch (err) {
+      console.error('Failed to update column', err)
+      // Ideal: rollback on failure, but keeping it simple for MVP
+    }
+  },
+
+  deleteColumn: async (columnId) => {
+    // Optimistic update
+    set((state) => ({
+      columns: state.columns.filter(col => col.id !== columnId)
+    }))
+    try {
+      const { columnService } = await import('../services/columnService')
+      await columnService.delete(columnId)
+    } catch (err) {
+      console.error('Failed to delete column', err)
+    }
   },
 
   setSelectedTask: (task) => set({ selectedTask: task }),

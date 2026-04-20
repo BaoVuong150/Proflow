@@ -425,10 +425,10 @@
   - [x] Priority filter (dropdown)
   - [x] Assignee filter (dropdown)
   - [x] Clear filters button
-- [ ] Column management
-  - [ ] Edit column name (inline)
-  - [ ] Edit column color
-  - [ ] Delete column (with confirmation)
+- [x] Column management
+  - [x] Edit column name (inline)
+  - [x] Edit column color
+  - [x] Delete column (with confirmation)
   - [ ] Drag & Drop columns to reorder
 - [ ] `MemberList.jsx` (project members panel/dropdown)
   - [ ] List members with roles

@@ -14,8 +14,20 @@ export default function KanbanColumn({ column }: KanbanColumnProps) {
   const [newTaskTitle, setNewTaskTitle] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   
+  const [isEditingName, setIsEditingName] = useState(false)
+  const [editName, setEditName] = useState(column.name)
+  
   const addTaskToColumn = useBoardStore((s) => s.addTaskToColumn)
   const board = useBoardStore((s) => s.board)
+
+  const handleSaveName = () => {
+    if (editName.trim() && editName.trim() !== column.name) {
+      useBoardStore.getState().updateColumn(column.id, { name: editName.trim() })
+    } else {
+      setEditName(column.name)
+    }
+    setIsEditingName(false)
+  }
 
   const { setNodeRef } = useSortable({
     id: column.id,
@@ -64,17 +76,62 @@ export default function KanbanColumn({ column }: KanbanColumnProps) {
       className="w-[300px] min-w-[300px] bg-[var(--color-bg-secondary)] rounded-xl border border-[var(--color-border-default)] flex flex-col h-full max-h-full"
     >
       {/* Column Header */}
-      <div className="flex items-center gap-2 p-4 border-b border-[var(--color-border-default)] shrink-0">
+      <div className="flex items-center gap-2 p-4 border-b border-[var(--color-border-default)] shrink-0 group">
         <div 
-          className="w-2.5 h-2.5 rounded-full shrink-0" 
+          className="w-2.5 h-2.5 rounded-full shrink-0 relative cursor-pointer" 
           style={{ background: column.color || 'var(--color-accent)' }} 
-        />
-        <h3 className="text-sm font-semibold flex-1 text-[var(--color-text-primary)]">
-          {column.name}
-        </h3>
+          title="Change Color"
+        >
+          {/* Extremely simple color picker hidden overlay */}
+          <input 
+            type="color" 
+            value={column.color || '#3b82f6'} 
+            onChange={(e) => useBoardStore.getState().updateColumn(column.id, { color: e.target.value })}
+            className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+          />
+        </div>
+        
+        {isEditingName ? (
+          <input
+            autoFocus
+            type="text"
+            value={editName}
+            onChange={(e) => setEditName(e.target.value)}
+            onBlur={handleSaveName}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSaveName()
+              if (e.key === 'Escape') {
+                setEditName(column.name)
+                setIsEditingName(false)
+              }
+            }}
+            className="flex-1 text-sm font-semibold bg-[var(--color-bg-elevated)] border border-[var(--color-border-default)] rounded px-1.5 py-0.5 text-[var(--color-text-primary)] outline-none focus:border-[var(--color-accent)]"
+          />
+        ) : (
+          <h3 
+            onClick={() => setIsEditingName(true)}
+            className="text-sm font-semibold flex-1 text-[var(--color-text-primary)] cursor-text hover:bg-[var(--color-bg-hover)] rounded px-1.5 py-0.5 -ml-1.5 transition-colors truncate"
+            title="Click to rename"
+          >
+            {column.name}
+          </h3>
+        )}
+
         <span className="text-xs font-semibold text-[var(--color-text-secondary)] bg-[var(--color-bg-tertiary)] px-2 py-0.5 rounded-full border border-[var(--color-border-default)]">
           {column.tasks?.length || 0}
         </span>
+
+        <button 
+          onClick={() => {
+            if (confirm(`Are you sure you want to delete the column "${column.name}"? All tasks inside will be lost.`)) {
+              useBoardStore.getState().deleteColumn(column.id)
+            }
+          }}
+          className="opacity-0 group-hover:opacity-100 p-1 text-[var(--color-text-muted)] hover:text-red-400 hover:bg-red-400/10 rounded transition-all cursor-pointer -mr-2"
+          title="Delete Column"
+        >
+          ✕
+        </button>
       </div>
 
       {/* Task List */}
