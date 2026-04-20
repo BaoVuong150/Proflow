@@ -40,9 +40,9 @@ export default function TaskCard({ task, isOverlay }: TaskCardProps) {
       {...attributes}
       {...listeners}
       onClick={() => setSelectedTask(task)}
-      className={`bg-[var(--color-bg-tertiary)] border border-[var(--color-border-default)] rounded-lg p-3.5 hover:border-[var(--color-accent)] hover:shadow-md transition-all group 
+      className={`bg-[var(--color-bg-tertiary)] border border-[var(--color-border-default)] rounded-lg p-3.5 hover:border-[var(--color-accent)] hover:shadow-md transition-all group duration-300
         ${isOverlay ? 'shadow-xl rotate-2 cursor-grabbing border-[var(--color-accent)] scale-105' : ''}
-        ${isSyncing ? 'cursor-wait opacity-80' : 'cursor-grab'}
+        ${isSyncing ? 'cursor-wait opacity-50 grayscale-[0.3] pointer-events-none' : 'cursor-grab'}
       `}
     >
       {/* Label Chips */}
