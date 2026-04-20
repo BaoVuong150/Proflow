@@ -25,9 +25,9 @@ class CommentController extends Controller
         $comments = $task->comments()
             ->with('user')
             ->latest()
-            ->get();
+            ->paginate(10);
 
-        return $this->success(CommentResource::collection($comments));
+        return $this->success($comments);
     }
 
     /**

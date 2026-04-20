@@ -15,7 +15,7 @@ export const taskFeatureService = {
   deleteChecklistItem: (itemId: number) => api.delete(`/checklist-items/${itemId}`),
 
   // --- Comments ---
-  getComments: (taskId: number) => api.get(`/tasks/${taskId}/comments`),
+  getComments: (taskId: number, page: number = 1) => api.get(`/tasks/${taskId}/comments?page=${page}`),
   createComment: (taskId: number, content: string) => api.post(`/tasks/${taskId}/comments`, { content }),
   deleteComment: (commentId: number) => api.delete(`/comments/${commentId}`),
 
