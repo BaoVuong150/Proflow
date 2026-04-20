@@ -401,17 +401,17 @@
 > 🎯 **MỤC TIÊU TỐI THƯỢNG:** Đánh bóng UI/UX đến mức **production-ready** — checklists, comments, attachments, activity log, filter, empty/loading/error states, responsive — để MVP trông như sản phẩm thật, sẵn sàng demo cho nhà tuyển dụng.
 
 ### Task Detail — Sub-features
-- [ ] `TaskChecklist.jsx`
-  - [ ] List checklists with items
-  - [ ] Add new checklist
-  - [ ] Add checklist items
-  - [ ] Toggle item completion (checkbox)
-  - [ ] Progress bar (completed/total)
-  - [ ] Delete checklist/item
-- [ ] Comments section in Task Detail
-  - [ ] `CommentList.jsx` (list of comments)
-  - [ ] `CommentItem.jsx` (avatar + name + time + content + delete button)
-  - [ ] Comment input (textarea + submit button)
+- [x] `TaskChecklist.jsx`
+  - [x] List checklists with items
+  - [x] Add new checklist
+  - [x] Add checklist items
+  - [x] Toggle item completion (checkbox)
+  - [x] Progress bar (completed/total)
+  - [x] Delete checklist/item
+- [x] Comments section in Task Detail
+  - [x] `CommentList.jsx` (list of comments)
+  - [x] `CommentItem.jsx` (avatar + name + time + content + delete button)
+  - [x] Comment input (textarea + submit button)
 - [ ] Attachments section in Task Detail
   - [ ] File upload (click or drag & drop zone)
   - [ ] File list (name + size + delete button)

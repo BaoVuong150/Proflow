@@ -42,13 +42,15 @@ class ProjectService
                 'description' => 'Default project board',
             ]);
 
-            // 4. Create default columns
-            $columns = ['To Do', 'In Progress', 'In Review', 'Done'];
-            foreach ($columns as $index => $colName) {
-                $board->columns()->create([
-                    'name' => $colName,
-                    'position' => $index,
-                ]);
+            // 4. Create default columns with distinct colors (per MVP spec)
+            $columns = [
+                ['name' => 'To Do',       'color' => '#64748b', 'position' => 0],
+                ['name' => 'In Progress', 'color' => '#3b82f6', 'position' => 1],
+                ['name' => 'In Review',   'color' => '#f59e0b', 'position' => 2],
+                ['name' => 'Done',        'color' => '#22c55e', 'position' => 3],
+            ];
+            foreach ($columns as $col) {
+                $board->columns()->create($col);
             }
 
             return $project->load('owner');

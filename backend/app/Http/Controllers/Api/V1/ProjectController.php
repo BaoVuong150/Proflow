@@ -29,7 +29,7 @@ class ProjectController extends Controller
         $projects = Project::whereHas('members', function ($query) use ($request) {
             $query->where('user_id', $request->user()->id);
         })
-        ->with('owner')
+        ->with(['owner', 'boards'])
         ->latest()
         ->get();
 

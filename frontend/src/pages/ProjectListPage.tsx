@@ -77,7 +77,7 @@ function ProjectListPage() {
                 {projects.map((project) => (
                   <Link
                     key={project.id}
-                    to={`/projects/${project.id}/board`}
+                    to={project.boards?.[0] ? `/projects/${project.id}/boards/${project.boards[0].id}` : `/projects/${project.id}`}
                     className="group bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)] rounded-xl overflow-hidden hover:border-[var(--color-accent)] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 no-underline flex flex-col h-full"
                   >
                     <div className="h-1.5 w-full transition-all duration-300 group-hover:h-2" style={{ background: project.color || 'var(--color-accent)' }} />

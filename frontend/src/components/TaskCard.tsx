@@ -24,6 +24,13 @@ export default function TaskCard({ task, isOverlay }: TaskCardProps) {
     opacity: isDragging ? 0.3 : 1,
   }
 
+  const isOverdue = task.due_date && new Date(task.due_date) < new Date() && task.status !== 'done'
+
+  const formatDueDate = (dateStr: string) => {
+    const d = new Date(dateStr)
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+  }
+
   return (
     <div 
       ref={setNodeRef}
@@ -31,35 +38,100 @@ export default function TaskCard({ task, isOverlay }: TaskCardProps) {
       {...attributes}
       {...listeners}
       onClick={() => setSelectedTask(task)}
-      className={`bg-[var(--color-bg-tertiary)] border border-[var(--color-border-default)] rounded-lg p-4 cursor-grab hover:border-[var(--color-accent)] hover:shadow-md transition-all group ${isOverlay ? 'shadow-xl rotate-2 cursor-grabbing border-[var(--color-accent)] scale-105' : ''}`}
+      className={`bg-[var(--color-bg-tertiary)] border border-[var(--color-border-default)] rounded-lg p-3.5 cursor-grab hover:border-[var(--color-accent)] hover:shadow-md transition-all group ${isOverlay ? 'shadow-xl rotate-2 cursor-grabbing border-[var(--color-accent)] scale-105' : ''}`}
     >
-      <p className="text-sm font-medium mb-3 text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors leading-snug">
+      {/* Label Chips */}
+      {task.labels && task.labels.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mb-2.5">
+          {task.labels.map((label) => (
+            <span
+              key={label.id}
+              className="text-[10px] px-2 py-0.5 rounded-full font-semibold leading-tight"
+              style={{ 
+                backgroundColor: `${label.color}22`, 
+                color: label.color,
+                border: `1px solid ${label.color}44`
+              }}
+            >
+              {label.name}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {/* Title */}
+      <p className="text-sm font-medium mb-2 text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors leading-snug">
         {task.title}
       </p>
       
-      <div className="flex items-center justify-between mt-2">
-        <div className="flex gap-2">
-          {task.priority && (
-            <span className={`inline-flex items-center text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-widest
-              ${task.priority === 'low' ? 'bg-[rgba(34,197,94,0.15)] text-[var(--color-priority-low)]' : ''}
-              ${task.priority === 'medium' ? 'bg-[rgba(245,158,11,0.15)] text-[var(--color-priority-medium)]' : ''}
-              ${task.priority === 'high' ? 'bg-[rgba(249,115,22,0.15)] text-[var(--color-priority-high)]' : ''}
-              ${task.priority === 'urgent' ? 'bg-[rgba(239,68,68,0.15)] text-[var(--color-priority-urgent)]' : ''}`}
-            >
-              {task.priority}
-            </span>
-          )}
-          {task.type && (
-            <span className="inline-flex items-center text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-widest bg-[var(--color-bg-elevated)] text-[var(--color-text-secondary)]">
-              {task.type}
-            </span>
+      {/* Badges Row: Priority + Type + Due Date */}
+      <div className="flex flex-wrap items-center gap-1.5 mb-2">
+        {task.type && (
+          <span className="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider bg-[var(--color-bg-elevated)] text-[var(--color-text-secondary)]">
+            {task.type === 'bug' && '🐛'}
+            {task.type === 'feature' && '✨'}
+            {task.type === 'task' && '📋'}
+            {task.type === 'improvement' && '🔧'}
+            {task.type}
+          </span>
+        )}
+        {task.priority && (
+          <span className={`inline-flex items-center text-[10px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider
+            ${task.priority === 'low' ? 'bg-[rgba(34,197,94,0.15)] text-[#22c55e]' : ''}
+            ${task.priority === 'medium' ? 'bg-[rgba(245,158,11,0.15)] text-[#f59e0b]' : ''}
+            ${task.priority === 'high' ? 'bg-[rgba(249,115,22,0.15)] text-[#f97316]' : ''}
+            ${task.priority === 'urgent' ? 'bg-[rgba(239,68,68,0.15)] text-[#ef4444]' : ''}`}
+          >
+            {task.priority}
+          </span>
+        )}
+        {task.due_date && (
+          <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded font-semibold ${isOverdue ? 'bg-[rgba(239,68,68,0.15)] text-[#ef4444]' : 'bg-[var(--color-bg-elevated)] text-[var(--color-text-secondary)]'}`}>
+            📅 {formatDueDate(task.due_date)}
+            {isOverdue && ' ⚠'}
+          </span>
+        )}
+      </div>
+
+      {/* Bottom Row: Checklist Progress + Assignees */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          {/* Checklist progress placeholder - shown when checklists data exists */}
+          {task.checklist_progress !== undefined && task.checklist_progress !== null && (
+            <div className="flex items-center gap-1.5">
+              <div className="w-12 h-1.5 bg-[var(--color-bg-elevated)] rounded-full overflow-hidden">
+                <div 
+                  className="h-full rounded-full transition-all"
+                  style={{ 
+                    width: `${task.checklist_progress}%`,
+                    backgroundColor: task.checklist_progress === 100 ? '#22c55e' : 'var(--color-accent)'
+                  }}
+                />
+              </div>
+              <span className="text-[10px] text-[var(--color-text-muted)] font-medium">
+                {task.checklist_progress === 100 ? '✓' : `${task.checklist_progress}%`}
+              </span>
+            </div>
           )}
         </div>
         
-        {/* Placeholder for Assignee Avatar */}
+        {/* Assignee Avatars */}
         {task.assignees && task.assignees.length > 0 && (
-          <div className="w-5 h-5 rounded-full bg-[var(--color-accent)] flex items-center justify-center text-[8px] font-bold text-white uppercase">
-            {task.assignees[0].name.substring(0, 2)}
+          <div className="flex -space-x-1.5">
+            {task.assignees.slice(0, 3).map((user) => (
+              <div
+                key={user.id}
+                title={user.name}
+                className="w-5 h-5 rounded-full bg-[var(--color-accent)] flex items-center justify-center text-[8px] font-bold text-white uppercase border border-[var(--color-bg-tertiary)]"
+              >
+                {user.name.substring(0, 2)}
+              </div>
+            ))}
+            {task.assignees.length > 3 && (
+              <div className="w-5 h-5 rounded-full bg-[var(--color-bg-elevated)] flex items-center justify-center text-[8px] font-bold text-[var(--color-text-secondary)] border border-[var(--color-bg-tertiary)]">
+                +{task.assignees.length - 3}
+              </div>
+            )}
           </div>
         )}
       </div>

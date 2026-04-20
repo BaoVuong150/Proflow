@@ -37,6 +37,22 @@ class TaskResource extends JsonResource
             // Relationships (if loaded)
             'assignees' => UserResource::collection($this->whenLoaded('assignees')),
             'labels' => LabelResource::collection($this->whenLoaded('labels')),
+
+            // Computed: checklist progress
+            'checklist_progress' => $this->when(
+                $this->relationLoaded('checklists'),
+                function () {
+                    $total = 0;
+                    $completed = 0;
+                    foreach ($this->checklists as $checklist) {
+                        if ($checklist->relationLoaded('items')) {
+                            $total += $checklist->items->count();
+                            $completed += $checklist->items->where('is_completed', true)->count();
+                        }
+                    }
+                    return $total > 0 ? round(($completed / $total) * 100) : null;
+                }
+            ),
         ];
     }
 }

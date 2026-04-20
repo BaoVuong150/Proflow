@@ -7,19 +7,15 @@ import KanbanBoard from '../components/KanbanBoard'
 import TaskDetailModal from '../components/TaskDetailModal'
 
 function BoardPage() {
-  const { projectId } = useParams()
+  const { projectId, boardId } = useParams()
   const { currentProject, fetchProject } = useProjectStore()
   const { columns, isLoading, fetchBoard, selectedTask, setSelectedTask } = useBoardStore()
 
+  // Parallel fetching
   useEffect(() => {
     if (projectId) fetchProject(projectId)
-  }, [projectId, fetchProject])
-
-  useEffect(() => {
-    if (currentProject?.boards?.[0]?.id) {
-      fetchBoard(currentProject.boards[0].id)
-    }
-  }, [currentProject, fetchBoard])
+    if (boardId) fetchBoard(Number(boardId))
+  }, [projectId, boardId, fetchProject, fetchBoard])
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--color-bg-primary)] overflow-hidden">

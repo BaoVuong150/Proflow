@@ -20,6 +20,7 @@ class ColumnResource extends JsonResource
             'name' => $this->name,
             'color' => $this->color,
             'position' => $this->position,
+            'tasks' => TaskResource::collection($this->whenLoaded('tasks')),
             'created_at' => $this->created_at?->toIso8601String(),
             'updated_at' => $this->updated_at?->toIso8601String(),
         ];

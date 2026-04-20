@@ -36,7 +36,7 @@ class BoardController extends Controller
         $board->load(['columns' => function ($query) {
             $query->orderBy('position')->with(['tasks' => function ($taskQuery) {
                 $taskQuery->orderBy('position')
-                          ->with(['assignees', 'labels']); // Eager load task relations
+                          ->with(['assignees', 'labels', 'checklists.items']); // Eager load task relations
                 
                 if (request()->has('priority')) {
                     $taskQuery->where('priority', request('priority'));

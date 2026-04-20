@@ -33,7 +33,7 @@ export default function AppSidebar({ projects, currentProjectId, onCreateProject
               return (
                 <li key={project.id}>
                   <Link
-                    to={`/projects/${project.id}/board`}
+                    to={project.boards?.[0] ? `/projects/${project.id}/boards/${project.boards[0].id}` : `/projects/${project.id}`}
                     className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
                       isActive 
                         ? 'bg-[var(--color-accent-light)] text-[var(--color-accent)] font-semibold' 

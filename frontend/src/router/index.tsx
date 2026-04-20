@@ -16,7 +16,7 @@ function AppRouter() {
 
       <Route element={<ProtectedRoute />}>
         <Route path="/projects" element={<ProjectListPage />} />
-        <Route path="/projects/:projectId/board" element={<BoardPage />} />
+        <Route path="/projects/:projectId/boards/:boardId" element={<BoardPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/projects" replace />} />

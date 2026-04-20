@@ -61,6 +61,7 @@ export interface Task {
   is_archived: boolean
   assignees?: User[]
   labels?: Label[]
+  checklist_progress?: number | null
   created_at: string
   updated_at: string
 }
@@ -70,6 +71,22 @@ export interface Label {
   project_id: number
   name: string
   color: string
+}
+
+export interface ChecklistItem {
+  id: number
+  checklist_id: number
+  content: string
+  is_completed: boolean
+  position: number
+}
+
+export interface Checklist {
+  id: number
+  task_id: number
+  title: string
+  position: number
+  items?: ChecklistItem[]
 }
 
 export interface Comment {
