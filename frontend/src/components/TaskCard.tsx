@@ -13,6 +13,7 @@ export default function TaskCard({ task, isOverlay }: TaskCardProps) {
   const isSyncing = useBoardStore((s) => s.syncingTasks.includes(task.id))
   const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
     id: task.id,
+    disabled: isSyncing,
     data: {
       type: 'Task',
       task
@@ -39,7 +40,10 @@ export default function TaskCard({ task, isOverlay }: TaskCardProps) {
       {...attributes}
       {...listeners}
       onClick={() => setSelectedTask(task)}
-      className={`bg-[var(--color-bg-tertiary)] border border-[var(--color-border-default)] rounded-lg p-3.5 cursor-grab hover:border-[var(--color-accent)] hover:shadow-md transition-all group ${isOverlay ? 'shadow-xl rotate-2 cursor-grabbing border-[var(--color-accent)] scale-105' : ''}`}
+      className={`bg-[var(--color-bg-tertiary)] border border-[var(--color-border-default)] rounded-lg p-3.5 hover:border-[var(--color-accent)] hover:shadow-md transition-all group 
+        ${isOverlay ? 'shadow-xl rotate-2 cursor-grabbing border-[var(--color-accent)] scale-105' : ''}
+        ${isSyncing ? 'cursor-wait opacity-80' : 'cursor-grab'}
+      `}
     >
       {/* Label Chips */}
       {task.labels && task.labels.length > 0 && (
