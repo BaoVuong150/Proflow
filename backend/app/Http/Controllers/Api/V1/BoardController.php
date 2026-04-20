@@ -59,7 +59,7 @@ class BoardController extends Controller
                 }]);
             }]);
             
-            return (new BoardResource($board))->resolve();
+            return json_decode((new BoardResource($board))->toJson(), true);
         });
 
         return $this->success($boardData);

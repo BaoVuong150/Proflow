@@ -37,7 +37,7 @@ class ProjectController extends Controller
             ->latest()
             ->get();
             
-            return ProjectResource::collection($projects)->resolve();
+            return json_decode(ProjectResource::collection($projects)->toJson(), true);
         });
 
         return $this->success($projectsData);
@@ -73,7 +73,7 @@ class ProjectController extends Controller
         $cacheKey = "project_{$project->id}";
         $projectData = \Illuminate\Support\Facades\Cache::tags(["project_{$project->id}"])->remember($cacheKey, 3600, function () use ($project) {
             $project->load(['owner', 'members.user', 'boards']);
-            return (new ProjectResource($project))->resolve();
+            return json_decode((new ProjectResource($project))->toJson(), true);
         });
 
         return $this->success($projectData);

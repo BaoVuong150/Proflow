@@ -4,7 +4,9 @@ $app = require_once 'bootstrap/app.php';
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 $kernel->bootstrap();
 
-use App\Models\Project;
-$project = Project::first();
-$serialized = serialize($project);
-file_put_contents('redis_test_log.txt', $serialized);
+$board = App\Models\Board::first();
+$board->load('columns');
+$resolved = (new App\Http\Resources\BoardResource($board))->resolve();
+
+$json = json_encode(['data' => $resolved]);
+echo $json;
