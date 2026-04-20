@@ -33,28 +33,32 @@ class BoardController extends Controller
     {
         $this->authorize('view', $board->project);
 
-        $board->load(['columns' => function ($query) {
-            $query->orderBy('position')->with(['tasks' => function ($taskQuery) {
-                $taskQuery->orderBy('position')
-                          ->with(['assignees', 'labels', 'checklists.items']); // Eager load task relations
-                
-                if (request()->has('priority')) {
-                    $taskQuery->where('priority', request('priority'));
-                }
-                
-                if (request()->has('assignee_id')) {
-                    $taskQuery->whereHas('assignees', function ($q) {
-                        $q->where('users.id', request('assignee_id'));
-                    });
-                }
-                
-                if (request()->has('label_id')) {
-                    $taskQuery->whereHas('labels', function ($q) {
-                        $q->where('labels.id', request('label_id'));
-                    });
-                }
+        $cacheKey = "board_{$board->id}_" . md5(json_encode(request()->only(['priority', 'assignee_id', 'label_id'])));
+
+        $board = \Illuminate\Support\Facades\Cache::tags(["board_{$board->id}"])->remember($cacheKey, 3600, function () use ($board) {
+            return $board->load(['columns' => function ($query) {
+                $query->orderBy('position')->with(['tasks' => function ($taskQuery) {
+                    $taskQuery->orderBy('position')
+                              ->with(['assignees', 'labels', 'checklists.items']); // Eager load task relations
+                    
+                    if (request()->has('priority')) {
+                        $taskQuery->where('priority', request('priority'));
+                    }
+                    
+                    if (request()->has('assignee_id')) {
+                        $taskQuery->whereHas('assignees', function ($q) {
+                            $q->where('users.id', request('assignee_id'));
+                        });
+                    }
+                    
+                    if (request()->has('label_id')) {
+                        $taskQuery->whereHas('labels', function ($q) {
+                            $q->where('labels.id', request('label_id'));
+                        });
+                    }
+                }]);
             }]);
-        }]);
+        });
 
         return $this->success(new BoardResource($board));
     }

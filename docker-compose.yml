@@ -67,16 +67,16 @@ services:
   # 🔮 ENHANCED PHASE SERVICES (Commented out)
   # ==========================================
 
-  # redis:
-  #   image: redis:7-alpine
-  #   container_name: proflow_redis
-  #   restart: unless-stopped
-  #   ports:
-  #     - "6379:6379"
-  #   volumes:
-  #     - proflow_redis_data:/data
-  #   networks:
-  #     - proflow_network
+  redis:
+    image: redis:7-alpine
+    container_name: proflow_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - proflow_redis_data:/data
+    networks:
+      - proflow_network
 
   # reverb:
   #   image: proflow-app
@@ -127,4 +127,4 @@ networks:
 
 volumes:
   proflow_mysql_data:
-  # proflow_redis_data:
+  proflow_redis_data:

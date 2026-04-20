@@ -7,6 +7,32 @@ use App\Services\ActivityLogService;
 
 class TaskObserver
 {
+    public function saved(Task $task): void
+    {
+        if ($task->column) {
+            \Illuminate\Support\Facades\Cache::tags(["board_{$task->column->board_id}"])->flush();
+        }
+    }
+
+    public function deleted(Task $task): void
+    {
+        if ($task->column) {
+            \Illuminate\Support\Facades\Cache::tags(["board_{$task->column->board_id}"])->flush();
+        }
+
+        if (!auth()->check()) {
+            return;
+        }
+
+        ActivityLogService::log(
+            user: auth()->user(),
+            project: $task->project,
+            loggable: $task,
+            action: 'task.deleted',
+            description: "deleted task '{$task->title}'",
+        );
+    }
+
     public function created(Task $task): void
     {
         if (!auth()->check()) {
@@ -54,18 +80,4 @@ class TaskObserver
         );
     }
 
-    public function deleted(Task $task): void
-    {
-        if (!auth()->check()) {
-            return;
-        }
-
-        ActivityLogService::log(
-            user: auth()->user(),
-            project: $task->project,
-            loggable: $task,
-            action: 'task.deleted',
-            description: "deleted task '{$task->title}'",
-        );
-    }
 }

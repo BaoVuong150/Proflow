@@ -26,12 +26,17 @@ class ProjectController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $projects = Project::whereHas('members', function ($query) use ($request) {
-            $query->where('user_id', $request->user()->id);
-        })
-        ->with(['owner', 'boards'])
-        ->latest()
-        ->get();
+        $userId = $request->user()->id;
+        $cacheKey = "user_{$userId}_projects";
+
+        $projects = \Illuminate\Support\Facades\Cache::tags(["user_{$userId}"])->remember($cacheKey, 3600, function () use ($userId) {
+            return Project::whereHas('members', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
+            ->with(['owner', 'boards'])
+            ->latest()
+            ->get();
+        });
 
         return $this->success(ProjectResource::collection($projects));
     }
@@ -45,6 +50,9 @@ class ProjectController extends Controller
             $request->user(),
             $request->validated()
         );
+
+        // Invalidate user projects cache
+        \Illuminate\Support\Facades\Cache::tags(["user_" . $request->user()->id])->flush();
 
         return $this->success(
             new ProjectResource($project),
@@ -60,8 +68,13 @@ class ProjectController extends Controller
     {
         $this->authorize('view', $project);
 
+        $cacheKey = "project_{$project->id}";
+        $projectData = \Illuminate\Support\Facades\Cache::tags(["project_{$project->id}"])->remember($cacheKey, 3600, function () use ($project) {
+            return $project->load(['owner', 'members.user', 'boards']);
+        });
+
         return $this->success(
-            new ProjectResource($project->load(['owner', 'members.user', 'boards']))
+            new ProjectResource($projectData)
         );
     }
 
@@ -73,6 +86,7 @@ class ProjectController extends Controller
         $this->authorize('update', $project);
 
         $project->update($request->validated());
+        \Illuminate\Support\Facades\Cache::tags(["project_{$project->id}", "user_" . $request->user()->id])->flush();
 
         return $this->success(
             new ProjectResource($project->fresh('owner')),
@@ -88,6 +102,7 @@ class ProjectController extends Controller
         $this->authorize('delete', $project);
 
         $project->delete();
+        \Illuminate\Support\Facades\Cache::tags(["project_{$project->id}", "user_" . request()->user()->id])->flush();
 
         return $this->success(null, 'Project deleted successfully');
     }
@@ -109,6 +124,11 @@ class ProjectController extends Controller
             : ProjectRole::Member;
 
         $project = $this->projectService->addMember($project, $request->input('email'), $role);
+        
+        \Illuminate\Support\Facades\Cache::tags(["project_{$project->id}"])->flush();
+        // Also invalidate for the added user
+        $user = \App\Models\User::where('email', $request->input('email'))->first();
+        if ($user) \Illuminate\Support\Facades\Cache::tags(["user_{$user->id}"])->flush();
 
         return $this->success(
             new ProjectResource($project),
@@ -124,6 +144,8 @@ class ProjectController extends Controller
         $this->authorize('manageMembers', $project);
 
         $this->projectService->removeMember($project, $userId);
+        
+        \Illuminate\Support\Facades\Cache::tags(["project_{$project->id}", "user_{$userId}"])->flush();
 
         return $this->success(null, 'Member removed successfully');
     }

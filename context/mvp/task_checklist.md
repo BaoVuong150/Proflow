@@ -536,12 +536,12 @@
 
 ### Epic 1: Redis Caching (Bộ nhớ đệm RAM)
 > 💡 **Tại sao:** Mỗi lần mở Board, Backend phải JOIN nhiều bảng (Columns, Tasks, Assignees, Labels). Với Redis, dữ liệu được lưu sẵn trong RAM, trả về nhanh gấp 10 lần MySQL.
-- [ ] Cài `predis/predis` + cấu hình Redis trong `docker-compose.yml`
-- [ ] Đổi `CACHE_DRIVER=redis` trong `.env`
-- [ ] Cache Board data (`BoardController@show`) — invalidate khi Task/Column thay đổi
-- [ ] Cache Project list (`ProjectController@index`) — invalidate khi tạo/xóa Project
-- [ ] Cache Member list cho từng Project — invalidate khi add/remove member
-- [ ] Verify: So sánh response time trước/sau khi bật Redis (target: giảm ≥ 50%)
+- [x] Cài `predis/predis` + cấu hình Redis trong `docker-compose.yml`
+- [x] Đổi `CACHE_DRIVER=redis` trong `.env`
+- [x] Cache Board data (`BoardController@show`) — invalidate khi Task/Column thay đổi
+- [x] Cache Project list (`ProjectController@index`) — invalidate khi tạo/xóa Project
+- [x] Cache Member list cho từng Project — invalidate khi add/remove member
+- [x] Verify: So sánh response time trước/sau khi bật Redis (target: giảm ≥ 50%)
 
 ### Epic 2: Queue & Background Jobs (Hàng đợi xử lý ngầm)
 > 💡 **Tại sao:** Ghi Activity Log và gửi Email thông báo đang chạy đồng bộ (synchronous), làm chậm tốc độ phản hồi API khi kéo thả Task.

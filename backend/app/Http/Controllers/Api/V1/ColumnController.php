@@ -45,6 +45,8 @@ class ColumnController extends Controller
             description: "created column '{$column->name}'",
         );
 
+        \Illuminate\Support\Facades\Cache::tags(["board_{$board->id}"])->flush();
+
         return $this->success(
             new ColumnResource($column),
             'Column created successfully',
@@ -70,6 +72,8 @@ class ColumnController extends Controller
             description: "renamed column from '{$oldName}' to '{$column->name}'",
             changes: ['old' => ['name' => $oldName], 'new' => ['name' => $column->name]],
         );
+
+        \Illuminate\Support\Facades\Cache::tags(["board_{$column->board_id}"])->flush();
 
         return $this->success(
             new ColumnResource($column),
@@ -99,7 +103,9 @@ class ColumnController extends Controller
             description: "deleted column '{$columnName}'",
         );
 
+        $boardId = $column->board_id;
         $column->delete();
+        \Illuminate\Support\Facades\Cache::tags(["board_{$boardId}"])->flush();
 
         return $this->success(null, 'Column deleted successfully');
     }
@@ -112,6 +118,7 @@ class ColumnController extends Controller
         $this->authorize('update', $board->project);
 
         $this->boardService->reorderColumns($board, $request->input('columns'));
+        \Illuminate\Support\Facades\Cache::tags(["board_{$board->id}"])->flush();
 
         return $this->success(null, 'Columns reordered successfully');
     }
