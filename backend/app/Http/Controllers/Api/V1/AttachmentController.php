@@ -46,7 +46,10 @@ class AttachmentController extends Controller
             'file' => ['required', 'file', 'max:10240'],
         ]);
 
-        $fileData = $this->fileUploadService->upload($request->file('file'));
+        $fileData = $this->fileUploadService->upload(
+            $request->file('file'),
+            $request->user()->id
+        );
 
         $attachment = $task->attachments()->create(array_merge($fileData, [
             'user_id' => $request->user()->id,
@@ -64,13 +67,17 @@ class AttachmentController extends Controller
     /**
      * Delete an attachment.
      */
-    public function destroy(Attachment $attachment): JsonResponse
+    public function destroy(Request $request, Attachment $attachment): JsonResponse
     {
         // Only uploader or project owner/admin can delete
         $task = $attachment->attachable;
         $this->authorize('update', $task);
 
-        $this->fileUploadService->delete($attachment->file_path);
+        $this->fileUploadService->delete(
+            $attachment->file_path,
+            $attachment->user_id,
+            $attachment->file_size
+        );
 
         $attachment->delete();
 

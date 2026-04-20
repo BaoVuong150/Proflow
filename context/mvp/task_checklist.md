@@ -554,11 +554,13 @@
 
 ### Epic 3: 100% Free Cloud Storage & Resource Quotas
 > 💡 **Tại sao:** AWS S3 bắt buộc nhập thẻ Visa và có thể trừ tiền nếu lố băng thông. Để an toàn 100% miễn phí, ta sẽ dùng Supabase/Cloudinary (không đòi thẻ) hoặc dùng Local Storage kết hợp với giới hạn Quota để chống đầy ổ cứng.
-- [ ] Lựa chọn 1: Giữ Local Storage nhưng tạo bảng `user_quotas` (Giới hạn tối đa 100MB file / User).
-- [ ] Lựa chọn 2: Cài thư viện `cloudinary-labs/cloudinary-laravel`.
-- [ ] Đăng ký Cloudinary (Free vĩnh viễn 25GB, không cần thẻ tín dụng).
-- [ ] Đổi logic `FileUploadService` đẩy file lên Cloudinary thay vì lưu vào ổ cứng.
-- [ ] Verify: Tải file lên → File xuất hiện trên Cloudinary, dung lượng ổ cứng Server không đổi.
+- [x] Tạo bảng `user_quotas` (Giới hạn tối đa 100MB file / User) + Model `UserQuota`
+- [x] Cài thư viện `cloudinary/cloudinary_php` SDK + config `config/cloudinary.php`
+- [x] Đăng ký Cloudinary (Free vĩnh viễn 25GB, không cần thẻ tín dụng)
+- [x] Đổi logic `FileUploadService` đẩy file lên Cloudinary thay vì lưu vào ổ cứng
+- [x] Atomic Quota Check: `DB::transaction` + `lockForUpdate` chống vượt rào dung lượng
+- [x] Quota release: Xóa file → trả lại dung lượng cho User
+- [x] Verify: 4/4 Tests PASS (Quota creation, blocking, remaining, release)
 
 ### Epic 4: Rate Limiting toàn diện (Chống spam & DDoS ứng dụng)
 > 💡 **Tại sao:** Hiện tại chỉ có 2 endpoint được rate limit (Move Task, Reorder Column). Các endpoint tạo Task, Comment, Upload File vẫn còn lỗ hổng bị spam.
