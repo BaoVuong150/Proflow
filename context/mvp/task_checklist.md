@@ -417,7 +417,7 @@
   - [x] File list (name + size + delete button)
 - [x] `ActivityTimeline.jsx`
   - [x] Timeline UI in task modal (recent activities for this task)
-  - [ ] Activity feed on project page (recent activities for project)
+  - [x] Activity feed on project page (recent activities for project)
   - [x] Activity item: avatar + description + timestamp
 
 ### Board — Additional Features

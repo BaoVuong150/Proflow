@@ -19,7 +19,8 @@ export default function ProjectActivitySidebar({ projectId, isOpen, onClose }: P
       setIsLoading(true)
       try {
         const { data } = await projectService.getProjectActivities(projectId)
-        setActivities(data.data) // Pagination data is inside data.data usually, or just data depending on ApiResponse trait
+        const activityList = Array.isArray(data.data) ? data.data : (data.data?.data || [])
+        setActivities(activityList) 
       } catch (err) {
         console.error('Failed to load project activities:', err)
       } finally {

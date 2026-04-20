@@ -62,7 +62,18 @@ export default function TaskAttachments({ taskId }: TaskAttachmentsProps) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i]
   }
 
-  if (isLoading) return <div className="animate-pulse h-16 bg-[var(--color-bg-secondary)] rounded-lg mt-6"></div>
+  if (isLoading) {
+    return (
+      <div className="flex flex-col gap-4 mt-6 border-t border-[var(--color-border-default)] pt-6">
+        <div className="flex items-center justify-between">
+          <label className="text-sm font-bold text-[var(--color-text-primary)] uppercase tracking-wider flex items-center gap-2">
+            📎 Attachments
+          </label>
+        </div>
+        <div className="animate-pulse h-16 bg-[var(--color-bg-secondary)] rounded-lg w-full"></div>
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col gap-4 mt-6 border-t border-[var(--color-border-default)] pt-6">

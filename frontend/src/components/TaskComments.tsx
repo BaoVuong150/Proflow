@@ -53,7 +53,21 @@ export default function TaskComments({ taskId }: TaskCommentsProps) {
     }
   }
 
-  if (isLoading) return <div className="animate-pulse h-20 bg-[var(--color-bg-secondary)] rounded-lg mt-6"></div>
+  if (isLoading) {
+    return (
+      <div className="flex flex-col gap-6 mt-6 border-t border-[var(--color-border-default)] pt-6">
+        <label className="text-sm font-bold text-[var(--color-text-primary)] uppercase tracking-wider flex items-center gap-2">
+          💬 Comments
+        </label>
+        <div className="animate-pulse flex gap-3">
+          <div className="w-8 h-8 rounded-full bg-[var(--color-bg-secondary)] shrink-0"></div>
+          <div className="flex-1 space-y-2">
+            <div className="h-20 bg-[var(--color-bg-secondary)] rounded-lg w-full"></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col gap-6 mt-6 border-t border-[var(--color-border-default)] pt-6">

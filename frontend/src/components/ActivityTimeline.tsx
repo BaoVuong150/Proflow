@@ -15,7 +15,9 @@ export default function ActivityTimeline({ projectId, taskId }: ActivityTimeline
     const fetchActivities = async () => {
       try {
         const { data } = await taskFeatureService.getTaskActivities(projectId, taskId)
-        setActivities(data.data)
+        // Handle both paginated and non-paginated responses safely
+        const activityList = Array.isArray(data.data) ? data.data : (data.data?.data || [])
+        setActivities(activityList)
       } catch (err) {
         console.error('Failed to load activities:', err)
       } finally {
@@ -26,7 +28,19 @@ export default function ActivityTimeline({ projectId, taskId }: ActivityTimeline
     fetchActivities()
   }, [projectId, taskId])
 
-  if (isLoading) return <div className="animate-pulse h-16 bg-[var(--color-bg-secondary)] rounded-lg mt-6"></div>
+  if (isLoading) {
+    return (
+      <div className="flex flex-col gap-4 mt-6 border-t border-[var(--color-border-default)] pt-6">
+        <label className="text-sm font-bold text-[var(--color-text-primary)] uppercase tracking-wider flex items-center gap-2">
+          ⏱️ Activity History
+        </label>
+        <div className="animate-pulse flex gap-4">
+          <div className="w-8 h-8 rounded-full bg-[var(--color-bg-secondary)] shrink-0"></div>
+          <div className="h-16 bg-[var(--color-bg-secondary)] rounded-lg w-full max-w-[50%]"></div>
+        </div>
+      </div>
+    )
+  }
 
   if (activities.length === 0) return null
 
