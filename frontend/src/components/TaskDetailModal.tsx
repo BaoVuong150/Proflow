@@ -183,7 +183,13 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
             </div>
           )}
 
-          {/* Checklists Section - Hidden for now, kept for future MVP scope */}
+          {/* 
+            TODO (Developer Note): 
+            The Checklist feature has been fully implemented in the Backend (DB schema, API, Models) 
+            and the API services (taskFeatureService).
+            It is intentionally hidden from the UI for the current MVP scope per the author's intent.
+            To re-enable this feature in the future, simply uncomment the line below.
+          */}
           {/* <TaskChecklists task={task} /> */}
 
           {/* Attachments Section */}
