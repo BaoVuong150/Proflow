@@ -3,8 +3,8 @@ import api from '../services/api'
 import { taskService } from '../services/taskService'
 import type { Board, Column, Task, ApiResponse } from '../types'
 
-const moveTaskTimeouts: Record<number, NodeJS.Timeout> = {}
-const reorderColumnTimeouts: Record<number, NodeJS.Timeout> = {}
+const moveTaskTimeouts: Record<number, ReturnType<typeof setTimeout>> = {}
+const reorderColumnTimeouts: Record<number, ReturnType<typeof setTimeout>> = {}
 
 interface BoardState {
   board: Board | null
