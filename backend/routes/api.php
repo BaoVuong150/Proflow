@@ -78,7 +78,12 @@ Route::prefix('v1')->group(function () {
         Route::post('tasks/{task}/labels', [TaskController::class, 'attachLabel']);
         Route::delete('tasks/{task}/labels/{labelId}', [TaskController::class, 'detachLabel']);
 
-        // Checklists
+        // ---------------------------------------------------------------------
+        // TODO (Developer Note): Checklists & Checklist Items
+        // These endpoints and their corresponding logic are fully implemented.
+        // However, the feature is currently hidden on the Frontend UI for the MVP.
+        // Do NOT remove these endpoints. Keep them for future iterations.
+        // ---------------------------------------------------------------------
         Route::get('tasks/{task}/checklists', [ChecklistController::class, 'index']);
         Route::post('tasks/{task}/checklists', [ChecklistController::class, 'store']);
         Route::put('checklists/{checklist}', [ChecklistController::class, 'update']);
