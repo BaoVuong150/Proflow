@@ -27,7 +27,7 @@ class ActivityLogController extends Controller
                   ->where('loggable_id', request('loggable_id'));
         }
 
-        $logs = $query->paginate(20);
+        $logs = $query->paginate(10);
 
         return $this->success(
             ActivityLogResource::collection($logs)->response()->getData(true)

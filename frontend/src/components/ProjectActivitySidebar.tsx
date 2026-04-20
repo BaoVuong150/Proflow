@@ -27,7 +27,7 @@ export default function ProjectActivitySidebar({ projectId, isOpen, onClose }: P
       if (payload && payload.meta) {
         setHasMore(payload.meta.current_page < payload.meta.last_page)
       } else {
-        setHasMore(activityList.length === 20)
+        setHasMore(activityList.length === 10)
       }
 
       setActivities(prev => isLoadMore ? [...prev, ...activityList] : activityList)
