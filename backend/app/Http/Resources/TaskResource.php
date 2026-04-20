@@ -37,6 +37,17 @@ class TaskResource extends JsonResource
             // Relationships (if loaded)
             'assignees' => UserResource::collection($this->whenLoaded('assignees')),
             'labels' => LabelResource::collection($this->whenLoaded('labels')),
+            'checklists' => $this->whenLoaded('checklists', function () {
+                return $this->checklists->map(function ($checklist) {
+                    return [
+                        'id' => $checklist->id,
+                        'task_id' => $checklist->task_id,
+                        'title' => $checklist->title,
+                        'position' => $checklist->position,
+                        'items' => $checklist->relationLoaded('items') ? $checklist->items : [],
+                    ];
+                });
+            }),
 
             // Computed: checklist progress
             'checklist_progress' => $this->when(

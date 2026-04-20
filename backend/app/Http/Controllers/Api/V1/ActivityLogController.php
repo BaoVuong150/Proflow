@@ -20,10 +20,14 @@ class ActivityLogController extends Controller
     {
         $this->authorize('view', $project);
 
-        $logs = $project->activityLogs()
-            ->with('user')
-            ->latest()
-            ->paginate(20);
+        $query = $project->activityLogs()->with('user')->latest();
+
+        if (request()->has('loggable_type') && request()->has('loggable_id')) {
+            $query->where('loggable_type', request('loggable_type'))
+                  ->where('loggable_id', request('loggable_id'));
+        }
+
+        $logs = $query->paginate(20);
 
         return $this->success(
             ActivityLogResource::collection($logs)->response()->getData(true)

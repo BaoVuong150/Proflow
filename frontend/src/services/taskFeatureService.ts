@@ -18,4 +18,19 @@ export const taskFeatureService = {
   getComments: (taskId: number) => api.get(`/tasks/${taskId}/comments`),
   createComment: (taskId: number, content: string) => api.post(`/tasks/${taskId}/comments`, { content }),
   deleteComment: (commentId: number) => api.delete(`/comments/${commentId}`),
+
+  // --- Attachments ---
+  getAttachments: (taskId: number) => api.get(`/tasks/${taskId}/attachments`),
+  uploadAttachment: (taskId: number, file: File) => {
+    const formData = new FormData()
+    formData.append('file', file)
+    return api.post(`/tasks/${taskId}/attachments`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
+  },
+  deleteAttachment: (attachmentId: number) => api.delete(`/attachments/${attachmentId}`),
+
+  // --- Activities ---
+  getTaskActivities: (projectId: number, taskId: number) => 
+    api.get(`/projects/${projectId}/activity?loggable_type=App\\Models\\Task&loggable_id=${taskId}`),
 }

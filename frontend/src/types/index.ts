@@ -61,6 +61,7 @@ export interface Task {
   is_archived: boolean
   assignees?: User[]
   labels?: Label[]
+  checklists?: Checklist[]
   checklist_progress?: number | null
   created_at: string
   updated_at: string
@@ -104,6 +105,19 @@ export interface ActivityLog {
   project_id: number
   action: string
   description: string
+  user?: User
+  created_at: string
+}
+
+export interface Attachment {
+  id: number
+  task_id: number
+  user_id: number
+  filename: string
+  original_name: string
+  mime_type: string
+  size: number
+  file_url: string
   user?: User
   created_at: string
 }

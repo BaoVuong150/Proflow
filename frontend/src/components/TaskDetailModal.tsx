@@ -5,6 +5,8 @@ import { taskService } from '../services/taskService'
 import { useBoardStore } from '../stores/boardStore'
 import TaskChecklists from './TaskChecklists'
 import TaskComments from './TaskComments'
+import TaskAttachments from './TaskAttachments'
+import ActivityTimeline from './ActivityTimeline'
 
 interface TaskDetailModalProps {
   isOpen: boolean
@@ -168,10 +170,16 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
           )}
 
           {/* Checklists Section */}
-          <TaskChecklists taskId={task.id} />
+          <TaskChecklists task={task} />
+
+          {/* Attachments Section */}
+          <TaskAttachments taskId={task.id} />
 
           {/* Comments Section */}
           <TaskComments taskId={task.id} />
+
+          {/* Activity Timeline */}
+          <ActivityTimeline projectId={task.project_id} taskId={task.id} />
         </div>
 
         {/* ═══ Right Column (Metadata) ═══ */}

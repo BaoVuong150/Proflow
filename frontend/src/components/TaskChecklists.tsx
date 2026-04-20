@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react'
-import type { Checklist, ChecklistItem } from '../types'
+import type { Task, Checklist } from '../types'
 import { taskFeatureService } from '../services/taskFeatureService'
 
 interface TaskChecklistsProps {
-  taskId: number
+  task: Task
 }
 
-export default function TaskChecklists({ taskId }: TaskChecklistsProps) {
-  const [checklists, setChecklists] = useState<Checklist[]>([])
-  const [isLoading, setIsLoading] = useState(true)
+export default function TaskChecklists({ task }: TaskChecklistsProps) {
+  // If the task already has checklists loaded (from Board API), use them!
+  const [checklists, setChecklists] = useState<Checklist[]>(task.checklists || [])
+  const [isLoading, setIsLoading] = useState(!task.checklists)
   const [newChecklistTitle, setNewChecklistTitle] = useState('')
   const [newItemContents, setNewItemContents] = useState<Record<number, string>>({})
   const [isAddingList, setIsAddingList] = useState(false)
 
   const fetchChecklists = async () => {
     try {
-      const { data } = await taskFeatureService.getChecklists(taskId)
+      const { data } = await taskFeatureService.getChecklists(task.id)
       setChecklists(data.data)
     } catch (err) {
       console.error('Failed to load checklists:', err)
@@ -25,13 +26,18 @@ export default function TaskChecklists({ taskId }: TaskChecklistsProps) {
   }
 
   useEffect(() => {
-    fetchChecklists()
-  }, [taskId])
+    // Only fetch if they weren't eager loaded
+    if (!task.checklists) {
+      fetchChecklists()
+    } else {
+      setChecklists(task.checklists)
+    }
+  }, [task])
 
   const handleAddChecklist = async () => {
     if (!newChecklistTitle.trim()) return
     try {
-      const { data } = await taskFeatureService.createChecklist(taskId, newChecklistTitle)
+      const { data } = await taskFeatureService.createChecklist(task.id, newChecklistTitle)
       setChecklists([...checklists, { ...data.data, items: [] }])
       setNewChecklistTitle('')
       setIsAddingList(false)

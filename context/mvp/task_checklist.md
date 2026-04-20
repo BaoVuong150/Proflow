@@ -412,13 +412,13 @@
   - [x] `CommentList.jsx` (list of comments)
   - [x] `CommentItem.jsx` (avatar + name + time + content + delete button)
   - [x] Comment input (textarea + submit button)
-- [ ] Attachments section in Task Detail
-  - [ ] File upload (click or drag & drop zone)
-  - [ ] File list (name + size + delete button)
-- [ ] `ActivityTimeline.jsx`
-  - [ ] Timeline UI in task modal (recent activities for this task)
+- [x] Attachments section in Task Detail
+  - [x] File upload (click or drag & drop zone)
+  - [x] File list (name + size + delete button)
+- [x] `ActivityTimeline.jsx`
+  - [x] Timeline UI in task modal (recent activities for this task)
   - [ ] Activity feed on project page (recent activities for project)
-  - [ ] Activity item: avatar + description + timestamp
+  - [x] Activity item: avatar + description + timestamp
 
 ### Board — Additional Features
 - [ ] Filter bar on board page
