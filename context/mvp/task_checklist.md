@@ -421,10 +421,10 @@
   - [x] Activity item: avatar + description + timestamp
 
 ### Board — Additional Features
-- [ ] Filter bar on board page
-  - [ ] Priority filter (dropdown)
-  - [ ] Assignee filter (dropdown)
-  - [ ] Clear filters button
+- [x] Filter bar on board page
+  - [x] Priority filter (dropdown)
+  - [x] Assignee filter (dropdown)
+  - [x] Clear filters button
 - [ ] Column management
   - [ ] Edit column name (inline)
   - [ ] Edit column color

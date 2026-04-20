@@ -72,6 +72,25 @@ export default function KanbanBoard({ columns }: KanbanBoardProps) {
     moveTask(activeId, destColId, destIndex)
   }
 
+  const filters = useBoardStore((s) => s.filters)
+
+  // Filter tasks based on current filters
+  const filterTasks = (tasks: Task[] | undefined) => {
+    if (!tasks) return []
+    return tasks.filter(task => {
+      let matches = true
+      if (filters.priority && task.priority !== filters.priority) matches = false
+      if (filters.assigneeId !== null) {
+        if (filters.assigneeId === -1) {
+          if (task.assignees && task.assignees.length > 0) matches = false
+        } else {
+          if (!task.assignees?.some(a => a.id === filters.assigneeId)) matches = false
+        }
+      }
+      return matches
+    })
+  }
+
   return (
     <DndContext
       sensors={sensors}
@@ -81,7 +100,10 @@ export default function KanbanBoard({ columns }: KanbanBoardProps) {
     >
       <div className="flex gap-4 items-start h-full pb-4">
         {columns.map((column) => (
-          <KanbanColumn key={column.id} column={column} />
+          <KanbanColumn 
+            key={column.id} 
+            column={{...column, tasks: filterTasks(column.tasks)}} 
+          />
         ))}
         
         {/* Add Column Button (Placeholder) */}

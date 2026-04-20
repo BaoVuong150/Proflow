@@ -6,6 +6,7 @@ import AppHeader from '../components/AppHeader'
 import KanbanBoard from '../components/KanbanBoard'
 import TaskDetailModal from '../components/TaskDetailModal'
 import ProjectActivitySidebar from '../components/ProjectActivitySidebar'
+import BoardFilterBar from '../components/BoardFilterBar'
 
 function BoardPage() {
   const { projectId, boardId } = useParams()
@@ -42,6 +43,9 @@ function BoardPage() {
           ⏱️ Activity
         </button>
       </AppHeader>
+
+      {/* Filter Bar */}
+      <BoardFilterBar />
 
       <main className="flex-1 overflow-x-auto overflow-y-hidden p-6 relative">
         {isLoading ? (

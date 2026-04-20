@@ -7,11 +7,18 @@ interface BoardState {
   board: Board | null
   columns: Column[]
   isLoading: boolean
+  error: string | null
   selectedTask: Task | null
+  filters: {
+    priority: string | null
+    assigneeId: number | null
+  }
   fetchBoard: (boardId: number) => Promise<void>
   moveTask: (taskId: number, columnId: number, position: number) => Promise<void>
   addTaskToColumn: (columnId: number, task: Task) => void
   setSelectedTask: (task: Task | null) => void
+  setFilters: (filters: Partial<BoardState['filters']>) => void
+  clearFilters: () => void
   clearBoard: () => void
 }
 
@@ -19,7 +26,12 @@ export const useBoardStore = create<BoardState>((set, get) => ({
   board: null,
   columns: [],
   isLoading: false,
+  error: null,
   selectedTask: null,
+  filters: {
+    priority: null,
+    assigneeId: null,
+  },
 
   fetchBoard: async (boardId) => {
     set({ isLoading: true })
@@ -84,6 +96,13 @@ export const useBoardStore = create<BoardState>((set, get) => ({
 
   setSelectedTask: (task) => set({ selectedTask: task }),
 
+  setFilters: (newFilters) => set((state) => ({ 
+    filters: { ...state.filters, ...newFilters } 
+  })),
+
+  clearFilters: () => set({ 
+    filters: { priority: null, assigneeId: null } 
+  }),
+
   clearBoard: () => set({ board: null, columns: [], selectedTask: null }),
 }))
-
