@@ -18,6 +18,7 @@ interface BoardState {
   addTaskToColumn: (columnId: number, task: Task) => void
   updateColumn: (columnId: number, updates: Partial<Column>) => Promise<void>
   deleteColumn: (columnId: number) => Promise<void>
+  reorderColumn: (activeId: number, overId: number) => Promise<void>
   setSelectedTask: (task: Task | null) => void
   setFilters: (filters: Partial<BoardState['filters']>) => void
   clearFilters: () => void
@@ -124,6 +125,30 @@ export const useBoardStore = create<BoardState>((set, get) => ({
     } catch (err) {
       console.error('Failed to delete column', err)
     }
+  },
+
+  reorderColumn: async (activeId, overId) => {
+    set((state) => {
+      const activeIndex = state.columns.findIndex(c => c.id === activeId)
+      const overIndex = state.columns.findIndex(c => c.id === overId)
+      
+      if (activeIndex === -1 || overIndex === -1) return state
+
+      const newColumns = [...state.columns]
+      const [movedColumn] = newColumns.splice(activeIndex, 1)
+      newColumns.splice(overIndex, 0, movedColumn)
+
+      // Call API in background
+      if (state.board?.id) {
+        import('../services/columnService').then(({ columnService }) => {
+          columnService.reorder(state.board!.id, newColumns.map(c => c.id)).catch(err => {
+            console.error('Failed to reorder columns', err)
+          })
+        })
+      }
+
+      return { columns: newColumns }
+    })
   },
 
   setSelectedTask: (task) => set({ selectedTask: task }),

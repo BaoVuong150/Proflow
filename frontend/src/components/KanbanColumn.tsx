@@ -29,13 +29,19 @@ export default function KanbanColumn({ column }: KanbanColumnProps) {
     setIsEditingName(false)
   }
 
-  const { setNodeRef } = useSortable({
+  const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
     id: column.id,
     data: {
       type: 'Column',
       column
     }
   })
+
+  const style = {
+    transition,
+    transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
+    opacity: isDragging ? 0.4 : 1,
+  }
 
   const handleCreateTask = async () => {
     if (!newTaskTitle.trim() || !board?.project_id) {
@@ -73,14 +79,27 @@ export default function KanbanColumn({ column }: KanbanColumnProps) {
   return (
     <div 
       ref={setNodeRef}
+      style={style}
       className="w-[300px] min-w-[300px] bg-[var(--color-bg-secondary)] rounded-xl border border-[var(--color-border-default)] flex flex-col h-full max-h-full"
     >
       {/* Column Header */}
-      <div className="flex items-center gap-2 p-4 border-b border-[var(--color-border-default)] shrink-0 group">
+      <div 
+        className="flex items-center gap-2 p-4 border-b border-[var(--color-border-default)] shrink-0 group cursor-grab active:cursor-grabbing"
+        {...attributes}
+        {...listeners}
+      >
+        {/* Drag Handle Icon */}
+        <div className="text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors opacity-50 group-hover:opacity-100">
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8h16M4 16h16" />
+          </svg>
+        </div>
+
         <div 
           className="w-2.5 h-2.5 rounded-full shrink-0 relative cursor-pointer" 
           style={{ background: column.color || 'var(--color-accent)' }} 
           title="Change Color"
+          onPointerDown={(e) => e.stopPropagation()} // Prevent drag when clicking color
         >
           {/* Extremely simple color picker hidden overlay */}
           <input 
@@ -98,6 +117,7 @@ export default function KanbanColumn({ column }: KanbanColumnProps) {
             value={editName}
             onChange={(e) => setEditName(e.target.value)}
             onBlur={handleSaveName}
+            onPointerDown={(e) => e.stopPropagation()} // Prevent drag when typing
             onKeyDown={(e) => {
               if (e.key === 'Enter') handleSaveName()
               if (e.key === 'Escape') {
@@ -109,7 +129,11 @@ export default function KanbanColumn({ column }: KanbanColumnProps) {
           />
         ) : (
           <h3 
-            onClick={() => setIsEditingName(true)}
+            onClick={(e) => {
+              e.stopPropagation()
+              setIsEditingName(true)
+            }}
+            onPointerDown={(e) => e.stopPropagation()} // Prevent drag when clicking to edit
             className="text-sm font-semibold flex-1 text-[var(--color-text-primary)] cursor-text hover:bg-[var(--color-bg-hover)] rounded px-1.5 py-0.5 -ml-1.5 transition-colors truncate"
             title="Click to rename"
           >
@@ -122,7 +146,9 @@ export default function KanbanColumn({ column }: KanbanColumnProps) {
         </span>
 
         <button 
-          onClick={() => {
+          onPointerDown={(e) => e.stopPropagation()} // Prevent drag when clicking delete
+          onClick={(e) => {
+            e.stopPropagation()
             if (confirm(`Are you sure you want to delete the column "${column.name}"? All tasks inside will be lost.`)) {
               useBoardStore.getState().deleteColumn(column.id)
             }

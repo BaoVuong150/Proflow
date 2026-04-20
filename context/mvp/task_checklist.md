@@ -429,7 +429,7 @@
   - [x] Edit column name (inline)
   - [x] Edit column color
   - [x] Delete column (with confirmation)
-  - [ ] Drag & Drop columns to reorder
+  - [x] Drag & Drop columns to reorder
 - [x] `MemberList.jsx` (project members panel/dropdown)
   - [x] List members with roles
   - [x] Add member form (email input)
