@@ -3,6 +3,9 @@ import api from '../services/api'
 import { taskService } from '../services/taskService'
 import type { Board, Column, Task, ApiResponse } from '../types'
 
+const moveTaskTimeouts: Record<number, NodeJS.Timeout> = {}
+const reorderColumnTimeouts: Record<number, NodeJS.Timeout> = {}
+
 interface BoardState {
   board: Board | null
   columns: Column[]
@@ -83,11 +86,18 @@ export const useBoardStore = create<BoardState>((set, get) => ({
       return { columns: newColumns }
     })
 
-    try {
-      await taskService.move(taskId, { column_id: columnId, position })
-    } catch {
-      set({ columns: prevColumns })
+    if (moveTaskTimeouts[taskId]) {
+      clearTimeout(moveTaskTimeouts[taskId])
     }
+
+    moveTaskTimeouts[taskId] = setTimeout(async () => {
+      try {
+        await taskService.move(taskId, { column_id: columnId, position })
+      } catch {
+        set({ columns: prevColumns })
+      }
+      delete moveTaskTimeouts[taskId]
+    }, 500)
   },
 
   addTaskToColumn: (columnId, task) => {
@@ -143,13 +153,21 @@ export const useBoardStore = create<BoardState>((set, get) => ({
       const [movedColumn] = newColumns.splice(activeIndex, 1)
       newColumns.splice(overIndex, 0, movedColumn)
 
-      // Call API in background
-      if (state.board?.id) {
-        import('../services/columnService').then(({ columnService }) => {
-          columnService.reorder(state.board!.id, newColumns.map(c => c.id)).catch(err => {
-            console.error('Failed to reorder columns', err)
+      const boardId = state.board?.id
+      if (boardId) {
+        if (reorderColumnTimeouts[boardId]) {
+          clearTimeout(reorderColumnTimeouts[boardId])
+        }
+
+        reorderColumnTimeouts[boardId] = setTimeout(() => {
+          import('../services/columnService').then(({ columnService }) => {
+            columnService.reorder(boardId, newColumns.map(c => c.id)).catch(err => {
+              console.error('Failed to reorder columns', err)
+              // Optionally revert to prevColumns here if you saved them
+            })
           })
-        })
+          delete reorderColumnTimeouts[boardId]
+        }, 500)
       }
 
       return { columns: newColumns }
