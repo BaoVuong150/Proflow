@@ -436,13 +436,13 @@
   - [x] Remove member button
 
 ### UX Polish
-- [ ] Loading states (skeleton loaders on board, spinners on actions)
-- [ ] Error handling (toast messages on API errors)
-- [ ] Empty states (no projects, no tasks, no comments illustration)
-- [ ] Responsive design (mobile-friendly sidebar collapse, scroll board)
-- [ ] Keyboard shortcuts: Escape to close modal
-- [ ] `NotFoundPage.jsx` (404 page)
-- [ ] Smooth transitions (modal open/close, toast slide)
+- [x] Loading states (skeleton loaders on board, spinners on actions)
+- [x] Error handling (toast messages on API errors)
+- [x] Empty states (no projects, no tasks, no comments illustration)
+- [x] Responsive design (mobile-friendly sidebar collapse, scroll board)
+- [x] Keyboard shortcuts: Escape to close modal
+- [x] `NotFoundPage.jsx` (404 page)
+- [x] Smooth transitions (modal open/close, toast slide)
 
 ### Final Checks
 - [ ] Run `./vendor/bin/pint` — fix code style

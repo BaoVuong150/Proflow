@@ -1,4 +1,5 @@
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 const api = axios.create({
   baseURL: '/api/v1',
@@ -21,6 +22,14 @@ api.interceptors.request.use(async (config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    // Show toast for errors
+    const message = error.response?.data?.message || error.message || 'An unexpected error occurred'
+    
+    // Ignore 401s for toasts (handled by redirect), and 404s to avoid spam
+    if (error.response?.status !== 401 && error.response?.status !== 404) {
+      toast.error(message)
+    }
+
     if (error.response?.status === 401) {
       // Avoid infinite loop if already on auth pages
       const path = window.location.pathname

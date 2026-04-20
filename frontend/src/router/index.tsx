@@ -5,6 +5,7 @@ import LoginPage from '../pages/LoginPage'
 import RegisterPage from '../pages/RegisterPage'
 import ProjectListPage from '../pages/ProjectListPage'
 import BoardPage from '../pages/BoardPage'
+import NotFoundPage from '../pages/NotFoundPage'
 
 function AppRouter() {
   return (
@@ -19,7 +20,7 @@ function AppRouter() {
         <Route path="/projects/:projectId/boards/:boardId" element={<BoardPage />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/projects" replace />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
 }
