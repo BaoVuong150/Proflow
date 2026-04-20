@@ -35,8 +35,8 @@ class BoardController extends Controller
 
         $cacheKey = "board_{$board->id}_" . md5(json_encode(request()->only(['priority', 'assignee_id', 'label_id'])));
 
-        $board = \Illuminate\Support\Facades\Cache::tags(["board_{$board->id}"])->remember($cacheKey, 3600, function () use ($board) {
-            return $board->load(['columns' => function ($query) {
+        $boardData = \Illuminate\Support\Facades\Cache::tags(["board_{$board->id}"])->remember($cacheKey, 3600, function () use ($board) {
+            $board->load(['columns' => function ($query) {
                 $query->orderBy('position')->with(['tasks' => function ($taskQuery) {
                     $taskQuery->orderBy('position')
                               ->with(['assignees', 'labels', 'checklists.items']); // Eager load task relations
@@ -58,8 +58,10 @@ class BoardController extends Controller
                     }
                 }]);
             }]);
+            
+            return (new BoardResource($board))->resolve();
         });
 
-        return $this->success(new BoardResource($board));
+        return $this->success($boardData);
     }
 }

@@ -29,16 +29,18 @@ class ProjectController extends Controller
         $userId = $request->user()->id;
         $cacheKey = "user_{$userId}_projects";
 
-        $projects = \Illuminate\Support\Facades\Cache::tags(["user_{$userId}"])->remember($cacheKey, 3600, function () use ($userId) {
-            return Project::whereHas('members', function ($query) use ($userId) {
+        $projectsData = \Illuminate\Support\Facades\Cache::tags(["user_{$userId}"])->remember($cacheKey, 3600, function () use ($userId) {
+            $projects = Project::whereHas('members', function ($query) use ($userId) {
                 $query->where('user_id', $userId);
             })
             ->with(['owner', 'boards'])
             ->latest()
             ->get();
+            
+            return ProjectResource::collection($projects)->resolve();
         });
 
-        return $this->success(ProjectResource::collection($projects));
+        return $this->success($projectsData);
     }
 
     /**
@@ -70,12 +72,11 @@ class ProjectController extends Controller
 
         $cacheKey = "project_{$project->id}";
         $projectData = \Illuminate\Support\Facades\Cache::tags(["project_{$project->id}"])->remember($cacheKey, 3600, function () use ($project) {
-            return $project->load(['owner', 'members.user', 'boards']);
+            $project->load(['owner', 'members.user', 'boards']);
+            return (new ProjectResource($project))->resolve();
         });
 
-        return $this->success(
-            new ProjectResource($projectData)
-        );
+        return $this->success($projectData);
     }
 
     /**
