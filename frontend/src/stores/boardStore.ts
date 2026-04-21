@@ -23,6 +23,7 @@ interface BoardState {
   updateColumn: (columnId: number, updates: Partial<Column>) => Promise<void>
   deleteColumn: (columnId: number) => Promise<void>
   reorderColumn: (activeId: number, overId: number) => Promise<void>
+  createColumn: (boardId: number, name: string) => Promise<void>
   setSelectedTask: (task: Task | null) => void
   setFilters: (filters: Partial<BoardState['filters']>) => void
   clearFilters: () => void
@@ -181,6 +182,16 @@ export const useBoardStore = create<BoardState>((set, get) => ({
 
       return { columns: newColumns }
     })
+  },
+
+  createColumn: async (boardId, name) => {
+    try {
+      const { columnService } = await import('../services/columnService')
+      const { data } = await columnService.create(boardId, { name })
+      set((state) => ({ columns: [...state.columns, data.data] }))
+    } catch (err) {
+      console.error('Failed to create column', err)
+    }
   },
 
   setSelectedTask: (task) => set({ selectedTask: task }),

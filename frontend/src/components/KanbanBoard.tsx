@@ -12,8 +12,27 @@ interface KanbanBoardProps {
 
 export default function KanbanBoard({ columns }: KanbanBoardProps) {
   const moveTask = useBoardStore((s) => s.moveTask)
+  const createColumn = useBoardStore((s) => s.createColumn)
+  const board = useBoardStore((s) => s.board)
   const [activeTask, setActiveTask] = useState<Task | null>(null)
   const [activeColumn, setActiveColumn] = useState<Column | null>(null)
+  
+  const [isAddingColumn, setIsAddingColumn] = useState(false)
+  const [newColumnName, setNewColumnName] = useState('')
+  const [isCreatingColumn, setIsCreatingColumn] = useState(false)
+
+  const handleCreateColumn = async () => {
+    if (!newColumnName.trim() || !board?.id) {
+      setIsAddingColumn(false)
+      setNewColumnName('')
+      return
+    }
+    setIsCreatingColumn(true)
+    await createColumn(board.id, newColumnName.trim())
+    setIsCreatingColumn(false)
+    setIsAddingColumn(false)
+    setNewColumnName('')
+  }
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
@@ -122,10 +141,53 @@ export default function KanbanBoard({ columns }: KanbanBoardProps) {
           ))}
         </SortableContext>
         
-        {/* Add Column Button (Placeholder) */}
-        <div className="w-[300px] min-w-[300px] h-[52px] bg-[var(--color-bg-tertiary)] border border-dashed border-[var(--color-border-default)] rounded-xl flex items-center justify-center cursor-pointer hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] text-[var(--color-text-muted)] transition-all font-semibold text-sm shrink-0">
-          + Add Column
-        </div>
+        {/* Add Column Button */}
+        {isAddingColumn ? (
+          <div className="w-[300px] min-w-[300px] p-3 bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)] rounded-xl shrink-0 h-fit">
+            <input
+              type="text"
+              value={newColumnName}
+              onChange={(e) => setNewColumnName(e.target.value)}
+              placeholder="Column name"
+              className="w-full bg-[var(--color-bg-primary)] border border-[var(--color-border-default)] rounded-lg p-2 mb-2 text-sm text-[var(--color-text-primary)] outline-none focus:border-[var(--color-accent)]"
+              autoFocus
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleCreateColumn()
+                if (e.key === 'Escape') {
+                  setIsAddingColumn(false)
+                  setNewColumnName('')
+                }
+              }}
+              disabled={isCreatingColumn}
+            />
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleCreateColumn}
+                disabled={isCreatingColumn || !newColumnName.trim()}
+                className="bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors flex-1 disabled:opacity-50"
+              >
+                {isCreatingColumn ? 'Adding...' : 'Add'}
+              </button>
+              <button
+                onClick={() => {
+                  setIsAddingColumn(false)
+                  setNewColumnName('')
+                }}
+                className="p-1.5 text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-tertiary)] rounded-lg transition-colors"
+                disabled={isCreatingColumn}
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div 
+            onClick={() => setIsAddingColumn(true)}
+            className="w-[300px] min-w-[300px] h-[52px] bg-[var(--color-bg-tertiary)] border border-dashed border-[var(--color-border-default)] rounded-xl flex items-center justify-center cursor-pointer hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] text-[var(--color-text-muted)] transition-all font-semibold text-sm shrink-0"
+          >
+            + Add Column
+          </div>
+        )}
       </div>
 
       <DragOverlay>
