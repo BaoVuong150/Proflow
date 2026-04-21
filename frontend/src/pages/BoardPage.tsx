@@ -28,6 +28,47 @@ function BoardPage() {
     if (boardId) fetchBoard(Number(boardId))
   }, [projectId, boardId, fetchProject, fetchBoard, isInvalidFormat])
 
+  // Real-time Sync (Epic 8)
+  useEffect(() => {
+    if (isInvalidFormat || !boardId) return;
+
+    let channel: any;
+
+    import('../services/echoService').then(({ default: echo }) => {
+      channel = echo.private(`board.${boardId}`);
+
+      channel.listen('TaskCreated', (e: any) => {
+        useBoardStore.getState().handleTaskCreated(e.task);
+      });
+
+      channel.listen('TaskUpdated', (e: any) => {
+        useBoardStore.getState().handleTaskUpdated(e.task);
+      });
+
+      channel.listen('TaskDeleted', (e: any) => {
+        useBoardStore.getState().handleTaskDeleted(e.taskId);
+      });
+
+      channel.listen('TaskMoved', (e: any) => {
+        useBoardStore.getState().handleTaskMoved(e.task, e.oldColumnId);
+      });
+
+      channel.on('pusher:subscription_succeeded', () => {
+        // Handle Edge Case 5: Silent disconnect reconnect
+        // Fetch board again to ensure data is fresh
+        fetchBoard(Number(boardId));
+      });
+    }).catch(err => console.error("Failed to load Echo", err));
+
+    return () => {
+      if (channel) {
+        import('../services/echoService').then(({ default: echo }) => {
+          echo.leave(`board.${boardId}`);
+        });
+      }
+    };
+  }, [boardId, isInvalidFormat, fetchBoard]);
+
   if (isNotFound) {
     return <Navigate to="/404" replace />
   }

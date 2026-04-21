@@ -600,8 +600,11 @@
 
 ### Epic 8: Real-time Sync (Đồng bộ thời gian thực) — Optional
 > 💡 **Tại sao:** Khi nhiều người cùng mở 1 Board, người A kéo Task nhưng màn hình người B không cập nhật (phải F5).
-- [ ] Cài `laravel/reverb` + thêm `reverb` service vào Docker
-- [ ] Cài `laravel-echo` + `pusher-js` ở Frontend
-- [ ] Broadcast events: `TaskMoved`, `TaskCreated`, `TaskUpdated`, `TaskDeleted`
-- [ ] Frontend: Listen events → update Zustand store → Board tự cập nhật
-- [ ] Verify: 2 browser tabs → kéo Task ở tab 1 → tab 2 cập nhật real-time
+- [x] Backend: Cài đặt `laravel/reverb`
+- [x] Backend: Tạo Event `TaskMoved`, `TaskCreated`, `TaskUpdated`, `TaskDeleted` (implement ShouldBroadcast)
+- [x] Frontend: Lắng nghe kênh `board.{id}` và dispatch actions vào boardStore
+- [x] Frontend Edge Cases Mitigations:
+  - Echo Effect (sử dụng broadcast()->toOthers())
+  - Tự kéo thả đè nhau (ngừng nhận event khi isDraggingTask = true)
+  - Mất kết nối mạng (tự refresh khi reconnect)
+- [x] Verify: Mở 2 tabs, kéo Task ở tab này, tab kia tự nhảy (Real-time Kanban)

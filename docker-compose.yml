@@ -79,20 +79,20 @@ services:
     networks:
       - proflow_network
 
-  # reverb:
-  #   image: proflow-app
-  #   container_name: proflow_reverb
-  #   restart: unless-stopped
-  #   command: php artisan reverb:start --host=0.0.0.0 --port=8080 --debug
-  #   ports:
-  #     - "8080:8080"
-  #   volumes:
-  #     - ./backend:/var/www
-  #   networks:
-  #     - proflow_network
-  #   depends_on:
-  #     - app
-  #     - redis
+  reverb:
+    image: proflow-app
+    container_name: proflow_reverb
+    restart: unless-stopped
+    command: php artisan reverb:start --host=0.0.0.0 --port=8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/var/www
+    networks:
+      - proflow_network
+    depends_on:
+      - app
+      - redis
 
   queue:
     image: proflow-app

@@ -36,7 +36,9 @@ class TaskService
         $taskData['reporter_id'] = $reporter->id;
         $taskData['position'] = $maxPosition + 1;
 
-        return Task::create($taskData);
+        $task = Task::create($taskData);
+        broadcast(new \App\Events\TaskCreated($task))->toOthers();
+        return $task;
     }
 
     /**
@@ -56,6 +58,7 @@ class TaskService
         }
 
         $task->update($dto->toArray());
+        broadcast(new \App\Events\TaskUpdated($task))->toOthers();
 
         return $task;
     }
@@ -66,25 +69,26 @@ class TaskService
     public function moveTask(Task $task, int $newColumnId, int $newPosition): void
     {
         $oldColumnName = $task->column->name;
+        $oldColumnId = $task->column_id;
 
         DB::transaction(function () use ($task, $newColumnId, $newPosition) {
-            $oldColumnId = $task->column_id;
+            $currentColumnId = $task->column_id;
             $oldPosition = $task->position;
 
             // Moving within the same column
-            if ($oldColumnId === $newColumnId) {
+            if ($currentColumnId === $newColumnId) {
                 if ($oldPosition === $newPosition) {
                     return; // No change
                 }
 
                 if ($newPosition > $oldPosition) {
                     // Moving down
-                    Task::where('column_id', $oldColumnId)
+                    Task::where('column_id', $currentColumnId)
                         ->whereBetween('position', [$oldPosition + 1, $newPosition])
                         ->decrement('position');
                 } else {
                     // Moving up
-                    Task::where('column_id', $oldColumnId)
+                    Task::where('column_id', $currentColumnId)
                         ->whereBetween('position', [$newPosition, $oldPosition - 1])
                         ->increment('position');
                 }
@@ -105,7 +109,7 @@ class TaskService
                     }
                 }
 
-                Task::where('column_id', $oldColumnId)
+                Task::where('column_id', $currentColumnId)
                     ->where('position', '>', $oldPosition)
                     ->decrement('position');
 
@@ -132,6 +136,9 @@ class TaskService
                 changes: ['old' => ['column' => $oldColumnName], 'new' => ['column' => $newColumnName]],
             );
         }
+
+        $task->refresh();
+        broadcast(new \App\Events\TaskMoved($task, $oldColumnId))->toOthers();
     }
 
     /**

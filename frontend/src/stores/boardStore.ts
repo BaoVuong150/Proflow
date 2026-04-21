@@ -28,6 +28,12 @@ interface BoardState {
   setFilters: (filters: Partial<BoardState['filters']>) => void
   clearFilters: () => void
   clearBoard: () => void
+  handleTaskCreated: (task: Task) => void
+  handleTaskUpdated: (task: Task) => void
+  handleTaskDeleted: (taskId: number) => void
+  handleTaskMoved: (task: Task, oldColumnId: number) => void
+  isDraggingTask: boolean
+  setIsDraggingTask: (isDragging: boolean) => void
 }
 
 export const useBoardStore = create<BoardState>((set, get) => ({
@@ -205,4 +211,89 @@ export const useBoardStore = create<BoardState>((set, get) => ({
   }),
 
   clearBoard: () => set({ board: null, columns: [], selectedTask: null }),
+
+  isDraggingTask: false,
+  setIsDraggingTask: (isDragging) => set({ isDraggingTask: isDragging }),
+
+  handleTaskCreated: (task) => set((state) => {
+    const newColumns = state.columns.map(col => {
+      if (col.id === task.column_id) {
+        // Only add if not already exists (in case of race conditions)
+        if (!col.tasks?.find(t => t.id === task.id)) {
+          return { ...col, tasks: [...(col.tasks || []), task] }
+        }
+      }
+      return col
+    })
+    return { columns: newColumns }
+  }),
+
+  handleTaskUpdated: (task) => set((state) => {
+    // If user is currently dragging, ignore to prevent snap
+    if (state.isDraggingTask) return state;
+
+    const newColumns = state.columns.map(col => {
+      if (col.id === task.column_id) {
+        return {
+          ...col,
+          tasks: col.tasks?.map(t => t.id === task.id ? { ...t, ...task } : t)
+        }
+      }
+      return col
+    })
+    return {
+      columns: newColumns,
+      selectedTask: state.selectedTask?.id === task.id ? { ...state.selectedTask, ...task } : state.selectedTask
+    }
+  }),
+
+  handleTaskDeleted: (taskId) => set((state) => {
+    const newColumns = state.columns.map(col => ({
+      ...col,
+      tasks: col.tasks?.filter(t => t.id !== taskId)
+    }))
+    
+    // Edge case: closing modal if task is deleted
+    if (state.selectedTask?.id === taskId) {
+      setTimeout(() => alert('This task was deleted by another user.'), 100);
+    }
+
+    return {
+      columns: newColumns,
+      selectedTask: state.selectedTask?.id === taskId ? null : state.selectedTask
+    }
+  }),
+
+  handleTaskMoved: (task, oldColumnId) => set((state) => {
+    if (state.isDraggingTask) return state; // Ignore if current user is dragging
+
+    let newColumns = [...state.columns];
+    
+    // Remove from old column
+    newColumns = newColumns.map(col => {
+      if (col.id === oldColumnId) {
+        return { ...col, tasks: col.tasks?.filter(t => t.id !== task.id) }
+      }
+      return col
+    })
+
+    // Add/Update in new column
+    newColumns = newColumns.map(col => {
+      if (col.id === task.column_id) {
+        let tasks = [...(col.tasks || [])];
+        const existingIdx = tasks.findIndex(t => t.id === task.id);
+        if (existingIdx >= 0) {
+           tasks[existingIdx] = task;
+        } else {
+           tasks.push(task);
+        }
+        // Re-sort by position
+        tasks.sort((a, b) => a.position - b.position);
+        return { ...col, tasks }
+      }
+      return col
+    })
+
+    return { columns: newColumns }
+  }),
 }))

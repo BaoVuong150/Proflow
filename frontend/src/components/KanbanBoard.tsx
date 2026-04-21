@@ -39,6 +39,8 @@ export default function KanbanBoard({ columns }: KanbanBoardProps) {
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   )
 
+  const setIsDraggingTask = useBoardStore(s => s.setIsDraggingTask)
+
   const handleDragStart = (event: any) => {
     const { active } = event
     
@@ -53,6 +55,7 @@ export default function KanbanBoard({ columns }: KanbanBoardProps) {
       const task = col.tasks?.find(t => t.id === taskId)
       if (task) {
         setActiveTask(task)
+        setIsDraggingTask(true)
         break
       }
     }
@@ -61,6 +64,7 @@ export default function KanbanBoard({ columns }: KanbanBoardProps) {
   const handleDragEnd = (event: any) => {
     setActiveTask(null)
     setActiveColumn(null)
+    setIsDraggingTask(false)
     const { active, over } = event
     if (!over) return
 
@@ -130,6 +134,11 @@ export default function KanbanBoard({ columns }: KanbanBoardProps) {
       collisionDetection={closestCorners}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
+      onDragCancel={() => {
+        setActiveTask(null)
+        setActiveColumn(null)
+        setIsDraggingTask(false)
+      }}
     >
       <div className="flex gap-4 items-start h-full pb-4">
         <SortableContext items={columns.map(c => c.id)} strategy={horizontalListSortingStrategy}>

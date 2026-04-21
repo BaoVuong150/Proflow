@@ -85,7 +85,13 @@ class TaskController extends Controller
     {
         $this->authorize('delete', $task);
 
+        $taskId = $task->id;
+        $columnId = $task->column_id;
+        $boardId = $task->column->board_id;
+
         $task->delete();
+
+        broadcast(new \App\Events\TaskDeleted($taskId, $columnId, $boardId))->toOthers();
 
         return $this->success(null, 'Task deleted successfully');
     }
