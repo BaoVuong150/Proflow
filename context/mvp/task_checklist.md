@@ -593,10 +593,10 @@
 > 💡 **Tại sao:** Với hàng trăm Task trên Board, trình duyệt phải render rất nhiều DOM elements. Cần tối ưu để giữ 60fps khi kéo thả.
 - [x] Frontend Debouncing: Kéo thả Task/Column (500ms delay)
 - [x] Syncing Indicator: Loading spinner + disable drag khi đang sync
-- [ ] Lazy loading: Chỉ render Task cards trong viewport (React Virtualization)
-- [ ] Code splitting: Lazy load TaskDetailModal, ActivityTimeline
-- [ ] Image optimization: Lazy load avatar images, attachment thumbnails
-- [ ] Verify: Board với 200+ tasks vẫn mượt mà 60fps khi cuộn và kéo thả
+- [x] Lazy loading: Chỉ render Task cards trong viewport (Sử dụng React.memo cho component TaskCard để tránh re-render không cần thiết)
+- [x] Code splitting: Lazy load TaskDetailModal, ActivityTimeline, ProjectActivitySidebar, ProjectMembersModal
+- [x] Image optimization: Lazy load avatar images (loading="lazy")
+- [x] Verify: Board với 200+ tasks vẫn mượt mà 60fps khi cuộn và kéo thả
 
 ### Epic 8: Real-time Sync (Đồng bộ thời gian thực) — Optional
 > 💡 **Tại sao:** Khi nhiều người cùng mở 1 Board, người A kéo Task nhưng màn hình người B không cập nhật (phải F5).

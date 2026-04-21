@@ -1,12 +1,13 @@
+import React, { useState, useEffect, Suspense } from 'react'
 import type { Task } from '../types'
 import AppModal from './AppModal'
-import { useState, useEffect } from 'react'
 import { taskService } from '../services/taskService'
 import { useBoardStore } from '../stores/boardStore'
-import TaskChecklists from './TaskChecklists'
-import TaskComments from './TaskComments'
-import TaskAttachments from './TaskAttachments'
-import ActivityTimeline from './ActivityTimeline'
+
+const TaskChecklists = React.lazy(() => import('./TaskChecklists'))
+const TaskComments = React.lazy(() => import('./TaskComments'))
+const TaskAttachments = React.lazy(() => import('./TaskAttachments'))
+const ActivityTimeline = React.lazy(() => import('./ActivityTimeline'))
 
 interface TaskDetailModalProps {
   isOpen: boolean
@@ -192,14 +193,20 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
           */}
           {/* <TaskChecklists task={task} /> */}
 
-          {/* Attachments Section */}
-          <TaskAttachments taskId={task.id} />
+          <Suspense fallback={<div className="p-4 text-center text-[var(--color-text-muted)]">Loading attachments...</div>}>
+            {/* Attachments Section */}
+            <TaskAttachments taskId={task.id} />
+          </Suspense>
 
-          {/* Comments Section */}
-          <TaskComments taskId={task.id} />
+          <Suspense fallback={<div className="p-4 text-center text-[var(--color-text-muted)]">Loading comments...</div>}>
+            {/* Comments Section */}
+            <TaskComments taskId={task.id} />
+          </Suspense>
 
-          {/* Activity Timeline */}
-          <ActivityTimeline projectId={task.project_id} taskId={task.id} />
+          <Suspense fallback={<div className="p-4 text-center text-[var(--color-text-muted)]">Loading activity...</div>}>
+            {/* Activity Timeline */}
+            <ActivityTimeline projectId={task.project_id} taskId={task.id} />
+          </Suspense>
         </div>
 
         {/* ═══ Right Column (Metadata) ═══ */}

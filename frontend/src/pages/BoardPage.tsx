@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import { useParams, Link, Navigate } from 'react-router'
 import { useProjectStore } from '../stores/projectStore'
 import { useBoardStore } from '../stores/boardStore'
 import AppHeader from '../components/AppHeader'
 import KanbanBoard from '../components/KanbanBoard'
-import TaskDetailModal from '../components/TaskDetailModal'
-import ProjectActivitySidebar from '../components/ProjectActivitySidebar'
 import BoardFilterBar from '../components/BoardFilterBar'
-import ProjectMembersModal from '../components/ProjectMembersModal'
+
+const TaskDetailModal = React.lazy(() => import('../components/TaskDetailModal'))
+const ProjectActivitySidebar = React.lazy(() => import('../components/ProjectActivitySidebar'))
+const ProjectMembersModal = React.lazy(() => import('../components/ProjectMembersModal'))
 
 function BoardPage() {
   const { projectId, boardId } = useParams()
@@ -76,28 +77,30 @@ function BoardPage() {
         )}
       </main>
 
-      {selectedTask && (
-        <TaskDetailModal 
-          isOpen={true} 
-          onClose={() => setSelectedTask(null)} 
-          task={selectedTask} 
-        />
-      )}
+      <Suspense fallback={null}>
+        {selectedTask && (
+          <TaskDetailModal 
+            isOpen={true} 
+            onClose={() => setSelectedTask(null)} 
+            task={selectedTask} 
+          />
+        )}
 
-      {projectId && (
-        <>
-          <ProjectActivitySidebar 
-            projectId={Number(projectId)} 
-            isOpen={isActivityOpen} 
-            onClose={() => setIsActivityOpen(false)} 
-          />
-          <ProjectMembersModal 
-            projectId={Number(projectId)} 
-            isOpen={isMembersOpen} 
-            onClose={() => setIsMembersOpen(false)} 
-          />
-        </>
-      )}
+        {projectId && (
+          <>
+            <ProjectActivitySidebar 
+              projectId={Number(projectId)} 
+              isOpen={isActivityOpen} 
+              onClose={() => setIsActivityOpen(false)} 
+            />
+            <ProjectMembersModal 
+              projectId={Number(projectId)} 
+              isOpen={isMembersOpen} 
+              onClose={() => setIsMembersOpen(false)} 
+            />
+          </>
+        )}
+      </Suspense>
     </div>
   )
 }

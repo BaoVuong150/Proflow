@@ -1,3 +1,4 @@
+import React from 'react'
 import type { Task } from '../types'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
@@ -8,7 +9,7 @@ interface TaskCardProps {
   isOverlay?: boolean
 }
 
-export default function TaskCard({ task, isOverlay }: TaskCardProps) {
+export default React.memo(function TaskCard({ task, isOverlay }: TaskCardProps) {
   const setSelectedTask = useBoardStore((s) => s.setSelectedTask)
   const isSyncing = useBoardStore((s) => s.syncingTasks.includes(task.id))
   const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({

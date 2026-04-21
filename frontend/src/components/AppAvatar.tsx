@@ -27,7 +27,7 @@ export default function AppAvatar({ name = 'User', imageUrl, size = 'md', classN
       className={`relative inline-flex items-center justify-center shrink-0 rounded-full bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] font-semibold uppercase border border-[var(--color-border-default)] ${sizeClasses[size]} ${className}`}
     >
       {imageUrl ? (
-        <img src={imageUrl} alt={name} className="w-full h-full rounded-full object-cover" />
+        <img src={imageUrl} alt={name} className="w-full h-full rounded-full object-cover" loading="lazy" />
       ) : (
         <span>{initials}</span>
       )}
