@@ -21,14 +21,14 @@ export default function TaskComments({ taskId }: TaskCommentsProps) {
     if (isLoadMore) setIsLoadingMore(true)
     try {
       const { data } = await taskFeatureService.getComments(taskId, pageNum)
-      // data.data is the paginated object containing data, current_page, etc.
+      // data.data is the array of comments, data.meta contains pagination info
       if (isLoadMore) {
-        setComments(prev => [...prev, ...data.data.data])
+        setComments(prev => [...prev, ...data.data])
       } else {
-        setComments(data.data.data)
+        setComments(data.data)
       }
-      setHasMore(data.data.current_page < data.data.last_page)
-      setPage(data.data.current_page)
+      setHasMore(data.meta.current_page < (data.meta.last_page ?? Math.ceil(data.meta.total / data.meta.per_page)))
+      setPage(data.meta.current_page)
     } catch (err) {
       console.error('Failed to load comments:', err)
     } finally {
