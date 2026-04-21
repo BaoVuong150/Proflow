@@ -43,7 +43,7 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
     setDueDate(task.due_date?.split('T')[0] || '')
     setSaveStatus('idle')
     setIsDeleting(false)
-  }, [task])
+  }, [task.id])
 
   const handleSave = async () => {
     setIsSaving(true)

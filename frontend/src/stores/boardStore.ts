@@ -294,6 +294,9 @@ export const useBoardStore = create<BoardState>((set, get) => ({
       return col
     })
 
-    return { columns: newColumns }
+    return { 
+      columns: newColumns,
+      selectedTask: state.selectedTask?.id === task.id ? { ...state.selectedTask, ...task } : state.selectedTask 
+    }
   }),
 }))
