@@ -10,6 +10,9 @@ declare global {
 
 window.Pusher = Pusher;
 
+import api from './api';
+window.axios = api;
+
 const echo = new Echo({
   broadcaster: 'reverb',
   key: import.meta.env.VITE_REVERB_APP_KEY,
