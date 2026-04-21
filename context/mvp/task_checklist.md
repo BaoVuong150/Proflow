@@ -485,13 +485,13 @@
 - [ ] Verify: Push code → 3 jobs pass → Green badge trên README
 
 ### Real-time Kanban (Ưu tiên 2 — 2 ngày)
-- [ ] Cài `laravel/reverb` + `predis/predis`
-- [ ] Cài `laravel-echo` + `pusher-js` (frontend)
-- [ ] Thêm `redis` + `reverb` services vào `docker-compose.yml`
-- [ ] Tạo Events: `TaskCreated`, `TaskMoved`, `TaskUpdated`, `TaskDeleted`
-- [ ] Broadcast events trên channel `project.{id}`
-- [ ] Frontend: Listen events → update Zustand store → board auto-refresh
-- [ ] Verify: 2 browser tabs → drag task ở tab 1 → tab 2 cập nhật real-time
+- [x] Cài `laravel/reverb` + `predis/predis`
+- [x] Cài `laravel-echo` + `pusher-js` (frontend)
+- [x] Thêm `redis` + `reverb` services vào `docker-compose.yml`
+- [x] Tạo Events: `TaskCreated`, `TaskMoved`, `TaskUpdated`, `TaskDeleted`
+- [x] Broadcast events trên channel `project.{id}`
+- [x] Frontend: Listen events → update Zustand store → board auto-refresh
+- [x] Verify: 2 browser tabs → drag task ở tab 1 → tab 2 cập nhật real-time
 
 ### Dashboard Analytics (Ưu tiên 3 — 1.5 ngày)
 - [ ] `DashboardController` + `DashboardService`
@@ -501,13 +501,13 @@
 - [ ] Verify: Dashboard hiển thị charts với data thật từ DB
 
 ### Full Test Suite (Ưu tiên 4 — 2 ngày)
-- [ ] Auth tests: register, login, logout, get user, validation errors
-- [ ] Project tests: CRUD, add/remove member, policy checks
-- [ ] Task tests: CRUD, move, assign, labels, checklists
-- [ ] Comment tests: create, delete, policy
-- [ ] Activity Log tests: auto logging on task actions
-- [ ] Target: ≥ 60% code coverage
-- [ ] Verify: `php artisan test` → all green
+- [x] Auth tests: register, login, logout, get user, validation errors
+- [x] Project tests: CRUD, add/remove member, policy checks
+- [x] Task tests: CRUD, move, assign, labels, checklists
+- [x] Comment tests: create, delete, policy
+- [x] Activity Log tests: auto logging on task actions
+- [x] Target: ≥ 60% code coverage
+- [x] Verify: `php artisan test` → all green
 
 ### API Documentation (Ưu tiên 5 — 0.5 ngày)
 - [ ] Cài `knuckleswtf/scribe`
