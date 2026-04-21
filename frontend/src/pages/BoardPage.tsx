@@ -38,11 +38,11 @@ function BoardPage() {
       channel = echo.private(`board.${boardId}`);
 
       channel.listen('TaskCreated', (e: any) => {
-        useBoardStore.getState().handleTaskCreated(e.task);
+        useBoardStore.getState().handleTaskCreated(e.task?.data || e.task);
       });
 
       channel.listen('TaskUpdated', (e: any) => {
-        useBoardStore.getState().handleTaskUpdated(e.task);
+        useBoardStore.getState().handleTaskUpdated(e.task?.data || e.task);
       });
 
       channel.listen('TaskDeleted', (e: any) => {
@@ -50,7 +50,7 @@ function BoardPage() {
       });
 
       channel.listen('TaskMoved', (e: any) => {
-        useBoardStore.getState().handleTaskMoved(e.task, e.oldColumnId);
+        useBoardStore.getState().handleTaskMoved(e.task?.data || e.task, e.oldColumnId);
       });
 
       channel.on('pusher:subscription_succeeded', () => {
