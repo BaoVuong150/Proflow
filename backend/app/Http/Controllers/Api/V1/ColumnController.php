@@ -33,7 +33,7 @@ class ColumnController extends Controller
 
         $column = $board->columns()->create([
             'name' => $request->input('name'),
-            'color' => $request->input('color'),
+            'color' => $request->input('color', '#6b7280'), // Default fallback color
             'position' => $maxPosition + 1,
         ]);
 
