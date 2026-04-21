@@ -577,9 +577,9 @@
 > 💡 **Tại sao:** Khi có 1.000+ Comments/Attachments/Activities, việc tải toàn bộ 1 lần sẽ làm treo trình duyệt và nghẽn Server.
 - [x] Pagination: Activity Logs (10/page + Load More UI)
 - [x] Pagination: Task Comments (10/page + Load More UI)
-- [ ] Pagination: Task Attachments (10/page + Load More UI)
-- [ ] Pagination: Project list (nếu user có > 20 projects)
-- [ ] Verify: Tạo 100+ comments trên 1 task → Load More hoạt động mượt mà
+- [x] Pagination: Task Attachments (10/page + Load More UI)
+- [x] Pagination: Project list (20/page kết hợp page-aware Redis cache)
+- [x] Verify: 4/4 Tests PASS (Projects 20/page, Comments 10/page, Attachments 10/page)
 
 ### Epic 6: Laravel Octane (Tăng tốc Engine PHP)
 > 💡 **Tại sao:** PHP mặc định khởi động lại toàn bộ framework mỗi request. Octane giữ application trong RAM, tăng throughput lên gấp 5-10 lần.

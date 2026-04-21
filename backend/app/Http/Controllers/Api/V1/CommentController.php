@@ -27,7 +27,7 @@ class CommentController extends Controller
             ->latest()
             ->paginate(10);
 
-        return $this->success($comments);
+        return $this->paginated($comments);
     }
 
     /**

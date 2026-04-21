@@ -30,9 +30,9 @@ class AttachmentController extends Controller
         $attachments = $task->attachments()
             ->with('uploader')
             ->latest()
-            ->get();
+            ->paginate(10);
 
-        return $this->success(AttachmentResource::collection($attachments));
+        return $this->paginated($attachments);
     }
 
     /**

@@ -27,7 +27,8 @@ class ProjectController extends Controller
     public function index(Request $request): JsonResponse
     {
         $userId = $request->user()->id;
-        $cacheKey = "user_{$userId}_projects";
+        $page = $request->input('page', 1);
+        $cacheKey = "user_{$userId}_projects_page_{$page}";
 
         $projectsData = \Illuminate\Support\Facades\Cache::tags(["user_{$userId}"])->remember($cacheKey, 3600, function () use ($userId) {
             $projects = Project::whereHas('members', function ($query) use ($userId) {
@@ -35,12 +36,23 @@ class ProjectController extends Controller
             })
             ->with(['owner', 'boards'])
             ->latest()
-            ->get();
+            ->paginate(20);
             
-            return json_decode(ProjectResource::collection($projects)->toJson(), true);
+            return $projects->toArray();
         });
 
-        return $this->success($projectsData);
+        return response()->json([
+            'success' => true,
+            'message' => 'Success',
+            'data' => $projectsData['data'],
+            'meta' => [
+                'current_page' => $projectsData['current_page'],
+                'per_page' => $projectsData['per_page'],
+                'total' => $projectsData['total'],
+                'last_page' => $projectsData['last_page'],
+                'timestamp' => now()->toIso8601String(),
+            ],
+        ]);
     }
 
     /**

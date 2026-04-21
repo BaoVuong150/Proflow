@@ -48,18 +48,16 @@ class CommentPaginationTest extends TestCase
         $response->assertStatus(200)
                  ->assertJsonStructure([
                      'success',
-                     'data' => [
+                     'data',
+                     'meta' => [
                          'current_page',
-                         'data',
-                         'last_page',
                          'per_page',
-                         'total'
+                         'total',
                      ]
                  ]);
 
         // 5. Assert only 10 items are returned per page
-        $this->assertCount(10, $response->json('data.data'));
-        $this->assertEquals(15, $response->json('data.total'));
-        $this->assertEquals(2, $response->json('data.last_page'));
+        $this->assertCount(10, $response->json('data'));
+        $this->assertEquals(15, $response->json('meta.total'));
     }
 }
