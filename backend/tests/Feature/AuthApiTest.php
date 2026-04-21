@@ -38,7 +38,7 @@ it('can login an existing user', function () {
     $response->assertStatus(200)
         ->assertJsonPath('success', true)
         ->assertJsonPath('data.email', 'test@example.com');
-        
+
     $this->assertAuthenticatedAs($user);
 });
 
@@ -55,7 +55,7 @@ it('fails to login with invalid credentials', function () {
 
     $response->assertStatus(422)
         ->assertJsonValidationErrors(['email']);
-        
+
     $this->assertGuest();
 });
 

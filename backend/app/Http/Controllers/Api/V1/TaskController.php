@@ -17,11 +17,11 @@ use App\Traits\ApiResponse;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TaskController extends Controller
 {
-    use ApiResponse, AuthorizesRequests;
+    use ApiResponse;
+    use AuthorizesRequests;
 
     public function __construct(private TaskService $taskService)
     {
@@ -35,7 +35,7 @@ class TaskController extends Controller
         $this->authorize('update', $project);
 
         $dto = TaskDTO::fromArray($request->validated());
-        
+
         $task = $this->taskService->createTask($project, $dto, $request->user());
 
         $task->load('assignees');

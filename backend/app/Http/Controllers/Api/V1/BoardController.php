@@ -12,7 +12,8 @@ use Illuminate\Http\JsonResponse;
 
 class BoardController extends Controller
 {
-    use ApiResponse, AuthorizesRequests;
+    use ApiResponse;
+    use AuthorizesRequests;
 
     /**
      * Display a listing of boards for a project.
@@ -40,17 +41,17 @@ class BoardController extends Controller
                 $query->orderBy('position')->with(['tasks' => function ($taskQuery) {
                     $taskQuery->orderBy('position')
                               ->with(['assignees', 'labels', 'checklists.items']); // Eager load task relations
-                    
+
                     if (request()->has('priority')) {
                         $taskQuery->where('priority', request('priority'));
                     }
-                    
+
                     if (request()->has('assignee_id')) {
                         $taskQuery->whereHas('assignees', function ($q) {
                             $q->where('users.id', request('assignee_id'));
                         });
                     }
-                    
+
                     if (request()->has('label_id')) {
                         $taskQuery->whereHas('labels', function ($q) {
                             $q->where('labels.id', request('label_id'));
@@ -58,7 +59,7 @@ class BoardController extends Controller
                     }
                 }]);
             }]);
-            
+
             return json_decode((new BoardResource($board))->toJson(), true);
         });
 

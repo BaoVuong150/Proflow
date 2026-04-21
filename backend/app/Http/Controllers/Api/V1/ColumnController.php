@@ -16,7 +16,8 @@ use Illuminate\Http\JsonResponse;
 
 class ColumnController extends Controller
 {
-    use ApiResponse, AuthorizesRequests;
+    use ApiResponse;
+    use AuthorizesRequests;
 
     public function __construct(private BoardService $boardService)
     {

@@ -4,7 +4,6 @@ namespace App\Events;
 
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -13,7 +12,9 @@ use Illuminate\Queue\SerializesModels;
 
 class TaskMoved implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public $task;
     public $oldColumnId;

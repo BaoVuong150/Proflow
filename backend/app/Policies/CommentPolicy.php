@@ -23,7 +23,7 @@ class CommentPolicy
             ->where('user_id', $user->id)
             ->first();
 
-        if (!$member) {
+        if (! $member) {
             return false;
         }
 

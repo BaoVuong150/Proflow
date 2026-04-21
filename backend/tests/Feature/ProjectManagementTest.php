@@ -223,7 +223,7 @@ it('removes user from all task assignments when removed from project', function 
 
     $board = Board::factory()->create(['project_id' => $project->id]);
     $column = Column::factory()->create(['board_id' => $board->id]);
-    
+
     $task = \App\Models\Task::factory()->create([
         'project_id' => $project->id,
         'column_id' => $column->id,
@@ -232,7 +232,7 @@ it('removes user from all task assignments when removed from project', function 
 
     // Assign member to task
     $task->assignees()->attach($member->id, ['assigned_by' => $owner->id]);
-    
+
     $this->assertDatabaseHas('task_assignments', [
         'task_id' => $task->id,
         'user_id' => $member->id,

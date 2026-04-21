@@ -14,7 +14,7 @@ beforeEach(function () {
     $this->owner = User::factory()->create();
     $this->project = Project::factory()->create(['owner_id' => $this->owner->id]);
     $this->project->members()->create(['user_id' => $this->owner->id, 'role' => ProjectRole::Owner]);
-    
+
     $this->board = Board::factory()->create(['project_id' => $this->project->id]);
     $this->column = Column::factory()->create(['board_id' => $this->board->id]);
 });
@@ -92,7 +92,7 @@ it('can move a task to a different column', function () {
 
     $task1 = Task::factory()->create(['project_id' => $this->project->id, 'column_id' => $this->column->id, 'position' => 0]);
     $task2 = Task::factory()->create(['project_id' => $this->project->id, 'column_id' => $this->column->id, 'position' => 1]);
-    
+
     // Existing task in new column
     $task3 = Task::factory()->create(['project_id' => $this->project->id, 'column_id' => $newColumn->id, 'position' => 0]);
 
@@ -240,7 +240,7 @@ it('fails to assign a user who is not a member of the project', function () {
 
 it('fails to attach a label from a different project', function () {
     $task = Task::factory()->create(['project_id' => $this->project->id, 'column_id' => $this->column->id]);
-    
+
     // Label from another project
     $otherProject = Project::factory()->create();
     $label = \App\Models\Label::factory()->create(['project_id' => $otherProject->id]);
@@ -270,7 +270,7 @@ it('prevents creating a task if column WIP limit is reached', function () {
 
 it('prevents moving a task if destination column WIP limit is reached', function () {
     $newColumn = Column::factory()->create(['board_id' => $this->board->id, 'wip_limit' => 1]);
-    
+
     // Existing task in new column (reaches limit)
     Task::factory()->create(['project_id' => $this->project->id, 'column_id' => $newColumn->id]);
 

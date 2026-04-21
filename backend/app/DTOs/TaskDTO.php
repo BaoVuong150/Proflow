@@ -35,7 +35,7 @@ readonly class TaskDTO
             estimatedHours: isset($data['estimated_hours']) ? (float) $data['estimated_hours'] : null,
         );
     }
-    
+
     public function toArray(): array
     {
         return array_filter([
@@ -48,6 +48,6 @@ readonly class TaskDTO
             'due_date' => $this->dueDate,
             'start_date' => $this->startDate,
             'estimated_hours' => $this->estimatedHours,
-        ], fn($value) => !is_null($value));
+        ], fn ($value) => ! is_null($value));
     }
 }

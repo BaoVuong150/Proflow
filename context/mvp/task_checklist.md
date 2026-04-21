@@ -445,27 +445,27 @@
 - [x] Smooth transitions (modal open/close, toast slide)
 
 ### Final Checks
-- [ ] Run `./vendor/bin/pint` — fix code style
-- [ ] Run `php artisan test` — all tests pass
-- [ ] `php artisan migrate:fresh --seed` — seeders work
-- [ ] `docker compose up -d` — everything runs
-- [ ] Manual walkthrough: full user flow from register to kanban
+- [x] Run `./vendor/bin/pint` — fix code style
+- [x] Run `php artisan test` — all tests pass
+- [x] `php artisan migrate:fresh --seed` — seeders work
+- [x] `docker compose up -d` — everything runs
+- [x] Manual walkthrough: full user flow from register to kanban
 
 ---
 
 ## 🏁 MVP Definition of Done
 
-- [ ] User có thể Register → Login → Tạo Project → Thêm Members
-- [ ] Kanban board hiển thị columns + tasks, hỗ trợ Drag & Drop
-- [ ] Task Detail Modal đầy đủ: description, assignees, labels, checklists, comments, attachments, activity
-- [ ] RBAC hoạt động: Owner/Admin có quyền cao hơn Member/Viewer
-- [ ] Activity Log ghi lại mọi thao tác quan trọng
-- [ ] Seeder tạo demo data để showcase
-- [ ] Docker chạy được bằng 1 command: `docker compose up -d`
-- [ ] Code sạch: PSR-12, meaningful naming, PHPDoc trên services
-- [ ] README có hướng dẫn cài đặt + screenshots
-- [ ] Ít nhất 5-10 Feature tests chạy pass
-- [ ] UI dark theme, trông chuyên nghiệp
+- [x] User có thể Register → Login → Tạo Project → Thêm Members
+- [x] Kanban board hiển thị columns + tasks, hỗ trợ Drag & Drop
+- [x] Task Detail Modal đầy đủ: description, assignees, labels, checklists, comments, attachments, activity
+- [x] RBAC hoạt động: Owner/Admin có quyền cao hơn Member/Viewer
+- [x] Activity Log ghi lại mọi thao tác quan trọng
+- [x] Seeder tạo demo data để showcase
+- [x] Docker chạy được bằng 1 command: `docker compose up -d`
+- [x] Code sạch: PSR-12, meaningful naming, PHPDoc trên services
+- [x] README có hướng dẫn cài đặt + screenshots
+- [x] Ít nhất 5-10 Feature tests chạy pass
+- [x] UI dark theme, trông chuyên nghiệp
 
 ---
 

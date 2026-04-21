@@ -27,7 +27,7 @@ class RealtimeSyncTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this->user = User::factory()->create();
         $this->project = Project::factory()->create(['owner_id' => $this->user->id]);
         \App\Models\ProjectMember::create([
@@ -35,7 +35,7 @@ class RealtimeSyncTest extends TestCase
             'user_id' => $this->user->id,
             'role' => 'admin'
         ]);
-        
+
         $this->board = Board::factory()->create(['project_id' => $this->project->id]);
         $this->column = Column::factory()->create(['board_id' => $this->board->id, 'name' => 'To Do']);
     }
@@ -50,7 +50,7 @@ class RealtimeSyncTest extends TestCase
         ]);
 
         $response->assertStatus(201);
-        
+
         Event::assertDispatched(TaskCreated::class, function ($event) {
             return $event->task->title === 'New Realtime Task';
         });

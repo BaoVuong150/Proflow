@@ -50,7 +50,7 @@ class FileUploadService
             throw new BadRequestHttpException('File size exceeds the maximum allowed size of 10MB.');
         }
 
-        if (!in_array($file->getMimeType(), self::ALLOWED_MIME_TYPES)) {
+        if (! in_array($file->getMimeType(), self::ALLOWED_MIME_TYPES)) {
             throw new BadRequestHttpException('File type is not allowed.');
         }
 
@@ -61,7 +61,7 @@ class FileUploadService
                 ['storage_used' => 0, 'storage_limit' => config('cloudinary.user_quota'), 'file_count' => 0]
             );
 
-            if (!$quota->hasQuotaFor($file->getSize())) {
+            if (! $quota->hasQuotaFor($file->getSize())) {
                 $remainingMB = round($quota->remainingStorage() / 1024 / 1024, 2);
                 throw new BadRequestHttpException(
                     "Storage quota exceeded. You have {$remainingMB}MB remaining."
@@ -126,7 +126,7 @@ class FileUploadService
     private function extractPublicId(string $url): ?string
     {
         // URL format: https://res.cloudinary.com/{cloud}/image/upload/v123/proflow/attachments/filename.ext
-        if (!str_contains($url, 'cloudinary.com')) {
+        if (! str_contains($url, 'cloudinary.com')) {
             return null;
         }
 

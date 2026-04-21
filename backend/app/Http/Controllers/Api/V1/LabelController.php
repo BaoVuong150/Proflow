@@ -14,7 +14,8 @@ use Illuminate\Http\JsonResponse;
 
 class LabelController extends Controller
 {
-    use ApiResponse, AuthorizesRequests;
+    use ApiResponse;
+    use AuthorizesRequests;
 
     public function index(Project $project): JsonResponse
     {

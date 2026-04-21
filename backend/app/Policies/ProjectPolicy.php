@@ -50,7 +50,7 @@ class ProjectPolicy
     {
         return $project->owner_id === $user->id;
     }
-    
+
     /**
      * Determine whether the user can manage members.
      */

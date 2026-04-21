@@ -22,7 +22,7 @@ class TaskPolicy
     public function update(User $user, Task $task): bool
     {
         $member = $task->project->members()->where('user_id', $user->id)->first();
-        if (!$member) {
+        if (! $member) {
             return false;
         }
 
@@ -41,7 +41,7 @@ class TaskPolicy
     public function delete(User $user, Task $task): bool
     {
         $member = $task->project->members()->where('user_id', $user->id)->first();
-        if (!$member) {
+        if (! $member) {
             return false;
         }
 

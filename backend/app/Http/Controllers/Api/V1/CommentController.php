@@ -13,7 +13,8 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    use ApiResponse, AuthorizesRequests;
+    use ApiResponse;
+    use AuthorizesRequests;
 
     /**
      * List comments for a task (newest first).

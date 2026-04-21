@@ -6,7 +6,6 @@ use App\Enums\ProjectRole;
 use App\Models\Board;
 use App\Models\Project;
 use App\Models\User;
-use App\Services\ActivityLogService;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;

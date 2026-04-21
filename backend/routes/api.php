@@ -51,11 +51,11 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('projects', ProjectController::class)->except(['store']);
         Route::post('projects/{project}/members', [ProjectController::class, 'addMember']);
         Route::delete('projects/{project}/members/{user}', [ProjectController::class, 'removeMember']);
-        
+
         // Boards
         Route::get('projects/{project}/boards', [BoardController::class, 'index']);
         Route::get('boards/{board}', [BoardController::class, 'show']);
-        
+
         // Columns
         Route::post('boards/{board}/columns', [ColumnController::class, 'store']);
         Route::put('columns/{column}', [ColumnController::class, 'update']);

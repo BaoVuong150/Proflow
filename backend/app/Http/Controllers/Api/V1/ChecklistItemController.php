@@ -12,7 +12,8 @@ use App\Models\Checklist;
 
 class ChecklistItemController extends Controller
 {
-    use ApiResponse, AuthorizesRequests;
+    use ApiResponse;
+    use AuthorizesRequests;
 
     /**
      * Create a new checklist item.
@@ -71,9 +72,9 @@ class ChecklistItemController extends Controller
         $this->authorize('update', $checklistItem->checklist->task);
 
         $checklistItem->update([
-            'is_completed' => !$checklistItem->is_completed,
-            'completed_at' => !$checklistItem->is_completed ? now() : null,
-            'completed_by' => !$checklistItem->is_completed ? $request->user()->id : null,
+            'is_completed' => ! $checklistItem->is_completed,
+            'completed_at' => ! $checklistItem->is_completed ? now() : null,
+            'completed_by' => ! $checklistItem->is_completed ? $request->user()->id : null,
         ]);
 
         return $this->success($checklistItem->fresh(), 'Item toggled successfully');

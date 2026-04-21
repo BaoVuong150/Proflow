@@ -12,7 +12,8 @@ use Illuminate\Http\Request;
 
 class ChecklistController extends Controller
 {
-    use ApiResponse, AuthorizesRequests;
+    use ApiResponse;
+    use AuthorizesRequests;
 
     /**
      * List checklists for a task.
@@ -22,7 +23,7 @@ class ChecklistController extends Controller
         $this->authorize('view', $task);
 
         $checklists = $task->checklists()
-            ->with(['items' => fn($q) => $q->orderBy('position')])
+            ->with(['items' => fn ($q) => $q->orderBy('position')])
             ->orderBy('position')
             ->get();
 

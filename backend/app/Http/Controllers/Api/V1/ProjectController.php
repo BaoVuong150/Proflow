@@ -15,7 +15,8 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    use ApiResponse, AuthorizesRequests;
+    use ApiResponse;
+    use AuthorizesRequests;
 
     public function __construct(private ProjectService $projectService)
     {
@@ -37,7 +38,7 @@ class ProjectController extends Controller
             ->with(['owner', 'boards'])
             ->latest()
             ->paginate(20);
-            
+
             return $projects->toArray();
         });
 
@@ -132,16 +133,18 @@ class ProjectController extends Controller
             'role' => ['nullable', 'string'],
         ]);
 
-        $role = $request->input('role') 
-            ? ProjectRole::tryFrom($request->input('role')) ?? ProjectRole::Member 
+        $role = $request->input('role')
+            ? ProjectRole::tryFrom($request->input('role')) ?? ProjectRole::Member
             : ProjectRole::Member;
 
         $project = $this->projectService->addMember($project, $request->input('email'), $role);
-        
+
         \Illuminate\Support\Facades\Cache::tags(["project_{$project->id}"])->flush();
         // Also invalidate for the added user
         $user = \App\Models\User::where('email', $request->input('email'))->first();
-        if ($user) \Illuminate\Support\Facades\Cache::tags(["user_{$user->id}"])->flush();
+        if ($user) {
+            \Illuminate\Support\Facades\Cache::tags(["user_{$user->id}"])->flush();
+        }
 
         return $this->success(
             new ProjectResource($project),
@@ -157,7 +160,7 @@ class ProjectController extends Controller
         $this->authorize('manageMembers', $project);
 
         $this->projectService->removeMember($project, $userId);
-        
+
         \Illuminate\Support\Facades\Cache::tags(["project_{$project->id}", "user_{$userId}"])->flush();
 
         return $this->success(null, 'Member removed successfully');

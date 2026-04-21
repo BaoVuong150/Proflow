@@ -13,7 +13,7 @@ it('can fetch boards for a project', function () {
     $owner = User::factory()->create();
     $project = Project::factory()->create(['owner_id' => $owner->id]);
     $project->members()->create(['user_id' => $owner->id, 'role' => ProjectRole::Owner]);
-    
+
     $board1 = Board::factory()->create(['project_id' => $project->id, 'name' => 'Board 1']);
     $board2 = Board::factory()->create(['project_id' => $project->id, 'name' => 'Board 2']);
 
@@ -27,9 +27,9 @@ it('can fetch a single board with ordered columns', function () {
     $owner = User::factory()->create();
     $project = Project::factory()->create(['owner_id' => $owner->id]);
     $project->members()->create(['user_id' => $owner->id, 'role' => ProjectRole::Owner]);
-    
+
     $board = Board::factory()->create(['project_id' => $project->id]);
-    
+
     Column::factory()->create(['board_id' => $board->id, 'position' => 2, 'name' => 'Col 2']);
     Column::factory()->create(['board_id' => $board->id, 'position' => 0, 'name' => 'Col 0']);
     Column::factory()->create(['board_id' => $board->id, 'position' => 1, 'name' => 'Col 1']);
@@ -48,7 +48,7 @@ it('can create a new column', function () {
     $project = Project::factory()->create(['owner_id' => $owner->id]);
     $project->members()->create(['user_id' => $owner->id, 'role' => ProjectRole::Owner]);
     $board = Board::factory()->create(['project_id' => $project->id]);
-    
+
     // Existing column at position 0
     Column::factory()->create(['board_id' => $board->id, 'position' => 0]);
 
@@ -60,7 +60,7 @@ it('can create a new column', function () {
     $response->assertStatus(201)
         ->assertJsonPath('data.name', 'New Column')
         ->assertJsonPath('data.position', 1); // Should be max + 1
-        
+
     $this->assertDatabaseHas('columns', [
         'board_id' => $board->id,
         'name' => 'New Column',
@@ -102,7 +102,7 @@ it('can reorder columns', function () {
     $project = Project::factory()->create(['owner_id' => $owner->id]);
     $project->members()->create(['user_id' => $owner->id, 'role' => ProjectRole::Owner]);
     $board = Board::factory()->create(['project_id' => $project->id]);
-    
+
     $col1 = Column::factory()->create(['board_id' => $board->id, 'position' => 0]);
     $col2 = Column::factory()->create(['board_id' => $board->id, 'position' => 1]);
     $col3 = Column::factory()->create(['board_id' => $board->id, 'position' => 2]);
@@ -158,7 +158,7 @@ it('prevents reordering columns in someone elses board', function () {
     $project = Project::factory()->create(['owner_id' => $owner->id]);
     $project->members()->create(['user_id' => $owner->id, 'role' => ProjectRole::Owner]);
     $board = Board::factory()->create(['project_id' => $project->id]);
-    
+
     $col1 = Column::factory()->create(['board_id' => $board->id, 'position' => 0]);
 
     $response = $this->actingAs($outsider)->putJson("/api/v1/boards/{$board->id}/columns/reorder", [
@@ -175,7 +175,7 @@ it('fails to reorder columns with invalid payload structure', function () {
     $project = Project::factory()->create(['owner_id' => $owner->id]);
     $project->members()->create(['user_id' => $owner->id, 'role' => ProjectRole::Owner]);
     $board = Board::factory()->create(['project_id' => $project->id]);
-    
+
     $col1 = Column::factory()->create(['board_id' => $board->id, 'position' => 0]);
 
     $response = $this->actingAs($owner)->putJson("/api/v1/boards/{$board->id}/columns/reorder", [
@@ -209,7 +209,7 @@ it('prevents deleting a column that contains tasks', function () {
     $project->members()->create(['user_id' => $owner->id, 'role' => ProjectRole::Owner]);
     $board = Board::factory()->create(['project_id' => $project->id]);
     $column = Column::factory()->create(['board_id' => $board->id]);
-    
+
     // Add a task to the column
     \App\Models\Task::factory()->create([
         'project_id' => $project->id,
@@ -221,6 +221,6 @@ it('prevents deleting a column that contains tasks', function () {
 
     $response->assertStatus(400)
         ->assertJsonFragment(['message' => 'Cannot delete a column that contains tasks. Please move or delete the tasks first.']);
-        
+
     $this->assertDatabaseHas('columns', ['id' => $column->id]);
 });

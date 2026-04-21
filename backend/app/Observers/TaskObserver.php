@@ -20,7 +20,7 @@ class TaskObserver
             \Illuminate\Support\Facades\Cache::tags(["board_{$task->column->board_id}"])->flush();
         }
 
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return;
         }
 
@@ -35,7 +35,7 @@ class TaskObserver
 
     public function created(Task $task): void
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return;
         }
 
@@ -50,7 +50,7 @@ class TaskObserver
 
     public function updated(Task $task): void
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return;
         }
 

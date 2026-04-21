@@ -14,7 +14,8 @@ use Illuminate\Http\Request;
 
 class AttachmentController extends Controller
 {
-    use ApiResponse, AuthorizesRequests;
+    use ApiResponse;
+    use AuthorizesRequests;
 
     public function __construct(private FileUploadService $fileUploadService)
     {

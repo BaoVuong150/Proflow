@@ -242,7 +242,14 @@ it('allows owner to delete any comment', function () {
 // =============================================
 
 it('can upload a file attachment to a task', function () {
-    Storage::fake('public');
+    $mock = Mockery::mock(\App\Services\FileUploadService::class);
+    $mock->shouldReceive('upload')->once()->andReturn([
+        'original_name' => 'document.pdf',
+        'file_path' => 'https://res.cloudinary.com/demo/image/upload/v1234/document.pdf',
+        'file_size' => 500,
+        'mime_type' => 'application/pdf',
+    ]);
+    app()->instance(\App\Services\FileUploadService::class, $mock);
 
     $file = UploadedFile::fake()->create('document.pdf', 500, 'application/pdf');
 
@@ -261,19 +268,6 @@ it('can upload a file attachment to a task', function () {
     ]);
 });
 
-it('stores file to public disk', function () {
-    Storage::fake('public');
-
-    $file = UploadedFile::fake()->create('report.pdf', 200, 'application/pdf');
-
-    $this->actingAs($this->owner)->postJson("/api/v1/tasks/{$this->task->id}/attachments", [
-        'file' => $file,
-    ]);
-
-    // Assert file was stored
-    $attachment = $this->task->attachments()->first();
-    Storage::disk('public')->assertExists($attachment->file_path);
-});
 
 it('can list attachments for a task', function () {
     $this->task->attachments()->create([
@@ -292,7 +286,9 @@ it('can list attachments for a task', function () {
 });
 
 it('can delete an attachment', function () {
-    Storage::fake('public');
+    $mock = Mockery::mock(\App\Services\FileUploadService::class);
+    $mock->shouldReceive('delete')->once()->andReturn(true);
+    app()->instance(\App\Services\FileUploadService::class, $mock);
 
     $attachment = $this->task->attachments()->create([
         'user_id' => $this->owner->id,

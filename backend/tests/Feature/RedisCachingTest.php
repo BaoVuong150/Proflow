@@ -30,10 +30,10 @@ class RedisCachingTest extends TestCase
         ]);
 
         $cacheKey = "board_{$board->id}_" . md5(json_encode([]));
-        
+
         // 2. Fetch Board (Should Cache)
         $this->actingAs($user)->getJson("/api/v1/boards/{$board->id}");
-        
+
         // Assert cache has the board
         $this->assertTrue(Cache::tags(["board_{$board->id}"])->has($cacheKey));
 
@@ -50,7 +50,8 @@ class RedisCachingTest extends TestCase
     public function test_project_list_is_cached_and_invalidated_on_project_create()
     {
         $user = User::factory()->create();
-        $cacheKey = "user_{$user->id}_projects";
+        // Projects list is paginated now, so cache key has page number
+        $cacheKey = "user_{$user->id}_projects_page_1";
 
         // Fetch projects
         $this->actingAs($user)->getJson("/api/v1/projects");

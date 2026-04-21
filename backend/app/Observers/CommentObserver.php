@@ -9,7 +9,7 @@ class CommentObserver
 {
     public function created(Comment $comment): void
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return;
         }
 
@@ -24,7 +24,7 @@ class CommentObserver
 
     public function deleted(Comment $comment): void
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return;
         }
 

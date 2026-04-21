@@ -32,7 +32,9 @@ class RateLimitTest extends TestCase
             'password' => 'password123',
             'password_confirmation' => 'password123',
         ]);
-        $this->assertContains($response->status(), [429, 201],
+        $this->assertContains(
+            $response->status(),
+            [429, 201],
             'Should be 429 (throttled) or 201 if rate limiter resets between tests'
         );
     }

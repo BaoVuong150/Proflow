@@ -7,7 +7,6 @@ use App\Models\Column;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
-use App\Services\ActivityLogService;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -52,7 +51,7 @@ class TaskService
                 $q->where('project_id', $task->project_id);
             })->where('id', $dto->columnId)->exists();
 
-            if (!$columnExists) {
+            if (! $columnExists) {
                 throw new BadRequestHttpException('Invalid column ID for this project.');
             }
         }
@@ -98,7 +97,7 @@ class TaskService
                     $q->where('project_id', $task->project_id);
                 })->where('id', $newColumnId)->first();
 
-                if (!$newColumn) {
+                if (! $newColumn) {
                     throw new BadRequestHttpException('Invalid column ID for this project.');
                 }
 
@@ -148,7 +147,7 @@ class TaskService
     {
         // Ensure user is part of the project
         $isMember = $task->project->members()->where('user_id', $user->id)->exists();
-        if (!$isMember) {
+        if (! $isMember) {
             throw new BadRequestHttpException('Cannot assign a user who is not a member of the project.');
         }
 

@@ -11,7 +11,8 @@ use Illuminate\Http\JsonResponse;
 
 class ActivityLogController extends Controller
 {
-    use ApiResponse, AuthorizesRequests;
+    use ApiResponse;
+    use AuthorizesRequests;
 
     /**
      * List activity logs for a project (paginated, newest first).

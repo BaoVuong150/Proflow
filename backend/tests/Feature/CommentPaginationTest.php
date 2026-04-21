@@ -25,10 +25,10 @@ class CommentPaginationTest extends TestCase
             'user_id' => $user->id,
             'role' => 'owner'
         ]);
-        
+
         $board = Board::factory()->create(['project_id' => $project->id]);
         $column = Column::factory()->create(['board_id' => $board->id]);
-        
+
         $task = Task::factory()->create([
             'project_id' => $project->id,
             'column_id' => $column->id,

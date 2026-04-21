@@ -33,7 +33,7 @@ class TaskResource extends JsonResource
             'is_archived' => $this->is_archived,
             'created_at' => $this->created_at?->toIso8601String(),
             'updated_at' => $this->updated_at?->toIso8601String(),
-            
+
             // Relationships (if loaded)
             'assignees' => UserResource::collection($this->whenLoaded('assignees')),
             'labels' => LabelResource::collection($this->whenLoaded('labels')),
