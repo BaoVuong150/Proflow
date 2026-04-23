@@ -480,9 +480,9 @@
   - [x] Job 2: Tests — Setup PHP 8.4 + MySQL service → Run Pest
   - [x] Job 3: Build Frontend — `npm ci` → `npm run build`
 - [x] Thêm CI status badge vào `README.md`
-- [ ] Push code → Verify CI chạy green ✅
+- [x] Push code → Verify CI chạy green ✅
 - [x] Tạo `.dockerignore` (loại bỏ node_modules, .git, tests khỏi image)
-- [ ] Verify: Push code → 3 jobs pass → Green badge trên README
+- [x] Verify: Push code → 3 jobs pass → Green badge trên README
 
 ### Real-time Kanban (Ưu tiên 2 — 2 ngày)
 - [x] Cài `laravel/reverb` + `predis/predis`
