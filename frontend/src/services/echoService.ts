@@ -20,8 +20,8 @@ const echo = new Echo({
   wsHost: import.meta.env.VITE_REVERB_HOST,
   wsPort: import.meta.env.VITE_REVERB_PORT ?? 8080,
   wssPort: import.meta.env.VITE_REVERB_PORT ?? 8080,
-  forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'https') === 'https',
-  enabledTransports: ['ws', 'wss'],
+  forceTLS: false,
+  enabledTransports: ['ws'],
   authorizer: (channel: any, options: any) => {
     return {
       authorize: (socketId: string, callback: any) => {
