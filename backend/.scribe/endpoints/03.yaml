@@ -78,7 +78,7 @@ endpoints:
         name: type
         description: ''
         required: false
-        example: task
+        example: bug
         type: string
         enumValues:
           - task
@@ -108,7 +108,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: closed
+        example: review
         type: string
         enumValues:
           - open
@@ -124,7 +124,7 @@ endpoints:
         name: due_date
         description: 'Must be a valid date.'
         required: false
-        example: '2026-04-23T09:48:01'
+        example: '2026-04-23T10:56:06'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -135,7 +135,7 @@ endpoints:
         name: start_date
         description: 'Must be a valid date.'
         required: false
-        example: '2026-04-23T09:48:01'
+        example: '2026-04-23T10:56:06'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -156,11 +156,11 @@ endpoints:
       title: b
       column_id: 16
       description: 'Eius et animi quos velit et.'
-      type: task
+      type: bug
       priority: urgent
-      status: closed
-      due_date: '2026-04-23T09:48:01'
-      start_date: '2026-04-23T09:48:01'
+      status: review
+      due_date: '2026-04-23T10:56:06'
+      start_date: '2026-04-23T10:56:06'
       estimated_hours: 60
     fileParameters: []
     responses: []
@@ -212,7 +212,7 @@ endpoints:
       -
         custom: []
         status: 401
-        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T09:48:01+00:00"}}'
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T10:56:06+00:00"}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -299,7 +299,7 @@ endpoints:
         name: type
         description: ''
         required: false
-        example: feature
+        example: improvement
         type: string
         enumValues:
           - task
@@ -329,7 +329,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: open
+        example: closed
         type: string
         enumValues:
           - open
@@ -345,7 +345,7 @@ endpoints:
         name: due_date
         description: 'Must be a valid date.'
         required: false
-        example: '2026-04-23T09:48:01'
+        example: '2026-04-23T10:56:06'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -356,7 +356,7 @@ endpoints:
         name: start_date
         description: 'Must be a valid date.'
         required: false
-        example: '2026-04-23T09:48:01'
+        example: '2026-04-23T10:56:06'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -377,11 +377,11 @@ endpoints:
       title: b
       column_id: 16
       description: 'Eius et animi quos velit et.'
-      type: feature
+      type: improvement
       priority: medium
-      status: open
-      due_date: '2026-04-23T09:48:01'
-      start_date: '2026-04-23T09:48:01'
+      status: closed
+      due_date: '2026-04-23T10:56:06'
+      start_date: '2026-04-23T10:56:06'
       estimated_hours: 60
     fileParameters: []
     responses: []

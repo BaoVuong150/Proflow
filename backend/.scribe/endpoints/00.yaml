@@ -193,7 +193,7 @@ endpoints:
       -
         custom: []
         status: 401
-        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T09:47:59+00:00"}}'
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T10:56:03+00:00"}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json

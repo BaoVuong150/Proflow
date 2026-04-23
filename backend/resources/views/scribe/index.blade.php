@@ -26,7 +26,7 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "http://localhost:8000";
+        var tryItOutBaseUrl = "http://localhost:3001";
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
@@ -247,7 +247,7 @@
     <div class="content">
         <h1 id="introduction">Introduction</h1>
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost:8000</code>
+    <strong>Base URL</strong>: <code>http://localhost:3001</code>
 </aside>
 <pre><code>This documentation aims to provide all the information you need to work with our API.
 
@@ -274,7 +274,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/v1/auth/register" \
+    "http://localhost:3001/api/v1/auth/register" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -287,7 +287,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/auth/register"
+    "http://localhost:3001/api/v1/auth/register"
 );
 
 const headers = {
@@ -434,7 +434,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/v1/auth/login" \
+    "http://localhost:3001/api/v1/auth/login" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -446,7 +446,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/auth/login"
+    "http://localhost:3001/api/v1/auth/login"
 );
 
 const headers = {
@@ -580,14 +580,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/v1/auth/logout" \
+    "http://localhost:3001/api/v1/auth/logout" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/auth/logout"
+    "http://localhost:3001/api/v1/auth/logout"
 );
 
 const headers = {
@@ -691,14 +691,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/auth/user" \
+    --get "http://localhost:3001/api/v1/auth/user" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/auth/user"
+    "http://localhost:3001/api/v1/auth/user"
 );
 
 const headers = {
@@ -732,7 +732,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T09:47:59+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T10:56:03+00:00&quot;
     }
 }</code>
  </pre>
@@ -827,14 +827,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/projects/1/boards" \
+    --get "http://localhost:3001/api/v1/projects/1/boards" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/projects/1/boards"
+    "http://localhost:3001/api/v1/projects/1/boards"
 );
 
 const headers = {
@@ -868,7 +868,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T09:48:00+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T10:56:05+00:00&quot;
     }
 }</code>
  </pre>
@@ -972,14 +972,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/boards/1" \
+    --get "http://localhost:3001/api/v1/boards/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/boards/1"
+    "http://localhost:3001/api/v1/boards/1"
 );
 
 const headers = {
@@ -1013,7 +1013,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T09:48:00+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T10:56:05+00:00&quot;
     }
 }</code>
  </pre>
@@ -1117,7 +1117,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/v1/boards/1/columns" \
+    "http://localhost:3001/api/v1/boards/1/columns" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1129,7 +1129,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/boards/1/columns"
+    "http://localhost:3001/api/v1/boards/1/columns"
 );
 
 const headers = {
@@ -1276,7 +1276,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/v1/columns/1" \
+    "http://localhost:3001/api/v1/columns/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1288,7 +1288,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/columns/1"
+    "http://localhost:3001/api/v1/columns/1"
 );
 
 const headers = {
@@ -1435,14 +1435,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/columns/1" \
+    "http://localhost:3001/api/v1/columns/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/columns/1"
+    "http://localhost:3001/api/v1/columns/1"
 );
 
 const headers = {
@@ -1559,7 +1559,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/v1/boards/1/columns/reorder" \
+    "http://localhost:3001/api/v1/boards/1/columns/reorder" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1575,7 +1575,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/boards/1/columns/reorder"
+    "http://localhost:3001/api/v1/boards/1/columns/reorder"
 );
 
 const headers = {
@@ -1738,14 +1738,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/projects/1/labels" \
+    --get "http://localhost:3001/api/v1/projects/1/labels" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/projects/1/labels"
+    "http://localhost:3001/api/v1/projects/1/labels"
 );
 
 const headers = {
@@ -1779,7 +1779,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T09:48:00+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T10:56:05+00:00&quot;
     }
 }</code>
  </pre>
@@ -1883,7 +1883,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/v1/projects/1/labels" \
+    "http://localhost:3001/api/v1/projects/1/labels" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1895,7 +1895,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/projects/1/labels"
+    "http://localhost:3001/api/v1/projects/1/labels"
 );
 
 const headers = {
@@ -2042,7 +2042,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/v1/labels/16" \
+    "http://localhost:3001/api/v1/labels/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2054,7 +2054,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/labels/16"
+    "http://localhost:3001/api/v1/labels/16"
 );
 
 const headers = {
@@ -2201,14 +2201,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/labels/16" \
+    "http://localhost:3001/api/v1/labels/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/labels/16"
+    "http://localhost:3001/api/v1/labels/16"
 );
 
 const headers = {
@@ -2325,14 +2325,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/tasks/1/checklists" \
+    --get "http://localhost:3001/api/v1/tasks/1/checklists" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/tasks/1/checklists"
+    "http://localhost:3001/api/v1/tasks/1/checklists"
 );
 
 const headers = {
@@ -2366,7 +2366,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T09:48:01+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T10:56:06+00:00&quot;
     }
 }</code>
  </pre>
@@ -2470,7 +2470,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/v1/tasks/1/checklists" \
+    "http://localhost:3001/api/v1/tasks/1/checklists" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2481,7 +2481,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/tasks/1/checklists"
+    "http://localhost:3001/api/v1/tasks/1/checklists"
 );
 
 const headers = {
@@ -2615,7 +2615,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/v1/checklists/16" \
+    "http://localhost:3001/api/v1/checklists/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2626,7 +2626,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/checklists/16"
+    "http://localhost:3001/api/v1/checklists/16"
 );
 
 const headers = {
@@ -2760,14 +2760,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/checklists/16" \
+    "http://localhost:3001/api/v1/checklists/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/checklists/16"
+    "http://localhost:3001/api/v1/checklists/16"
 );
 
 const headers = {
@@ -2884,7 +2884,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/v1/checklists/16/items" \
+    "http://localhost:3001/api/v1/checklists/16/items" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2895,7 +2895,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/checklists/16/items"
+    "http://localhost:3001/api/v1/checklists/16/items"
 );
 
 const headers = {
@@ -3029,7 +3029,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/v1/checklist-items/16" \
+    "http://localhost:3001/api/v1/checklist-items/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -3040,7 +3040,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/checklist-items/16"
+    "http://localhost:3001/api/v1/checklist-items/16"
 );
 
 const headers = {
@@ -3174,14 +3174,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/checklist-items/16" \
+    "http://localhost:3001/api/v1/checklist-items/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/checklist-items/16"
+    "http://localhost:3001/api/v1/checklist-items/16"
 );
 
 const headers = {
@@ -3298,14 +3298,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/v1/checklist-items/16/toggle" \
+    "http://localhost:3001/api/v1/checklist-items/16/toggle" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/checklist-items/16/toggle"
+    "http://localhost:3001/api/v1/checklist-items/16/toggle"
 );
 
 const headers = {
@@ -3422,14 +3422,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/tasks/1/comments" \
+    --get "http://localhost:3001/api/v1/tasks/1/comments" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/tasks/1/comments"
+    "http://localhost:3001/api/v1/tasks/1/comments"
 );
 
 const headers = {
@@ -3463,7 +3463,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T09:48:01+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T10:56:06+00:00&quot;
     }
 }</code>
  </pre>
@@ -3567,7 +3567,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/v1/tasks/1/comments" \
+    "http://localhost:3001/api/v1/tasks/1/comments" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -3578,7 +3578,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/tasks/1/comments"
+    "http://localhost:3001/api/v1/tasks/1/comments"
 );
 
 const headers = {
@@ -3712,14 +3712,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/comments/16" \
+    "http://localhost:3001/api/v1/comments/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/comments/16"
+    "http://localhost:3001/api/v1/comments/16"
 );
 
 const headers = {
@@ -3836,14 +3836,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/tasks/1/attachments" \
+    --get "http://localhost:3001/api/v1/tasks/1/attachments" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/tasks/1/attachments"
+    "http://localhost:3001/api/v1/tasks/1/attachments"
 );
 
 const headers = {
@@ -3877,7 +3877,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T09:48:01+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T10:56:06+00:00&quot;
     }
 }</code>
  </pre>
@@ -3981,15 +3981,15 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/v1/tasks/1/attachments" \
+    "http://localhost:3001/api/v1/tasks/1/attachments" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
-    --form "file=@/tmp/phps0dtfr149dnr8gKPBMP" </code></pre></div>
+    --form "file=@/tmp/phpemm78aev1k666npMFHl" </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/tasks/1/attachments"
+    "http://localhost:3001/api/v1/tasks/1/attachments"
 );
 
 const headers = {
@@ -4105,7 +4105,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/tmp/phps0dtfr149dnr8gKPBMP</code></p>
+<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/tmp/phpemm78aev1k666npMFHl</code></p>
         </div>
         </form>
 
@@ -4122,14 +4122,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/attachments/16" \
+    "http://localhost:3001/api/v1/attachments/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/attachments/16"
+    "http://localhost:3001/api/v1/attachments/16"
 );
 
 const headers = {
@@ -4246,14 +4246,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/projects/1/activity" \
+    --get "http://localhost:3001/api/v1/projects/1/activity" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/projects/1/activity"
+    "http://localhost:3001/api/v1/projects/1/activity"
 );
 
 const headers = {
@@ -4287,7 +4287,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T09:48:02+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T10:56:07+00:00&quot;
     }
 }</code>
  </pre>
@@ -4395,7 +4395,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/v1/projects" \
+    "http://localhost:3001/api/v1/projects" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -4407,7 +4407,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/projects"
+    "http://localhost:3001/api/v1/projects"
 );
 
 const headers = {
@@ -4541,14 +4541,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/projects" \
+    --get "http://localhost:3001/api/v1/projects" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/projects"
+    "http://localhost:3001/api/v1/projects"
 );
 
 const headers = {
@@ -4582,7 +4582,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T09:47:59+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T10:56:04+00:00&quot;
     }
 }</code>
  </pre>
@@ -4673,14 +4673,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/projects/1" \
+    --get "http://localhost:3001/api/v1/projects/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/projects/1"
+    "http://localhost:3001/api/v1/projects/1"
 );
 
 const headers = {
@@ -4714,7 +4714,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T09:48:00+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T10:56:05+00:00&quot;
     }
 }</code>
  </pre>
@@ -4818,7 +4818,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/v1/projects/1" \
+    "http://localhost:3001/api/v1/projects/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -4830,7 +4830,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/projects/1"
+    "http://localhost:3001/api/v1/projects/1"
 );
 
 const headers = {
@@ -4981,14 +4981,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/projects/1" \
+    "http://localhost:3001/api/v1/projects/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/projects/1"
+    "http://localhost:3001/api/v1/projects/1"
 );
 
 const headers = {
@@ -5105,7 +5105,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/v1/projects/1/members" \
+    "http://localhost:3001/api/v1/projects/1/members" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -5117,7 +5117,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/projects/1/members"
+    "http://localhost:3001/api/v1/projects/1/members"
 );
 
 const headers = {
@@ -5264,14 +5264,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/projects/1/members/architecto" \
+    "http://localhost:3001/api/v1/projects/1/members/architecto" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/projects/1/members/architecto"
+    "http://localhost:3001/api/v1/projects/1/members/architecto"
 );
 
 const headers = {
@@ -5404,18 +5404,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/v1/projects/1/tasks" \
+    "http://localhost:3001/api/v1/projects/1/tasks" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
     \"title\": \"b\",
     \"column_id\": 16,
     \"description\": \"Eius et animi quos velit et.\",
-    \"type\": \"task\",
+    \"type\": \"bug\",
     \"priority\": \"urgent\",
-    \"status\": \"closed\",
-    \"due_date\": \"2026-04-23T09:48:01\",
-    \"start_date\": \"2026-04-23T09:48:01\",
+    \"status\": \"review\",
+    \"due_date\": \"2026-04-23T10:56:06\",
+    \"start_date\": \"2026-04-23T10:56:06\",
     \"estimated_hours\": 60
 }"
 </code></pre></div>
@@ -5423,7 +5423,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/projects/1/tasks"
+    "http://localhost:3001/api/v1/projects/1/tasks"
 );
 
 const headers = {
@@ -5435,11 +5435,11 @@ let body = {
     "title": "b",
     "column_id": 16,
     "description": "Eius et animi quos velit et.",
-    "type": "task",
+    "type": "bug",
     "priority": "urgent",
-    "status": "closed",
-    "due_date": "2026-04-23T09:48:01",
-    "start_date": "2026-04-23T09:48:01",
+    "status": "review",
+    "due_date": "2026-04-23T10:56:06",
+    "start_date": "2026-04-23T10:56:06",
     "estimated_hours": 60
 };
 
@@ -5581,10 +5581,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-projects--project_id--tasks"
-               value="task"
+               value="bug"
                data-component="body">
     <br>
-<p>Example: <code>task</code></p>
+<p>Example: <code>bug</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>task</code></li> <li><code>bug</code></li> <li><code>feature</code></li> <li><code>improvement</code></li></ul>
         </div>
@@ -5609,10 +5609,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="POSTapi-v1-projects--project_id--tasks"
-               value="closed"
+               value="review"
                data-component="body">
     <br>
-<p>Example: <code>closed</code></p>
+<p>Example: <code>review</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>open</code></li> <li><code>in_progress</code></li> <li><code>review</code></li> <li><code>done</code></li> <li><code>closed</code></li></ul>
         </div>
@@ -5623,10 +5623,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="due_date"                data-endpoint="POSTapi-v1-projects--project_id--tasks"
-               value="2026-04-23T09:48:01"
+               value="2026-04-23T10:56:06"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-04-23T09:48:01</code></p>
+<p>Must be a valid date. Example: <code>2026-04-23T10:56:06</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>start_date</code></b>&nbsp;&nbsp;
@@ -5635,10 +5635,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="start_date"                data-endpoint="POSTapi-v1-projects--project_id--tasks"
-               value="2026-04-23T09:48:01"
+               value="2026-04-23T10:56:06"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-04-23T09:48:01</code></p>
+<p>Must be a valid date. Example: <code>2026-04-23T10:56:06</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>estimated_hours</code></b>&nbsp;&nbsp;
@@ -5667,14 +5667,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/tasks/1" \
+    --get "http://localhost:3001/api/v1/tasks/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/tasks/1"
+    "http://localhost:3001/api/v1/tasks/1"
 );
 
 const headers = {
@@ -5708,7 +5708,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T09:48:01+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T10:56:06+00:00&quot;
     }
 }</code>
  </pre>
@@ -5812,18 +5812,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/v1/tasks/1" \
+    "http://localhost:3001/api/v1/tasks/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
     \"title\": \"b\",
     \"column_id\": 16,
     \"description\": \"Eius et animi quos velit et.\",
-    \"type\": \"feature\",
+    \"type\": \"improvement\",
     \"priority\": \"medium\",
-    \"status\": \"open\",
-    \"due_date\": \"2026-04-23T09:48:01\",
-    \"start_date\": \"2026-04-23T09:48:01\",
+    \"status\": \"closed\",
+    \"due_date\": \"2026-04-23T10:56:06\",
+    \"start_date\": \"2026-04-23T10:56:06\",
     \"estimated_hours\": 60
 }"
 </code></pre></div>
@@ -5831,7 +5831,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/tasks/1"
+    "http://localhost:3001/api/v1/tasks/1"
 );
 
 const headers = {
@@ -5843,11 +5843,11 @@ let body = {
     "title": "b",
     "column_id": 16,
     "description": "Eius et animi quos velit et.",
-    "type": "feature",
+    "type": "improvement",
     "priority": "medium",
-    "status": "open",
-    "due_date": "2026-04-23T09:48:01",
-    "start_date": "2026-04-23T09:48:01",
+    "status": "closed",
+    "due_date": "2026-04-23T10:56:06",
+    "start_date": "2026-04-23T10:56:06",
     "estimated_hours": 60
 };
 
@@ -5989,10 +5989,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="PUTapi-v1-tasks--task_id-"
-               value="feature"
+               value="improvement"
                data-component="body">
     <br>
-<p>Example: <code>feature</code></p>
+<p>Example: <code>improvement</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>task</code></li> <li><code>bug</code></li> <li><code>feature</code></li> <li><code>improvement</code></li></ul>
         </div>
@@ -6017,10 +6017,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PUTapi-v1-tasks--task_id-"
-               value="open"
+               value="closed"
                data-component="body">
     <br>
-<p>Example: <code>open</code></p>
+<p>Example: <code>closed</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>open</code></li> <li><code>in_progress</code></li> <li><code>review</code></li> <li><code>done</code></li> <li><code>closed</code></li></ul>
         </div>
@@ -6031,10 +6031,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="due_date"                data-endpoint="PUTapi-v1-tasks--task_id-"
-               value="2026-04-23T09:48:01"
+               value="2026-04-23T10:56:06"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-04-23T09:48:01</code></p>
+<p>Must be a valid date. Example: <code>2026-04-23T10:56:06</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>start_date</code></b>&nbsp;&nbsp;
@@ -6043,10 +6043,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="start_date"                data-endpoint="PUTapi-v1-tasks--task_id-"
-               value="2026-04-23T09:48:01"
+               value="2026-04-23T10:56:06"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-04-23T09:48:01</code></p>
+<p>Must be a valid date. Example: <code>2026-04-23T10:56:06</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>estimated_hours</code></b>&nbsp;&nbsp;
@@ -6075,14 +6075,14 @@ Must be one of:
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/tasks/1" \
+    "http://localhost:3001/api/v1/tasks/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/tasks/1"
+    "http://localhost:3001/api/v1/tasks/1"
 );
 
 const headers = {
@@ -6199,7 +6199,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/v1/tasks/1/move" \
+    "http://localhost:3001/api/v1/tasks/1/move" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -6211,7 +6211,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/tasks/1/move"
+    "http://localhost:3001/api/v1/tasks/1/move"
 );
 
 const headers = {
@@ -6358,7 +6358,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/v1/tasks/1/assign" \
+    "http://localhost:3001/api/v1/tasks/1/assign" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -6369,7 +6369,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/tasks/1/assign"
+    "http://localhost:3001/api/v1/tasks/1/assign"
 );
 
 const headers = {
@@ -6503,14 +6503,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/tasks/1/assign/architecto" \
+    "http://localhost:3001/api/v1/tasks/1/assign/architecto" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/tasks/1/assign/architecto"
+    "http://localhost:3001/api/v1/tasks/1/assign/architecto"
 );
 
 const headers = {
@@ -6639,7 +6639,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8000/api/v1/tasks/1/labels" \
+    "http://localhost:3001/api/v1/tasks/1/labels" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -6650,7 +6650,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/tasks/1/labels"
+    "http://localhost:3001/api/v1/tasks/1/labels"
 );
 
 const headers = {
@@ -6784,14 +6784,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/tasks/1/labels/16" \
+    "http://localhost:3001/api/v1/tasks/1/labels/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/tasks/1/labels/16"
+    "http://localhost:3001/api/v1/tasks/1/labels/16"
 );
 
 const headers = {
