@@ -22,9 +22,17 @@ class TaskMoved implements ShouldBroadcast
 
     public function __construct(Task $task, int $oldColumnId)
     {
-        $this->task = new TaskResource($task);
+        $this->task = $task;
         $this->oldColumnId = $oldColumnId;
         $this->boardId = $task->column->board_id;
+    }
+
+    public function broadcastWith(): array
+    {
+        return [
+            'task' => (new TaskResource($this->task))->resolve(),
+            'oldColumnId' => $this->oldColumnId,
+        ];
     }
 
     public function broadcastOn(): array

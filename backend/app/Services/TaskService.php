@@ -36,6 +36,7 @@ class TaskService
         $taskData['position'] = $maxPosition + 1;
 
         $task = Task::create($taskData);
+        $task->load(['assignees', 'labels', 'checklists.items']);
         broadcast(new \App\Events\TaskCreated($task))->toOthers();
         return $task;
     }
@@ -57,6 +58,7 @@ class TaskService
         }
 
         $task->update($dto->toArray());
+        $task->load(['assignees', 'labels', 'checklists.items']);
         broadcast(new \App\Events\TaskUpdated($task))->toOthers();
 
         return $task;
@@ -121,6 +123,9 @@ class TaskService
             ]);
         }, 5);
 
+        $task->load(['assignees', 'labels', 'checklists.items']);
+        broadcast(new \App\Events\TaskMoved($task, $oldColumnId))->toOthers();
+
         // Manual activity log for task.moved
         if (auth()->check()) {
             $newColumnName = Column::find($newColumnId)?->name ?? 'Unknown';
@@ -134,8 +139,6 @@ class TaskService
             );
         }
 
-        $task->refresh();
-        broadcast(new \App\Events\TaskMoved($task, $oldColumnId))->toOthers();
     }
 
     /**

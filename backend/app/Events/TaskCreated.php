@@ -21,8 +21,15 @@ class TaskCreated implements ShouldBroadcast
 
     public function __construct(Task $task)
     {
-        $this->task = new TaskResource($task);
+        $this->task = $task;
         $this->boardId = $task->column->board_id;
+    }
+
+    public function broadcastWith(): array
+    {
+        return [
+            'task' => (new TaskResource($this->task))->resolve(),
+        ];
     }
 
     public function broadcastOn(): array
