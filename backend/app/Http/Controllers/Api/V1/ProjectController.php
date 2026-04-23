@@ -29,9 +29,6 @@ class ProjectController extends Controller
 
     /**
      * Display a listing of the user's projects.
-     *
-     * @apiResourceCollection App\Http\Resources\ProjectResource
-     * @apiResourceModel App\Models\Project
      */
     public function index(Request $request): JsonResponse
     {
