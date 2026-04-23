@@ -160,6 +160,9 @@ class TaskService
             action: 'task.assigned',
             description: "assigned {$user->name} to '{$task->title}'",
         );
+
+        $task->refresh();
+        broadcast(new \App\Events\TaskUpdated($task))->toOthers();
     }
 
     /**
@@ -178,6 +181,9 @@ class TaskService
                 description: "unassigned {$user->name} from '{$task->title}'",
             );
         }
+
+        $task->refresh();
+        broadcast(new \App\Events\TaskUpdated($task))->toOthers();
     }
     /**
      * Attach a label to a task.
