@@ -5,7 +5,6 @@
 /backend/vendor/
 /backend/node_modules/
 /backend/.env
-/backend/.env.ci
 /backend/storage/*.key
 /backend/public/hot
 /backend/public/storage
