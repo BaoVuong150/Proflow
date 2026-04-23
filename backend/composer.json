@@ -20,6 +20,7 @@
         "barryvdh/laravel-debugbar": "*",
         "barryvdh/laravel-ide-helper": "*",
         "fakerphp/faker": "^1.23",
+        "knuckleswtf/scribe": "*",
         "laravel/pail": "^1.2.5",
         "laravel/pint": "*",
         "mockery/mockery": "^1.6",
@@ -82,7 +83,7 @@
         }
     },
     "config": {
-        "optimize-autoloader": true,
+        "optimize-autoloader": false,
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {

@@ -510,10 +510,10 @@
 - [x] Verify: `php artisan test` → all green
 
 ### API Documentation (Ưu tiên 5 — 0.5 ngày)
-- [ ] Cài `knuckleswtf/scribe`
-- [ ] Thêm annotations vào Controllers
-- [ ] Generate docs: `php artisan scribe:generate`
-- [ ] Verify: API docs accessible tại `/docs`
+- [x] Cài `knuckleswtf/scribe`
+- [x] Thêm annotations vào Controllers
+- [x] Generate docs: `php artisan scribe:generate`
+- [x] Verify: API docs accessible tại `/docs`
 
 ### README & Portfolio Polish (0.5 ngày)
 - [ ] README song ngữ (Việt + English)

@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * @group Authentication
+ *
+ * APIs for managing user authentication and session.
+ */
 class AuthController extends Controller
 {
     use ApiResponse;

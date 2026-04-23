@@ -13,6 +13,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @group Projects
+ *
+ * APIs for managing projects and their members.
+ */
 class ProjectController extends Controller
 {
     use ApiResponse;

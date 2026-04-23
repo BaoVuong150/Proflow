@@ -18,6 +18,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @group Tasks
+ *
+ * APIs for managing Kanban tasks.
+ */
 class TaskController extends Controller
 {
     use ApiResponse;
