@@ -75,11 +75,11 @@ function BoardPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--color-bg-primary)] overflow-hidden">
-      <AppHeader 
+      <AppHeader
         title={
           <div className="flex items-center gap-2">
-            <Link 
-              to="/projects" 
+            <Link
+              to="/projects"
               className="p-1 -ml-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)] rounded transition-colors flex items-center justify-center cursor-pointer"
               title="Back to Projects"
             >
@@ -87,9 +87,9 @@ function BoardPage() {
             </Link>
             <span className="font-bold text-base">{currentProject?.name || 'Loading Project...'}</span>
           </div>
-        } 
+        }
       >
-        <button 
+        <button
           onClick={() => setIsMembersOpen(true)}
           className="hidden sm:flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)] rounded transition-colors cursor-pointer border border-[var(--color-border-default)]"
           title="Manage Project Members"
@@ -97,7 +97,7 @@ function BoardPage() {
           👥 Members ({currentProject?.members?.length || 0})
         </button>
 
-        <button 
+        <button
           onClick={() => setIsActivityOpen(true)}
           className="hidden sm:flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)] rounded transition-colors cursor-pointer border border-[var(--color-border-default)]"
         >
@@ -108,7 +108,7 @@ function BoardPage() {
       {/* Filter Bar */}
       <BoardFilterBar />
 
-      <main className="flex-1 overflow-x-auto overflow-y-hidden p-6 relative">
+      <main className="flex-1 overflow-x-auto overflow-y-auto sm:overflow-y-hidden p-3 sm:p-4 lg:p-6 relative">
         {isLoading ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-center text-[var(--color-text-muted)]">Loading board...</div>
@@ -120,24 +120,24 @@ function BoardPage() {
 
       <Suspense fallback={null}>
         {selectedTask && (
-          <TaskDetailModal 
-            isOpen={true} 
-            onClose={() => setSelectedTask(null)} 
-            task={selectedTask} 
+          <TaskDetailModal
+            isOpen={true}
+            onClose={() => setSelectedTask(null)}
+            task={selectedTask}
           />
         )}
 
         {projectId && (
           <>
-            <ProjectActivitySidebar 
-              projectId={Number(projectId)} 
-              isOpen={isActivityOpen} 
-              onClose={() => setIsActivityOpen(false)} 
+            <ProjectActivitySidebar
+              projectId={Number(projectId)}
+              isOpen={isActivityOpen}
+              onClose={() => setIsActivityOpen(false)}
             />
-            <ProjectMembersModal 
-              projectId={Number(projectId)} 
-              isOpen={isMembersOpen} 
-              onClose={() => setIsMembersOpen(false)} 
+            <ProjectMembersModal
+              projectId={Number(projectId)}
+              isOpen={isMembersOpen}
+              onClose={() => setIsMembersOpen(false)}
             />
           </>
         )}

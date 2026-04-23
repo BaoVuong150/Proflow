@@ -474,14 +474,14 @@
 > 🎯 **MỤC TIÊU TỐI THƯỢNG:** Nâng cấp dự án lên **portfolio-grade** — CI/CD pipeline, real-time WebSocket, dashboard analytics, full test suite, API docs — để **nổi bật hơn 90% ứng viên khác** khi phỏng vấn.
 
 ### DevOps: GitHub Actions CI (Ưu tiên 1 — 1 ngày)
-- [ ] Tạo `.env.ci` (environment cho CI testing)
-- [ ] Tạo `.github/workflows/ci.yml`
-  - [ ] Job 1: Code Quality — Laravel Pint (`./vendor/bin/pint --test`)
-  - [ ] Job 2: Tests — Setup PHP 8.4 + MySQL service → Run Pest
-  - [ ] Job 3: Build Frontend — `npm ci` → `npm run build`
-- [ ] Thêm CI status badge vào `README.md`
+- [x] Tạo `.env.ci` (environment cho CI testing)
+- [x] Tạo `.github/workflows/ci.yml`
+  - [x] Job 1: Code Quality — Laravel Pint (`./vendor/bin/pint --test`)
+  - [x] Job 2: Tests — Setup PHP 8.4 + MySQL service → Run Pest
+  - [x] Job 3: Build Frontend — `npm ci` → `npm run build`
+- [x] Thêm CI status badge vào `README.md`
 - [ ] Push code → Verify CI chạy green ✅
-- [ ] Tạo `.dockerignore` (loại bỏ node_modules, .git, tests khỏi image)
+- [x] Tạo `.dockerignore` (loại bỏ node_modules, .git, tests khỏi image)
 - [ ] Verify: Push code → 3 jobs pass → Green badge trên README
 
 ### Real-time Kanban (Ưu tiên 2 — 2 ngày)

@@ -1,8 +1,8 @@
 import type { Column, Task } from '../types'
 import KanbanColumn from './KanbanColumn'
 import TaskCard from './TaskCard'
-import { DndContext, DragOverlay, closestCorners, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
-import { sortableKeyboardCoordinates, SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable'
+import { DndContext, DragOverlay, closestCorners, KeyboardSensor, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core'
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable'
 import { useState } from 'react'
 import { useBoardStore } from '../stores/boardStore'
 
@@ -15,7 +15,6 @@ export default function KanbanBoard({ columns }: KanbanBoardProps) {
   const createColumn = useBoardStore((s) => s.createColumn)
   const board = useBoardStore((s) => s.board)
   const [activeTask, setActiveTask] = useState<Task | null>(null)
-  const [activeColumn, setActiveColumn] = useState<Column | null>(null)
   
   const [isAddingColumn, setIsAddingColumn] = useState(false)
   const [newColumnName, setNewColumnName] = useState('')
@@ -36,6 +35,7 @@ export default function KanbanBoard({ columns }: KanbanBoardProps) {
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 200, tolerance: 5 } }),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   )
 
@@ -43,14 +43,7 @@ export default function KanbanBoard({ columns }: KanbanBoardProps) {
 
   const handleDragStart = (event: any) => {
     const { active } = event
-    
-    if (active.data.current?.type === 'Column') {
-      const col = columns.find(c => c.id === active.id)
-      if (col) setActiveColumn(col)
-      return
-    }
-
-    const taskId = active.id
+    const taskId = parseInt(String(active.id).replace('task-', ''))
     for (const col of columns) {
       const task = col.tasks?.find(t => t.id === taskId)
       if (task) {
@@ -63,48 +56,50 @@ export default function KanbanBoard({ columns }: KanbanBoardProps) {
 
   const handleDragEnd = (event: any) => {
     setActiveTask(null)
-    setActiveColumn(null)
     setIsDraggingTask(false)
     const { active, over } = event
     if (!over) return
 
-    if (active.data.current?.type === 'Column') {
-      if (active.id !== over.id) {
-        useBoardStore.getState().reorderColumn(active.id, over.id)
-      }
-      return
-    }
-
-    const activeId = active.id
-    const overId = over.id
+    const activeId = parseInt(String(active.id).replace('task-', ''))
+    const overIdString = String(over.id)
+    const isOverColumn = overIdString.startsWith('column-')
+    const overIdParsed = parseInt(overIdString.replace('column-', '').replace('task-', ''))
 
     let sourceColId = -1
     let destColId = -1
     let destIndex = -1
 
+    // Find source column
     for (const col of columns) {
       if (col.tasks?.some(t => t.id === activeId)) {
         sourceColId = col.id
+        break
       }
     }
 
-    for (const col of columns) {
-      if (col.id === overId) {
-        destColId = col.id
-        destIndex = col.tasks?.length || 0
-        break
-      }
-      const idx = col.tasks?.findIndex(t => t.id === overId) ?? -1
-      if (idx !== -1) {
-        destColId = col.id
-        const isBelowOverItem = over && active.rect.current.translated && active.rect.current.translated.top > over.rect.top + over.rect.height;
-        const modifier = isBelowOverItem ? 1 : 0;
-        destIndex = idx + modifier
-        break
+    // Find destination column and index
+    if (isOverColumn) {
+      destColId = overIdParsed
+      const destCol = columns.find(c => c.id === destColId)
+      destIndex = destCol?.tasks?.length || 0
+    } else {
+      for (const col of columns) {
+        const idx = col.tasks?.findIndex(t => t.id === overIdParsed) ?? -1
+        if (idx !== -1) {
+          destColId = col.id
+          destIndex = idx
+          break
+        }
       }
     }
 
     if (sourceColId === -1 || destColId === -1) return
+
+    // Don't call API if nothing changed
+    if (sourceColId === destColId) {
+      const sourceIndex = columns.find(c => c.id === sourceColId)?.tasks?.findIndex(t => t.id === activeId) ?? -1
+      if (sourceIndex === destIndex) return
+    }
 
     moveTask(activeId, destColId, destIndex)
   }
@@ -136,23 +131,31 @@ export default function KanbanBoard({ columns }: KanbanBoardProps) {
       onDragEnd={handleDragEnd}
       onDragCancel={() => {
         setActiveTask(null)
-        setActiveColumn(null)
         setIsDraggingTask(false)
       }}
     >
-      <div className="flex gap-4 items-start h-full pb-4">
-        <SortableContext items={columns.map(c => c.id)} strategy={horizontalListSortingStrategy}>
-          {columns.map((column) => (
-            <KanbanColumn 
-              key={column.id} 
-              column={{...column, tasks: filterTasks(column.tasks)}} 
-            />
-          ))}
-        </SortableContext>
+      {/* 
+        Mobile: vertical stack, scroll vertically  
+        Tablet+: horizontal row, scroll horizontally 
+      */}
+      <div className="
+        flex flex-col gap-4 items-stretch pb-4
+        sm:flex-row sm:items-start sm:h-full
+      ">
+        {columns.map((column) => (
+          <KanbanColumn 
+            key={column.id} 
+            column={{...column, tasks: filterTasks(column.tasks)}} 
+          />
+        ))}
         
         {/* Add Column Button */}
         {isAddingColumn ? (
-          <div className="w-[300px] min-w-[300px] p-3 bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)] rounded-xl shrink-0 h-fit">
+          <div className="
+            w-full p-3 bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)] rounded-xl h-fit
+            sm:w-[280px] sm:min-w-[280px] sm:shrink-0
+            lg:w-[300px] lg:min-w-[300px]
+          ">
             <input
               type="text"
               value={newColumnName}
@@ -192,7 +195,11 @@ export default function KanbanBoard({ columns }: KanbanBoardProps) {
         ) : (
           <div 
             onClick={() => setIsAddingColumn(true)}
-            className="w-[300px] min-w-[300px] h-[52px] bg-[var(--color-bg-tertiary)] border border-dashed border-[var(--color-border-default)] rounded-xl flex items-center justify-center cursor-pointer hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] text-[var(--color-text-muted)] transition-all font-semibold text-sm shrink-0"
+            className="
+              w-full h-[52px] bg-[var(--color-bg-tertiary)] border border-dashed border-[var(--color-border-default)] rounded-xl flex items-center justify-center cursor-pointer hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] text-[var(--color-text-muted)] transition-all font-semibold text-sm
+              sm:w-[280px] sm:min-w-[280px] sm:shrink-0
+              lg:w-[300px] lg:min-w-[300px]
+            "
           >
             + Add Column
           </div>
@@ -201,25 +208,6 @@ export default function KanbanBoard({ columns }: KanbanBoardProps) {
 
       <DragOverlay>
         {activeTask ? <TaskCard task={activeTask} isOverlay={true} /> : null}
-        {activeColumn ? (
-          <div className="w-[300px] bg-[var(--color-bg-secondary)] rounded-xl border border-[var(--color-accent)] opacity-80 shadow-2xl overflow-hidden scale-105 transition-transform flex flex-col h-fit max-h-[80vh]">
-            <div className="flex items-center gap-2 p-4 border-b border-[var(--color-border-default)] bg-[var(--color-bg-elevated)]">
-              <div className="w-2.5 h-2.5 rounded-full" style={{ background: activeColumn.color || 'var(--color-accent)' }} />
-              <h3 className="text-sm font-semibold flex-1 text-[var(--color-text-primary)]">{activeColumn.name}</h3>
-              <span className="text-xs font-semibold text-[var(--color-text-secondary)] bg-[var(--color-bg-tertiary)] px-2 py-0.5 rounded-full">
-                {activeColumn.tasks?.length || 0}
-              </span>
-            </div>
-            <div className="p-3 opacity-50 pointer-events-none">
-              {activeColumn.tasks?.slice(0, 3).map(task => (
-                <div key={task.id} className="h-16 bg-[var(--color-bg-primary)] border border-[var(--color-border-default)] rounded-lg mb-2 last:mb-0" />
-              ))}
-              {activeColumn.tasks && activeColumn.tasks.length > 3 && (
-                <div className="text-center text-xs text-[var(--color-text-muted)] font-bold mt-2">+{activeColumn.tasks.length - 3} more tasks</div>
-              )}
-            </div>
-          </div>
-        ) : null}
       </DragOverlay>
     </DndContext>
   )

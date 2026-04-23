@@ -13,7 +13,7 @@ export default React.memo(function TaskCard({ task, isOverlay }: TaskCardProps) 
   const setSelectedTask = useBoardStore((s) => s.setSelectedTask)
   const isSyncing = useBoardStore((s) => s.syncingTasks.includes(task.id))
   const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
-    id: task.id,
+    id: `task-${task.id}`,
     disabled: isSyncing,
     data: {
       type: 'Task',
@@ -41,18 +41,18 @@ export default React.memo(function TaskCard({ task, isOverlay }: TaskCardProps) 
       {...attributes}
       {...listeners}
       onClick={() => setSelectedTask(task)}
-      className={`bg-[var(--color-bg-tertiary)] border border-[var(--color-border-default)] rounded-lg p-3.5 hover:border-[var(--color-accent)] hover:shadow-md transition-all group duration-300
+      className={`bg-[var(--color-bg-tertiary)] border border-[var(--color-border-default)] rounded-lg p-3 sm:p-3.5 hover:border-[var(--color-accent)] hover:shadow-md transition-all group duration-300 touch-manipulation
         ${isOverlay ? 'shadow-xl rotate-2 cursor-grabbing border-[var(--color-accent)] scale-105' : ''}
         ${isSyncing ? 'cursor-wait opacity-50 grayscale-[0.3] pointer-events-none' : 'cursor-grab'}
       `}
     >
       {/* Label Chips */}
       {task.labels && task.labels.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mb-2.5">
+        <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-2.5">
           {task.labels.map((label) => (
             <span
               key={label.id}
-              className="text-[10px] px-2 py-0.5 rounded-full font-semibold leading-tight"
+              className="text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full font-semibold leading-tight"
               style={{ 
                 backgroundColor: `${label.color}22`, 
                 color: label.color,
@@ -66,8 +66,8 @@ export default React.memo(function TaskCard({ task, isOverlay }: TaskCardProps) 
       )}
 
       {/* Title & Sync Status */}
-      <div className="flex justify-between items-start gap-2 mb-2">
-        <p className="text-sm font-medium text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors leading-snug">
+      <div className="flex justify-between items-start gap-2 mb-1.5 sm:mb-2">
+        <p className="text-sm font-medium text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors leading-snug line-clamp-2">
           {task.title}
         </p>
         {isSyncing && (
@@ -79,7 +79,7 @@ export default React.memo(function TaskCard({ task, isOverlay }: TaskCardProps) 
       </div>
       
       {/* Badges Row: Priority + Type + Due Date */}
-      <div className="flex flex-wrap items-center gap-1.5 mb-2">
+      <div className="flex flex-wrap items-center gap-1 sm:gap-1.5 mb-1.5 sm:mb-2">
         {task.type && (
           <span className="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider bg-[var(--color-bg-elevated)] text-[var(--color-text-secondary)]">
             {task.type === 'bug' && '🐛'}

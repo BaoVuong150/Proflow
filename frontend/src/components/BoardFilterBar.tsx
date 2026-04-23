@@ -9,7 +9,7 @@ export default function BoardFilterBar() {
   const activeFiltersCount = (filters.priority ? 1 : 0) + (filters.assigneeId ? 1 : 0)
 
   return (
-    <div className="flex items-center gap-3 px-6 py-3 bg-[var(--color-bg-primary)] border-b border-[var(--color-border-default)] shrink-0 overflow-x-auto hide-scrollbar">
+    <div className="flex flex-wrap items-center gap-2 sm:gap-3 px-3 sm:px-6 py-2 sm:py-3 bg-[var(--color-bg-primary)] border-b border-[var(--color-border-default)] shrink-0 overflow-x-auto hide-scrollbar">
       <span className="text-sm font-semibold text-[var(--color-text-secondary)] flex items-center gap-1 shrink-0">
         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -25,10 +25,10 @@ export default function BoardFilterBar() {
         <div className="flex -space-x-2">
           {currentProject?.members?.map((member, index) => (
             <button
-              key={`member-${member.id}-${index}`}
-              onClick={() => setFilters({ assigneeId: filters.assigneeId === member.id ? null : member.id })}
+              key={`member-${member.user_id}-${index}`}
+              onClick={() => setFilters({ assigneeId: filters.assigneeId === member.user_id ? null : member.user_id })}
               className={`relative rounded-full transition-transform hover:z-10 hover:scale-110 ${
-                filters.assigneeId === member.id 
+                filters.assigneeId === member.user_id 
                   ? 'ring-2 ring-[var(--color-accent)] ring-offset-2 ring-offset-[var(--color-bg-primary)] z-10' 
                   : 'opacity-70 hover:opacity-100'
               }`}

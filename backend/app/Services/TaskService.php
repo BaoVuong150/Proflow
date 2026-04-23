@@ -69,25 +69,23 @@ class TaskService
     {
         $oldColumnName = $task->column->name;
         $oldColumnId = $task->column_id;
+        $oldPosition = $task->position;
 
-        DB::transaction(function () use ($task, $newColumnId, $newPosition) {
-            $currentColumnId = $task->column_id;
-            $oldPosition = $task->position;
+        if ($oldColumnId === $newColumnId && $oldPosition === $newPosition) {
+            return; // No change
+        }
 
+        DB::transaction(function () use ($task, $newColumnId, $newPosition, $oldColumnId, $oldPosition) {
             // Moving within the same column
-            if ($currentColumnId === $newColumnId) {
-                if ($oldPosition === $newPosition) {
-                    return; // No change
-                }
-
+            if ($oldColumnId === $newColumnId) {
                 if ($newPosition > $oldPosition) {
                     // Moving down
-                    Task::where('column_id', $currentColumnId)
+                    Task::where('column_id', $oldColumnId)
                         ->whereBetween('position', [$oldPosition + 1, $newPosition])
                         ->decrement('position');
                 } else {
                     // Moving up
-                    Task::where('column_id', $currentColumnId)
+                    Task::where('column_id', $oldColumnId)
                         ->whereBetween('position', [$newPosition, $oldPosition - 1])
                         ->increment('position');
                 }
@@ -108,7 +106,7 @@ class TaskService
                     }
                 }
 
-                Task::where('column_id', $currentColumnId)
+                Task::where('column_id', $oldColumnId)
                     ->where('position', '>', $oldPosition)
                     ->decrement('position');
 

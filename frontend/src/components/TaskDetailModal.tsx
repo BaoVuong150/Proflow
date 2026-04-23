@@ -3,6 +3,7 @@ import type { Task } from '../types'
 import AppModal from './AppModal'
 import { taskService } from '../services/taskService'
 import { useBoardStore } from '../stores/boardStore'
+import TaskAssignees from './TaskAssignees'
 
 const TaskChecklists = React.lazy(() => import('./TaskChecklists'))
 const TaskComments = React.lazy(() => import('./TaskComments'))
@@ -167,22 +168,10 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
             </div>
           )}
 
-          {/* Assignees display */}
-          {task.assignees && task.assignees.length > 0 && (
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-bold text-[var(--color-text-muted)] uppercase tracking-wider">👥 Assignees</label>
-              <div className="flex flex-wrap gap-2">
-                {task.assignees.map((user) => (
-                  <div key={user.id} className="flex items-center gap-2 bg-[var(--color-bg-secondary)] border border-[var(--color-border-default)] rounded-full px-3 py-1">
-                    <div className="w-5 h-5 rounded-full bg-[var(--color-accent)] flex items-center justify-center text-[8px] font-bold text-white uppercase">
-                      {user.name.substring(0, 2)}
-                    </div>
-                    <span className="text-xs font-medium text-[var(--color-text-primary)]">{user.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          {/* Assignees - interactive (mobile only, desktop shows in sidebar) */}
+          <div className="md:hidden">
+            <TaskAssignees taskId={task.id} assignees={task.assignees || []} />
+          </div>
 
           {/* 
             TODO (Developer Note): 
@@ -264,6 +253,11 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
               />
               {columns.find(c => c.id === task.column_id)?.name || 'Unknown'}
             </div>
+          </div>
+
+          {/* Assignees - Sidebar */}
+          <div className="hidden md:block">
+            <TaskAssignees taskId={task.id} assignees={task.assignees || []} />
           </div>
 
           {/* Meta Info */}

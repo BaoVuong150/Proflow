@@ -1,16 +1,24 @@
+x-app-build: &app-build
+  context: ./backend
+  dockerfile: docker/php/Dockerfile
+
 services:
   # ==========================================
   # MVP SERVICES
   # ==========================================
   app:
-    build:
-      context: ./backend
-      dockerfile: docker/php/Dockerfile
+    build: *app-build
     image: proflow-app
     container_name: proflow_app
     restart: unless-stopped
     working_dir: /var/www
-    command: php artisan octane:start --server=frankenphp --host=0.0.0.0 --port=8000
+    command: >
+      sh -c "
+      if [ ! -d vendor ]; then composer install --ignore-platform-reqs; fi &&
+      if [ ! -f .env ]; then cp .env.example .env && php artisan key:generate; fi &&
+      php artisan migrate --force &&
+      php artisan octane:start --server=frankenphp --host=0.0.0.0 --port=8000
+      "
     volumes:
       - ./backend:/var/www
     networks:
@@ -80,6 +88,7 @@ services:
       - proflow_network
 
   reverb:
+    build: *app-build
     image: proflow-app
     container_name: proflow_reverb
     restart: unless-stopped
@@ -95,6 +104,7 @@ services:
       - redis
 
   queue:
+    build: *app-build
     image: proflow-app
     container_name: proflow_queue
     restart: unless-stopped
@@ -121,6 +131,22 @@ services:
   #     - app
   #     - redis
   #     - mysql
+
+  # ==========================================
+  # FRONTEND SERVICE
+  # ==========================================
+  frontend:
+    image: node:20-alpine
+    container_name: proflow_frontend
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    ports:
+      - "3000:3000"
+    networks:
+      - proflow_network
 
 networks:
   proflow_network:

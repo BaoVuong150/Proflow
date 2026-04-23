@@ -7,17 +7,21 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
+    watch: {
+      usePolling: true,
+      interval: 1000,
+    },
     proxy: {
       '/api': {
-        target: 'http://localhost:3001',
+        target: 'http://host.docker.internal:3001',
         changeOrigin: true,
       },
       '/sanctum': {
-        target: 'http://localhost:3001',
+        target: 'http://host.docker.internal:3001',
         changeOrigin: true,
       },
       '/broadcasting': {
-        target: 'http://localhost:3001',
+        target: 'http://host.docker.internal:3001',
         changeOrigin: true,
       },
     },

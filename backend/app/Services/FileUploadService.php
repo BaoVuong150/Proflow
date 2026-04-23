@@ -25,16 +25,24 @@ class FileUploadService
 
     public function __construct()
     {
-        $this->cloudinary = new Cloudinary([
-            'cloud' => [
-                'cloud_name' => config('cloudinary.cloud_name'),
-                'api_key'    => config('cloudinary.api_key'),
-                'api_secret' => config('cloudinary.api_secret'),
-            ],
-            'url' => [
-                'secure' => true,
-            ],
-        ]);
+        // Instantiated lazily
+    }
+
+    private function getCloudinary(): Cloudinary
+    {
+        if (! isset($this->cloudinary)) {
+            $this->cloudinary = new Cloudinary([
+                'cloud' => [
+                    'cloud_name' => config('cloudinary.cloud_name') ?? 'demo',
+                    'api_key'    => config('cloudinary.api_key') ?? '123',
+                    'api_secret' => config('cloudinary.api_secret') ?? 'abc',
+                ],
+                'url' => [
+                    'secure' => true,
+                ],
+            ]);
+        }
+        return $this->cloudinary;
     }
 
     /**
@@ -70,7 +78,7 @@ class FileUploadService
 
             // ── Upload to Cloudinary ──
             $folder = config('cloudinary.folder') . '/' . $directory;
-            $result = $this->cloudinary->uploadApi()->upload(
+            $result = $this->getCloudinary()->uploadApi()->upload(
                 $file->getRealPath(),
                 [
                     'folder'          => $folder,
@@ -103,7 +111,7 @@ class FileUploadService
 
         if ($publicId) {
             try {
-                $this->cloudinary->uploadApi()->destroy($publicId);
+                $this->getCloudinary()->uploadApi()->destroy($publicId);
             } catch (\Exception $e) {
                 // Log but don't block deletion from DB
                 \Log::warning('Cloudinary delete failed: ' . $e->getMessage());

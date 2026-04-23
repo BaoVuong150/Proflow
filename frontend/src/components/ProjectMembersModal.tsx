@@ -95,7 +95,7 @@ export default function ProjectMembersModal({ isOpen, onClose, projectId }: Proj
           <h4 className="text-sm font-bold text-[var(--color-text-primary)]">Current Members ({currentProject.members?.length || 0})</h4>
           <div className="flex flex-col gap-2 max-h-60 overflow-y-auto pr-2">
             {currentProject.members?.map((member, index) => (
-              <div key={`modal-member-${member.id}-${index}`} className="flex items-center justify-between p-3 bg-[var(--color-bg-secondary)] rounded-lg border border-[var(--color-border-default)] group">
+              <div key={`modal-member-${member.user_id}-${index}`} className="flex items-center justify-between p-3 bg-[var(--color-bg-secondary)] rounded-lg border border-[var(--color-border-default)] group">
                 <div className="flex items-center gap-3">
                   <AppAvatar name={member.name} size="md" />
                   <div className="flex flex-col">
@@ -105,20 +105,20 @@ export default function ProjectMembersModal({ isOpen, onClose, projectId }: Proj
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="text-xs font-semibold px-2 py-1 rounded bg-[var(--color-bg-elevated)] text-[var(--color-text-secondary)] border border-[var(--color-border-default)] uppercase">
-                    {member.pivot?.role || 'member'}
+                    {member.role || 'member'}
                   </span>
-                  {currentProject.owner_id !== member.id && (
+                  {currentProject.owner_id !== member.user_id && (
                     <button
-                      onClick={() => handleRemoveMember(member.id)}
-                      disabled={removingMemberId === member.id}
+                      onClick={() => handleRemoveMember(member.user_id)}
+                      disabled={removingMemberId === member.user_id}
                       className={`p-1.5 rounded transition-all text-xs font-semibold flex items-center gap-1 ${
-                        removingMemberId === member.id 
+                        removingMemberId === member.user_id 
                           ? 'text-red-400 bg-red-400/10 opacity-100' 
                           : 'text-[var(--color-text-muted)] hover:text-red-400 hover:bg-red-400/10 opacity-0 group-hover:opacity-100'
                       }`}
                       title="Remove Member"
                     >
-                      {removingMemberId === member.id ? (
+                      {removingMemberId === member.user_id ? (
                         <>
                           <svg className="animate-spin h-3 w-3 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

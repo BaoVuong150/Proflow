@@ -22,7 +22,7 @@ export default function AppHeader({ title, children }: AppHeaderProps) {
         {title && (
           <>
             <div className="w-px h-6 bg-[var(--color-border-default)] mx-2 hidden sm:block"></div>
-            <div className="text-[var(--color-text-primary)] font-semibold truncate max-w-[300px]">
+            <div className="text-[var(--color-text-primary)] font-semibold flex items-center min-w-0">
               {title}
             </div>
           </>

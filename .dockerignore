@@ -1,0 +1,17 @@
+.git
+.gitignore
+.env
+.dockerignore
+docker-compose.yml
+docker/
+node_modules/
+backend/vendor/
+backend/tests/
+frontend/node_modules/
+frontend/dist/
+storage/logs/
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/views/
+npm-debug.log
+yarn-error.log

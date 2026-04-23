@@ -10,6 +10,14 @@ export interface User {
   updated_at: string
 }
 
+export interface ProjectMember {
+  user_id: number
+  name: string
+  email: string
+  avatar_path?: string | null
+  role: string
+}
+
 export interface Project {
   id: number
   name: string
@@ -20,7 +28,7 @@ export interface Project {
   icon: string | null
   is_archived: boolean
   boards?: Board[]
-  members?: (User & { pivot?: { role: string } })[]
+  members?: ProjectMember[]
   created_at: string
   updated_at: string
 }
