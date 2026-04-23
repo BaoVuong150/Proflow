@@ -54,7 +54,17 @@ endpoints:
       name: b
       description: 'Et animi quos velit et fugiat.'
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:01+00:00"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -90,14 +100,10 @@ endpoints:
     responses:
       -
         custom: []
-        status: 401
-        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T10:56:04+00:00"}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: 'http://localhost:3000'
-          access-control-allow-credentials: 'true'
-        description: null
+        status: 200
+        content: '{"data":[{"id":2,"name":"Reverse-engineered fault-tolerant success","description":"Modi deserunt aut ab provident perspiciatis. Omnis nostrum aut adipisci quidem nostrum qui commodi. Iure odit et et modi ipsum nostrum omnis. Et consequatur aut dolores enim.","status":null,"owner_id":2,"created_at":"2026-04-23T11:01:02+00:00","updated_at":"2026-04-23T11:01:02+00:00"},{"id":3,"name":"Balanced content-based support","description":"Quia officia est dignissimos neque. Odio veritatis excepturi doloribus delectus fugit qui repudiandae. Est alias tenetur ratione. Voluptate accusamus ut et recusandae.","status":null,"owner_id":3,"created_at":"2026-04-23T11:01:02+00:00","updated_at":"2026-04-23T11:01:02+00:00"}]}'
+        headers: []
+        description: ''
     responseFields: []
     auth: []
     controller: null
@@ -146,7 +152,7 @@ endpoints:
       -
         custom: []
         status: 401
-        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T10:56:05+00:00"}}'
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:02+00:00"}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -222,7 +228,17 @@ endpoints:
       name: b
       description: 'Et animi quos velit et fugiat.'
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:02+00:00"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -267,7 +283,17 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:02+00:00"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -336,7 +362,17 @@ endpoints:
       email: gbailey@example.net
       role: architecto
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:02+00:00"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -393,7 +429,17 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:02+00:00"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null

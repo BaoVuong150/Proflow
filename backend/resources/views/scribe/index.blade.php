@@ -310,7 +310,35 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-auth-register">
-</span>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 3
+x-ratelimit-remaining: 2
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;The given data was invalid.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:00:59+00:00&quot;
+    },
+    &quot;errors&quot;: {
+        &quot;password&quot;: [
+            &quot;The password field confirmation does not match.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-auth-register" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-auth-register"></span>:
@@ -468,7 +496,35 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-auth-login">
-</span>
+            <blockquote>
+            <p>Example response (422):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 5
+x-ratelimit-remaining: 4
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;The given data was invalid.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:00+00:00&quot;
+    },
+    &quot;errors&quot;: {
+        &quot;email&quot;: [
+            &quot;These credentials do not match our records.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-auth-login" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-auth-login"></span>:
@@ -604,7 +660,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-auth-logout">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:00+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-auth-logout" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-auth-logout"></span>:
@@ -732,7 +809,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T10:56:03+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:00+00:00&quot;
     }
 }</code>
  </pre>
@@ -868,7 +945,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T10:56:05+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:02+00:00&quot;
     }
 }</code>
  </pre>
@@ -1013,7 +1090,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T10:56:05+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:02+00:00&quot;
     }
 }</code>
  </pre>
@@ -1151,7 +1228,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-boards--board_id--columns">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:02+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-boards--board_id--columns" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-boards--board_id--columns"></span>:
@@ -1310,7 +1408,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-PUTapi-v1-columns--column_id-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-PUTapi-v1-columns--column_id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-PUTapi-v1-columns--column_id-"></span>:
@@ -1459,7 +1578,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-DELETEapi-v1-columns--column_id-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-DELETEapi-v1-columns--column_id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-DELETEapi-v1-columns--column_id-"></span>:
@@ -1601,7 +1741,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-PUTapi-v1-boards--board_id--columns-reorder">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-PUTapi-v1-boards--board_id--columns-reorder" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-PUTapi-v1-boards--board_id--columns-reorder"></span>:
@@ -1779,7 +1940,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T10:56:05+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
     }
 }</code>
  </pre>
@@ -1917,7 +2078,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-projects--project_id--labels">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-projects--project_id--labels" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-projects--project_id--labels"></span>:
@@ -2076,7 +2258,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-PUTapi-v1-labels--label_id-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-PUTapi-v1-labels--label_id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-PUTapi-v1-labels--label_id-"></span>:
@@ -2225,7 +2428,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-DELETEapi-v1-labels--label_id-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-DELETEapi-v1-labels--label_id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-DELETEapi-v1-labels--label_id-"></span>:
@@ -2366,7 +2590,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T10:56:06+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
     }
 }</code>
  </pre>
@@ -2502,7 +2726,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-tasks--task_id--checklists">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-tasks--task_id--checklists" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-tasks--task_id--checklists"></span>:
@@ -2647,7 +2892,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-PUTapi-v1-checklists--checklist_id-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-PUTapi-v1-checklists--checklist_id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-PUTapi-v1-checklists--checklist_id-"></span>:
@@ -2784,7 +3050,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-DELETEapi-v1-checklists--checklist_id-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-DELETEapi-v1-checklists--checklist_id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-DELETEapi-v1-checklists--checklist_id-"></span>:
@@ -2916,7 +3203,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-checklists--checklist_id--items">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-checklists--checklist_id--items" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-checklists--checklist_id--items"></span>:
@@ -3061,7 +3369,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-PUTapi-v1-checklist-items--checklistItem_id-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-PUTapi-v1-checklist-items--checklistItem_id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-PUTapi-v1-checklist-items--checklistItem_id-"></span>:
@@ -3198,7 +3527,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-DELETEapi-v1-checklist-items--checklistItem_id-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-DELETEapi-v1-checklist-items--checklistItem_id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-DELETEapi-v1-checklist-items--checklistItem_id-"></span>:
@@ -3322,7 +3672,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-PUTapi-v1-checklist-items--checklistItem_id--toggle">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-PUTapi-v1-checklist-items--checklistItem_id--toggle" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-PUTapi-v1-checklist-items--checklistItem_id--toggle"></span>:
@@ -3463,7 +3834,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T10:56:06+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
     }
 }</code>
  </pre>
@@ -3599,7 +3970,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-tasks--task_id--comments">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-tasks--task_id--comments" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-tasks--task_id--comments"></span>:
@@ -3736,7 +4128,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-DELETEapi-v1-comments--comment_id-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:04+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-DELETEapi-v1-comments--comment_id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-DELETEapi-v1-comments--comment_id-"></span>:
@@ -3877,7 +4290,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T10:56:06+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:04+00:00&quot;
     }
 }</code>
  </pre>
@@ -3984,7 +4397,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     "http://localhost:3001/api/v1/tasks/1/attachments" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
-    --form "file=@/tmp/phpemm78aev1k666npMFHl" </code></pre></div>
+    --form "file=@/tmp/php5h0gd0kgsbd13IhlpbC" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -4009,7 +4422,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-tasks--task_id--attachments">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:04+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-tasks--task_id--attachments" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-tasks--task_id--attachments"></span>:
@@ -4105,7 +4539,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/tmp/phpemm78aev1k666npMFHl</code></p>
+<p>Must be a file. Must not be greater than 10240 kilobytes. Example: <code>/tmp/php5h0gd0kgsbd13IhlpbC</code></p>
         </div>
         </form>
 
@@ -4146,7 +4580,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-DELETEapi-v1-attachments--attachment_id-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:04+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-DELETEapi-v1-attachments--attachment_id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-DELETEapi-v1-attachments--attachment_id-"></span>:
@@ -4287,7 +4742,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T10:56:07+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:04+00:00&quot;
     }
 }</code>
  </pre>
@@ -4429,7 +4884,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-projects">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:01+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-projects" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-projects"></span>:
@@ -4566,24 +5042,31 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-projects">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (200):</p>
         </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: http://localhost:3000
-access-control-allow-credentials: true
- </code></pre></details>         <pre>
+                <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Unauthenticated.&quot;,
-    &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T10:56:04+00:00&quot;
-    }
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 2,
+            &quot;name&quot;: &quot;Reverse-engineered fault-tolerant success&quot;,
+            &quot;description&quot;: &quot;Modi deserunt aut ab provident perspiciatis. Omnis nostrum aut adipisci quidem nostrum qui commodi. Iure odit et et modi ipsum nostrum omnis. Et consequatur aut dolores enim.&quot;,
+            &quot;status&quot;: null,
+            &quot;owner_id&quot;: 2,
+            &quot;created_at&quot;: &quot;2026-04-23T11:01:02+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-04-23T11:01:02+00:00&quot;
+        },
+        {
+            &quot;id&quot;: 3,
+            &quot;name&quot;: &quot;Balanced content-based support&quot;,
+            &quot;description&quot;: &quot;Quia officia est dignissimos neque. Odio veritatis excepturi doloribus delectus fugit qui repudiandae. Est alias tenetur ratione. Voluptate accusamus ut et recusandae.&quot;,
+            &quot;status&quot;: null,
+            &quot;owner_id&quot;: 3,
+            &quot;created_at&quot;: &quot;2026-04-23T11:01:02+00:00&quot;,
+            &quot;updated_at&quot;: &quot;2026-04-23T11:01:02+00:00&quot;
+        }
+    ]
 }</code>
  </pre>
     </span>
@@ -4714,7 +5197,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T10:56:05+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:02+00:00&quot;
     }
 }</code>
  </pre>
@@ -4852,7 +5335,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-PUTapi-v1-projects--id-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:02+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-PUTapi-v1-projects--id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-PUTapi-v1-projects--id-"></span>:
@@ -5005,7 +5509,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-DELETEapi-v1-projects--id-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:02+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-DELETEapi-v1-projects--id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-DELETEapi-v1-projects--id-"></span>:
@@ -5139,7 +5664,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-projects--project_id--members">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:02+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-projects--project_id--members" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-projects--project_id--members"></span>:
@@ -5288,7 +5834,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-DELETEapi-v1-projects--project_id--members--user-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:02+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-DELETEapi-v1-projects--project_id--members--user-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-DELETEapi-v1-projects--project_id--members--user-"></span>:
@@ -5411,11 +5978,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"title\": \"b\",
     \"column_id\": 16,
     \"description\": \"Eius et animi quos velit et.\",
-    \"type\": \"bug\",
-    \"priority\": \"urgent\",
-    \"status\": \"review\",
-    \"due_date\": \"2026-04-23T10:56:06\",
-    \"start_date\": \"2026-04-23T10:56:06\",
+    \"type\": \"improvement\",
+    \"priority\": \"medium\",
+    \"status\": \"in_progress\",
+    \"due_date\": \"2026-04-23T11:01:03\",
+    \"start_date\": \"2026-04-23T11:01:03\",
     \"estimated_hours\": 60
 }"
 </code></pre></div>
@@ -5435,11 +6002,11 @@ let body = {
     "title": "b",
     "column_id": 16,
     "description": "Eius et animi quos velit et.",
-    "type": "bug",
-    "priority": "urgent",
-    "status": "review",
-    "due_date": "2026-04-23T10:56:06",
-    "start_date": "2026-04-23T10:56:06",
+    "type": "improvement",
+    "priority": "medium",
+    "status": "in_progress",
+    "due_date": "2026-04-23T11:01:03",
+    "start_date": "2026-04-23T11:01:03",
     "estimated_hours": 60
 };
 
@@ -5452,7 +6019,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-projects--project_id--tasks">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-projects--project_id--tasks" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-projects--project_id--tasks"></span>:
@@ -5581,10 +6169,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="POSTapi-v1-projects--project_id--tasks"
-               value="bug"
+               value="improvement"
                data-component="body">
     <br>
-<p>Example: <code>bug</code></p>
+<p>Example: <code>improvement</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>task</code></li> <li><code>bug</code></li> <li><code>feature</code></li> <li><code>improvement</code></li></ul>
         </div>
@@ -5595,10 +6183,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="priority"                data-endpoint="POSTapi-v1-projects--project_id--tasks"
-               value="urgent"
+               value="medium"
                data-component="body">
     <br>
-<p>Example: <code>urgent</code></p>
+<p>Example: <code>medium</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>low</code></li> <li><code>medium</code></li> <li><code>high</code></li> <li><code>urgent</code></li></ul>
         </div>
@@ -5609,10 +6197,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="POSTapi-v1-projects--project_id--tasks"
-               value="review"
+               value="in_progress"
                data-component="body">
     <br>
-<p>Example: <code>review</code></p>
+<p>Example: <code>in_progress</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>open</code></li> <li><code>in_progress</code></li> <li><code>review</code></li> <li><code>done</code></li> <li><code>closed</code></li></ul>
         </div>
@@ -5623,10 +6211,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="due_date"                data-endpoint="POSTapi-v1-projects--project_id--tasks"
-               value="2026-04-23T10:56:06"
+               value="2026-04-23T11:01:03"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-04-23T10:56:06</code></p>
+<p>Must be a valid date. Example: <code>2026-04-23T11:01:03</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>start_date</code></b>&nbsp;&nbsp;
@@ -5635,10 +6223,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="start_date"                data-endpoint="POSTapi-v1-projects--project_id--tasks"
-               value="2026-04-23T10:56:06"
+               value="2026-04-23T11:01:03"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-04-23T10:56:06</code></p>
+<p>Must be a valid date. Example: <code>2026-04-23T11:01:03</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>estimated_hours</code></b>&nbsp;&nbsp;
@@ -5708,7 +6296,7 @@ access-control-allow-credentials: true
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Unauthenticated.&quot;,
     &quot;meta&quot;: {
-        &quot;timestamp&quot;: &quot;2026-04-23T10:56:06+00:00&quot;
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
     }
 }</code>
  </pre>
@@ -5819,11 +6407,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"title\": \"b\",
     \"column_id\": 16,
     \"description\": \"Eius et animi quos velit et.\",
-    \"type\": \"improvement\",
-    \"priority\": \"medium\",
-    \"status\": \"closed\",
-    \"due_date\": \"2026-04-23T10:56:06\",
-    \"start_date\": \"2026-04-23T10:56:06\",
+    \"type\": \"feature\",
+    \"priority\": \"high\",
+    \"status\": \"in_progress\",
+    \"due_date\": \"2026-04-23T11:01:03\",
+    \"start_date\": \"2026-04-23T11:01:03\",
     \"estimated_hours\": 60
 }"
 </code></pre></div>
@@ -5843,11 +6431,11 @@ let body = {
     "title": "b",
     "column_id": 16,
     "description": "Eius et animi quos velit et.",
-    "type": "improvement",
-    "priority": "medium",
-    "status": "closed",
-    "due_date": "2026-04-23T10:56:06",
-    "start_date": "2026-04-23T10:56:06",
+    "type": "feature",
+    "priority": "high",
+    "status": "in_progress",
+    "due_date": "2026-04-23T11:01:03",
+    "start_date": "2026-04-23T11:01:03",
     "estimated_hours": 60
 };
 
@@ -5860,7 +6448,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-PUTapi-v1-tasks--task_id-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-PUTapi-v1-tasks--task_id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-PUTapi-v1-tasks--task_id-"></span>:
@@ -5989,10 +6598,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="type"                data-endpoint="PUTapi-v1-tasks--task_id-"
-               value="improvement"
+               value="feature"
                data-component="body">
     <br>
-<p>Example: <code>improvement</code></p>
+<p>Example: <code>feature</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>task</code></li> <li><code>bug</code></li> <li><code>feature</code></li> <li><code>improvement</code></li></ul>
         </div>
@@ -6003,10 +6612,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="priority"                data-endpoint="PUTapi-v1-tasks--task_id-"
-               value="medium"
+               value="high"
                data-component="body">
     <br>
-<p>Example: <code>medium</code></p>
+<p>Example: <code>high</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>low</code></li> <li><code>medium</code></li> <li><code>high</code></li> <li><code>urgent</code></li></ul>
         </div>
@@ -6017,10 +6626,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PUTapi-v1-tasks--task_id-"
-               value="closed"
+               value="in_progress"
                data-component="body">
     <br>
-<p>Example: <code>closed</code></p>
+<p>Example: <code>in_progress</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>open</code></li> <li><code>in_progress</code></li> <li><code>review</code></li> <li><code>done</code></li> <li><code>closed</code></li></ul>
         </div>
@@ -6031,10 +6640,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="due_date"                data-endpoint="PUTapi-v1-tasks--task_id-"
-               value="2026-04-23T10:56:06"
+               value="2026-04-23T11:01:03"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-04-23T10:56:06</code></p>
+<p>Must be a valid date. Example: <code>2026-04-23T11:01:03</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>start_date</code></b>&nbsp;&nbsp;
@@ -6043,10 +6652,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="start_date"                data-endpoint="PUTapi-v1-tasks--task_id-"
-               value="2026-04-23T10:56:06"
+               value="2026-04-23T11:01:03"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-04-23T10:56:06</code></p>
+<p>Must be a valid date. Example: <code>2026-04-23T11:01:03</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>estimated_hours</code></b>&nbsp;&nbsp;
@@ -6099,7 +6708,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-DELETEapi-v1-tasks--task_id-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-DELETEapi-v1-tasks--task_id-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-DELETEapi-v1-tasks--task_id-"></span>:
@@ -6233,7 +6863,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-tasks--task_id--move">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-tasks--task_id--move" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-tasks--task_id--move"></span>:
@@ -6390,7 +7041,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-tasks--task_id--assign">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-tasks--task_id--assign" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-tasks--task_id--assign"></span>:
@@ -6527,7 +7199,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-DELETEapi-v1-tasks--task_id--assign--user-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-DELETEapi-v1-tasks--task_id--assign--user-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-DELETEapi-v1-tasks--task_id--assign--user-"></span>:
@@ -6671,7 +7364,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-POSTapi-v1-tasks--task_id--labels">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-POSTapi-v1-tasks--task_id--labels" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-POSTapi-v1-tasks--task_id--labels"></span>:
@@ -6808,7 +7522,28 @@ fetch(url, {
 </span>
 
 <span id="example-responses-DELETEapi-v1-tasks--task_id--labels--labelId-">
-</span>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Unauthenticated.&quot;,
+    &quot;meta&quot;: {
+        &quot;timestamp&quot;: &quot;2026-04-23T11:01:03+00:00&quot;
+    }
+}</code>
+ </pre>
+    </span>
 <span id="execution-results-DELETEapi-v1-tasks--task_id--labels--labelId-" hidden>
     <blockquote>Received response<span
                 id="execution-response-status-DELETEapi-v1-tasks--task_id--labels--labelId-"></span>:

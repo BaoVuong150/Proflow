@@ -235,8 +235,7 @@ return [
         'responses' => configureStrategy(
             Defaults::RESPONSES_STRATEGIES,
             Strategies\Responses\ResponseCalls::withSettings(
-                only: ['GET *'],
-                // Recommended: disable debug mode in response calls to avoid error stack traces in responses
+                only: [], // Disabled to prevent 401 errors from Sanctum overriding docs
                 config: [
                     'app.debug' => false,
                 ]

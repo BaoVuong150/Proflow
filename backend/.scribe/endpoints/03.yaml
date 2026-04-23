@@ -78,7 +78,7 @@ endpoints:
         name: type
         description: ''
         required: false
-        example: bug
+        example: improvement
         type: string
         enumValues:
           - task
@@ -93,7 +93,7 @@ endpoints:
         name: priority
         description: ''
         required: false
-        example: urgent
+        example: medium
         type: string
         enumValues:
           - low
@@ -108,7 +108,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: review
+        example: in_progress
         type: string
         enumValues:
           - open
@@ -124,7 +124,7 @@ endpoints:
         name: due_date
         description: 'Must be a valid date.'
         required: false
-        example: '2026-04-23T10:56:06'
+        example: '2026-04-23T11:01:03'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -135,7 +135,7 @@ endpoints:
         name: start_date
         description: 'Must be a valid date.'
         required: false
-        example: '2026-04-23T10:56:06'
+        example: '2026-04-23T11:01:03'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -156,14 +156,24 @@ endpoints:
       title: b
       column_id: 16
       description: 'Eius et animi quos velit et.'
-      type: bug
-      priority: urgent
-      status: review
-      due_date: '2026-04-23T10:56:06'
-      start_date: '2026-04-23T10:56:06'
+      type: improvement
+      priority: medium
+      status: in_progress
+      due_date: '2026-04-23T11:01:03'
+      start_date: '2026-04-23T11:01:03'
       estimated_hours: 60
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:03+00:00"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -212,7 +222,7 @@ endpoints:
       -
         custom: []
         status: 401
-        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T10:56:06+00:00"}}'
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:03+00:00"}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -299,7 +309,7 @@ endpoints:
         name: type
         description: ''
         required: false
-        example: improvement
+        example: feature
         type: string
         enumValues:
           - task
@@ -314,7 +324,7 @@ endpoints:
         name: priority
         description: ''
         required: false
-        example: medium
+        example: high
         type: string
         enumValues:
           - low
@@ -329,7 +339,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: closed
+        example: in_progress
         type: string
         enumValues:
           - open
@@ -345,7 +355,7 @@ endpoints:
         name: due_date
         description: 'Must be a valid date.'
         required: false
-        example: '2026-04-23T10:56:06'
+        example: '2026-04-23T11:01:03'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -356,7 +366,7 @@ endpoints:
         name: start_date
         description: 'Must be a valid date.'
         required: false
-        example: '2026-04-23T10:56:06'
+        example: '2026-04-23T11:01:03'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -377,14 +387,24 @@ endpoints:
       title: b
       column_id: 16
       description: 'Eius et animi quos velit et.'
-      type: improvement
-      priority: medium
-      status: closed
-      due_date: '2026-04-23T10:56:06'
-      start_date: '2026-04-23T10:56:06'
+      type: feature
+      priority: high
+      status: in_progress
+      due_date: '2026-04-23T11:01:03'
+      start_date: '2026-04-23T11:01:03'
       estimated_hours: 60
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:03+00:00"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -429,7 +449,17 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:03+00:00"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -498,7 +528,17 @@ endpoints:
       column_id: 16
       position: 39
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:03+00:00"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -555,7 +595,17 @@ endpoints:
     cleanBodyParameters:
       user_id: 16
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:03+00:00"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -612,7 +662,17 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:03+00:00"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -669,7 +729,17 @@ endpoints:
     cleanBodyParameters:
       label_id: 16
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:03+00:00"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -726,7 +796,17 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:03+00:00"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null

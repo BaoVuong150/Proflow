@@ -68,7 +68,19 @@ endpoints:
       email: zbailey@example.net
       password: '-0pBNvYgxw'
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 422
+        content: '{"success":false,"message":"The given data was invalid.","meta":{"timestamp":"2026-04-23T11:00:59+00:00"},"errors":{"password":["The password field confirmation does not match."]}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '3'
+          x-ratelimit-remaining: '2'
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -125,7 +137,19 @@ endpoints:
       email: gbailey@example.net
       password: '|]|{+-'
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 422
+        content: '{"success":false,"message":"The given data was invalid.","meta":{"timestamp":"2026-04-23T11:01:00+00:00"},"errors":{"email":["These credentials do not match our records."]}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '5'
+          x-ratelimit-remaining: '4'
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -158,7 +182,17 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:00+00:00"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -195,7 +229,7 @@ endpoints:
       -
         custom: []
         status: 401
-        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T10:56:03+00:00"}}'
+        content: '{"success":false,"message":"Unauthenticated.","meta":{"timestamp":"2026-04-23T11:01:00+00:00"}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
