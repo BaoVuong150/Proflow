@@ -162,6 +162,7 @@ class TaskService
         );
 
         $task->refresh();
+        $task->load(['assignees', 'labels', 'checklists.items']);
         broadcast(new \App\Events\TaskUpdated($task))->toOthers();
     }
 
@@ -183,6 +184,7 @@ class TaskService
         }
 
         $task->refresh();
+        $task->load(['assignees', 'labels', 'checklists.items']);
         broadcast(new \App\Events\TaskUpdated($task))->toOthers();
     }
     /**
