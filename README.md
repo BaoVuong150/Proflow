@@ -1,6 +1,6 @@
 # ProFlow
 
-[![CI/CD](https://github.com/BaoVuong150/Proflow/actions/workflows/ci.yml/badge.svg)](https://github.com/BaoVuong150/Proflow/actions)
+[![CI/CD](https://github.com/BaoVuong150/Proflow/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/BaoVuong150/Proflow/actions)
 ![Tech Stack](https://img.shields.io/badge/Laravel-13-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 ![MySQL](https://img.shields.io/badge/MySQL-8.4-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
