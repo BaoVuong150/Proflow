@@ -166,6 +166,11 @@ class TaskService
 
         $task->refresh();
         $task->load(['assignees', 'labels', 'checklists.items']);
+
+        if ($task->column) {
+            \Illuminate\Support\Facades\Cache::tags(["board_{$task->column->board_id}"])->flush();
+        }
+
         broadcast(new \App\Events\TaskUpdated($task))->toOthers();
     }
 
@@ -188,6 +193,11 @@ class TaskService
 
         $task->refresh();
         $task->load(['assignees', 'labels', 'checklists.items']);
+
+        if ($task->column) {
+            \Illuminate\Support\Facades\Cache::tags(["board_{$task->column->board_id}"])->flush();
+        }
+
         broadcast(new \App\Events\TaskUpdated($task))->toOthers();
     }
     /**
@@ -200,6 +210,10 @@ class TaskService
         }
 
         $task->labels()->syncWithoutDetaching([$label->id]);
+
+        if ($task->column) {
+            \Illuminate\Support\Facades\Cache::tags(["board_{$task->column->board_id}"])->flush();
+        }
     }
 
     /**
@@ -208,5 +222,9 @@ class TaskService
     public function detachLabel(Task $task, \App\Models\Label $label): void
     {
         $task->labels()->detach($label->id);
+
+        if ($task->column) {
+            \Illuminate\Support\Facades\Cache::tags(["board_{$task->column->board_id}"])->flush();
+        }
     }
 }
