@@ -200,6 +200,7 @@ class TaskService
 
         broadcast(new \App\Events\TaskUpdated($task))->toOthers();
     }
+
     /**
      * Attach a label to a task.
      */

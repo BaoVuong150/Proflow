@@ -6,6 +6,9 @@ use App\Models\Comment;
 use App\Models\Task;
 use App\Observers\CommentObserver;
 use App\Observers\TaskObserver;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,8 +29,8 @@ class AppServiceProvider extends ServiceProvider
         Task::observe(TaskObserver::class);
         Comment::observe(CommentObserver::class);
 
-        \Illuminate\Support\Facades\RateLimiter::for('auth.login', function (\Illuminate\Http\Request $request) {
-            return \Illuminate\Cache\RateLimiting\Limit::perMinute(5)->by($request->email.$request->ip());
+        RateLimiter::for('auth.login', function (Request $request) {
+            return Limit::perMinute(5)->by($request->email . $request->ip());
         });
     }
 }
