@@ -14,14 +14,17 @@ window.Pusher = Pusher;
 import api from './api';
 window.axios = api;
 
+const isSecure = (import.meta.env.VITE_REVERB_SCHEME ?? 'http') === 'https';
+
 const echo = new Echo({
   broadcaster: 'reverb',
   key: import.meta.env.VITE_REVERB_APP_KEY,
+  cluster: 'ap1',
   wsHost: import.meta.env.VITE_REVERB_HOST,
   wsPort: import.meta.env.VITE_REVERB_PORT ?? 8080,
   wssPort: import.meta.env.VITE_REVERB_PORT ?? 8080,
-  forceTLS: false,
-  enabledTransports: ['ws'],
+  forceTLS: isSecure,
+  enabledTransports: isSecure ? ['wss', 'ws'] : ['ws'],
   authorizer: (channel: any, options: any) => {
     return {
       authorize: (socketId: string, callback: any) => {
