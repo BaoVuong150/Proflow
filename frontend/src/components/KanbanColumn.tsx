@@ -5,6 +5,7 @@ import { useDroppable } from '@dnd-kit/core'
 import { useState } from 'react'
 import { taskService } from '../services/taskService'
 import { useBoardStore } from '../stores/boardStore'
+import ConfirmModal from './ConfirmModal'
 
 interface KanbanColumnProps {
   column: Column
@@ -17,6 +18,8 @@ export default function KanbanColumn({ column }: KanbanColumnProps) {
   
   const [isEditingName, setIsEditingName] = useState(false)
   const [editName, setEditName] = useState(column.name)
+  
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   
   const addTaskToColumn = useBoardStore((s) => s.addTaskToColumn)
   const board = useBoardStore((s) => s.board)
@@ -136,9 +139,7 @@ export default function KanbanColumn({ column }: KanbanColumnProps) {
         <button 
           onClick={(e) => {
             e.stopPropagation()
-            if (confirm(`Are you sure you want to delete the column "${column.name}"? All tasks inside will be lost.`)) {
-              useBoardStore.getState().deleteColumn(column.id)
-            }
+            setIsDeleteModalOpen(true)
           }}
           className="opacity-0 group-hover:opacity-100 p-1 text-[var(--color-text-muted)] hover:text-red-400 hover:bg-red-400/10 rounded transition-all cursor-pointer -mr-2"
           title="Delete Column"
@@ -207,6 +208,21 @@ export default function KanbanColumn({ column }: KanbanColumnProps) {
           </button>
         </div>
       )}
+
+      <ConfirmModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={() => useBoardStore.getState().deleteColumn(column.id)}
+        title="Delete Column"
+        message={
+          <>
+            Are you sure you want to delete the column <strong>"{column.name}"</strong>? 
+            All tasks inside will be permanently lost.
+          </>
+        }
+        confirmText="Delete"
+        danger={true}
+      />
     </div>
   )
 }
