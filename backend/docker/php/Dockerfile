@@ -30,6 +30,6 @@ WORKDIR /var/www
 # Copy existing application directory contents (will be mounted in docker-compose for dev)
 COPY . /var/www
 
-# Expose port 9000 (PHP-FPM) and 8000 (Octane)
-EXPOSE 9000 8000
-CMD ["php-fpm"]
+# Expose port 8000
+EXPOSE 8000
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
