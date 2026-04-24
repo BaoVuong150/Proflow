@@ -516,12 +516,12 @@
 - [x] Verify: API docs accessible tại `/docs`
 
 ### README & Portfolio Polish (0.5 ngày)
-- [ ] README song ngữ (Việt + English)
-- [ ] Screenshots / GIF demo
-- [ ] Tech stack badges
-- [ ] Hướng dẫn cài đặt (Docker)
-- [ ] `CONTRIBUTING.md` (conventional commits, branch strategy)
-- [ ] GitHub repo: pinned, topics, description
+- [x] README song ngữ (Việt + English)
+- [x] Screenshots / GIF demo
+- [x] Tech stack badges
+- [x] Hướng dẫn cài đặt (Docker)
+- [x] `CONTRIBUTING.md` (conventional commits, branch strategy)
+- [x] GitHub repo: pinned, topics, description
 
 ### Security & Production Readiness (New Epic)
 - [ ] Setup SSL/HTTPS certificates for Nginx in production (`SESSION_SECURE_COOKIE=true`).
