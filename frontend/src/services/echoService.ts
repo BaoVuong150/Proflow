@@ -17,9 +17,9 @@ window.axios = api;
 const isSecure = (import.meta.env.VITE_REVERB_SCHEME ?? 'http') === 'https';
 
 const echo = new Echo({
-  broadcaster: 'reverb',
+  broadcaster: 'pusher',
   key: import.meta.env.VITE_REVERB_APP_KEY,
-  cluster: 'ap1',
+  cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER || 'ap1',
   wsHost: import.meta.env.VITE_REVERB_HOST,
   wsPort: import.meta.env.VITE_REVERB_PORT ?? 8080,
   wssPort: import.meta.env.VITE_REVERB_PORT ?? 8080,
