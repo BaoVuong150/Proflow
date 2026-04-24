@@ -146,15 +146,25 @@ export const useBoardStore = create<BoardState>((set, get) => ({
   },
 
   deleteColumn: async (columnId) => {
+    const previousColumns = useBoardStore.getState().columns;
+    
     // Optimistic update
     set((state) => ({
       columns: state.columns.filter(col => col.id !== columnId)
     }))
+    
     try {
       const { columnService } = await import('../services/columnService')
       await columnService.delete(columnId)
-    } catch (err) {
+    } catch (err: any) {
       console.error('Failed to delete column', err)
+      // Revert optimistic update
+      set({ columns: previousColumns })
+      
+      const errorMessage = err.response?.data?.message || 'Failed to delete column'
+      import('react-hot-toast').then(({ toast }) => {
+        toast.error(errorMessage)
+      })
     }
   },
 
