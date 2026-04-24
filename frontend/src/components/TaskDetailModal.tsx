@@ -4,6 +4,7 @@ import AppModal from './AppModal'
 import { taskService } from '../services/taskService'
 import { useBoardStore } from '../stores/boardStore'
 import TaskAssignees from './TaskAssignees'
+import ConfirmModal from './ConfirmModal'
 
 const TaskChecklists = React.lazy(() => import('./TaskChecklists'))
 const TaskComments = React.lazy(() => import('./TaskComments'))
@@ -25,6 +26,7 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
   const [isSaving, setIsSaving] = useState(false)
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [isDeleting, setIsDeleting] = useState(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
   const { columns, setSelectedTask } = useBoardStore()
 
@@ -79,7 +81,6 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
   }
 
   const handleDelete = async () => {
-    if (!confirm('Are you sure you want to delete this task?')) return
     setIsDeleting(true)
     try {
       await taskService.destroy(task.id)
@@ -105,7 +106,7 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
           Task #{task.id}
         </span>
         <button 
-          onClick={handleDelete}
+          onClick={() => setIsDeleteModalOpen(true)}
           disabled={isDeleting}
           className="text-xs font-semibold text-red-400 hover:text-red-300 hover:bg-red-400/10 px-2 py-1 rounded transition-colors cursor-pointer disabled:opacity-50 flex items-center gap-1"
         >
@@ -291,6 +292,21 @@ export default function TaskDetailModal({ isOpen, onClose, task }: TaskDetailMod
           </button>
         </div>
       </div>
+
+      <ConfirmModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={handleDelete}
+        title="Delete Task"
+        message={
+          <>
+            Are you sure you want to delete the task <strong>"{task.title}"</strong>? 
+            This action cannot be undone.
+          </>
+        }
+        confirmText="Delete"
+        danger={true}
+      />
     </AppModal>
   )
 }
