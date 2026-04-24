@@ -9,6 +9,10 @@
       "destination": "https://proflow-17tu.onrender.com/sanctum/:path*"
     },
     {
+      "source": "/broadcasting/:path*",
+      "destination": "https://proflow-17tu.onrender.com/broadcasting/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
