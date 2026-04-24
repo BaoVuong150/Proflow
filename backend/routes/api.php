@@ -16,14 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Rate Limiters
-|--------------------------------------------------------------------------
-*/
-RateLimiter::for('auth.login', function (Request $request) {
-    return Limit::perMinute(5)->by($request->email.$request->ip());
-});
+
 
 /*
 |--------------------------------------------------------------------------

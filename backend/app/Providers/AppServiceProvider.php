@@ -25,5 +25,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Task::observe(TaskObserver::class);
         Comment::observe(CommentObserver::class);
+
+        \Illuminate\Support\Facades\RateLimiter::for('auth.login', function (\Illuminate\Http\Request $request) {
+            return \Illuminate\Cache\RateLimiting\Limit::perMinute(5)->by($request->email.$request->ip());
+        });
     }
 }
