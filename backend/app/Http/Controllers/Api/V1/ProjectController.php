@@ -74,6 +74,8 @@ class ProjectController extends Controller
         // Invalidate user projects cache
         \Illuminate\Support\Facades\Cache::tags(["user_" . $request->user()->id])->flush();
 
+        $project->load(['owner', 'boards']);
+
         return $this->success(
             new ProjectResource($project),
             'Project created successfully',
