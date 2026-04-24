@@ -14,13 +14,13 @@
         "laravel/reverb": "*",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^3.0",
-        "predis/predis": "*"
+        "predis/predis": "*",
+        "knuckleswtf/scribe": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "*",
         "barryvdh/laravel-ide-helper": "*",
         "fakerphp/faker": "^1.23",
-        "knuckleswtf/scribe": "*",
         "laravel/pail": "^1.2.5",
         "laravel/pint": "*",
         "mockery/mockery": "^1.6",
