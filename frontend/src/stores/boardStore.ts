@@ -49,7 +49,14 @@ export const useBoardStore = create<BoardState>((set, get) => ({
   },
 
   fetchBoard: async (boardId) => {
-    set({ isLoading: true, error: null })
+    // Only show the loading overlay if we are loading a different board
+    // This allows silent background refreshes (e.g. from WebSocket reconnects) without UI flicker
+    const isNewBoard = get().board?.id !== boardId;
+    
+    if (isNewBoard) {
+      set({ isLoading: true, error: null })
+    }
+
     try {
       const { data } = await api.get<ApiResponse<Board>>(`/boards/${boardId}`)
       const board = data.data
