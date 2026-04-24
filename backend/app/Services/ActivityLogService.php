@@ -31,6 +31,6 @@ class ActivityLogService
             'user_agent' => request()?->userAgent(),
         ];
 
-        \App\Jobs\LogActivityJob::dispatch($logData);
+        \App\Jobs\LogActivityJob::dispatchSync($logData);
     }
 }
