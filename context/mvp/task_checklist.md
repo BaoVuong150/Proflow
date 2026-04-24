@@ -516,6 +516,12 @@
 - [x] Verify: API docs accessible tại `/docs`
 
 ### README & Portfolio Polish (0.5 ngày)
+- [x] Create/Update README.md
+  - [x] Badges (Tech Stack)
+  - [x] Quick Start & Setup
+  - [x] Docker setup
+- [x] Write CONTRIBUTING.md standardizing git flow
+- [x] Verify: Backend live, no 500 errors
 - [x] README song ngữ (Việt + English)
 - [x] Screenshots / GIF demo
 - [x] Tech stack badges
