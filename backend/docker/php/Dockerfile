@@ -27,8 +27,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy existing application directory contents (will be mounted in docker-compose for dev)
+# Copy existing application directory contents
 COPY . /var/www
+
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader
 
 # Expose port 8000
 EXPOSE 8000
